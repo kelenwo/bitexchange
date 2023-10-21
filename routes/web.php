@@ -15,7 +15,7 @@ use App\Http\Controllers\dashboardController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
 
 Route::get('/dashboard', [dashboardController::class, 'index'])->name('dashboard');

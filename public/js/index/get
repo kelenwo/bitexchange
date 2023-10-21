@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# List of JavaScript file URLs
+js_files=(
+  "https://blitzexchange.org/js/core.min.js"
+  "https://blitzexchange.org/search/search.js"
+  "https://blitzexchange.org/js/rev_slider/jquery.themepunch.tools.min.js"
+  "https://blitzexchange.org/js/rev_slider/jquery.themepunch.revolution.min.js"
+  "https://blitzexchange.org/js/rev_slider/extensions/revolution.extension.actions.min.js"
+  "https://blitzexchange.org/js/rev_slider/extensions/revolution.extension.carousel.min.js"
+  "https://blitzexchange.org/js/rev_slider/extensions/revolution.extension.kenburn.min.js"
+  "https://blitzexchange.org/js/rev_slider/extensions/revolution.extension.layeranimation.min.js"
+  "https://blitzexchange.org/js/rev_slider/extensions/revolution.extension.migration.min.js"
+  "https://blitzexchange.org/js/rev_slider/extensions/revolution.extension.navigation.min.js"
+  "https://blitzexchange.org/js/rev_slider/extensions/revolution.extension.parallax.min.js"
+  "https://blitzexchange.org/js/rev_slider/extensions/revolution.extension.slideanims.min.js"
+  "https://blitzexchange.org/js/rev_slider/extensions/revolution.extension.video.min.js"
+  "https://blitzexchange.org/js/main.js"
+  "https://blitzexchange.org/js/mailform/jquery.form.min.js"
+  "https://blitzexchange.org/js/mailform/jquery.rd-mailform.min.c.js"
+  "https://blitzexchange.org/j/jquery.appear.js"
+  "https://blitzexchange.org/j/swiper/swiper.min.js"
+  "https://blitzexchange.org/j/swiperanimation/SwiperAnimation.min.js"
+  "https://blitzexchange.org/j/counter/jquery.countTo.js"
+  "https://blitzexchange.org/j/owl-carousel/owl.carousel.min.js"
+  "https://blitzexchange.org/j/jarallax/jarallax.min.js"
+  "https://blitzexchange.org/j/jarallax/jarallax-video.min.js"
+  "https://blitzexchange.org/j/magnific-popup/jquery.magnific-popup.min.js"
+)
+
+# Destination directory to save the files
+destination_dir="."
+
+# Loop through the URLs and download the files
+for url in "${js_files[@]}"; do
+  filename=$(basename "$url")
+  destination_path="$destination_dir/$filename"
+  
+  # Use wget to download the file
+  wget "$url" -O "$destination_path"
+  
+  # Check if wget was successful
+  if [ $? -eq 0 ]; then
+    echo "Downloaded: $filename"
+  else
+    echo "Failed to download: $filename"
+  fi
+done
