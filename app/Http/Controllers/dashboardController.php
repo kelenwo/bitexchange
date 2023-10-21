@@ -11,4 +11,9 @@ class dashboardController extends Controller
     {
         return view('dashboard.index');
     }
+
+    public function deposit(): View
+    {
+        return view('dashboard.deposit');
+    }
 }

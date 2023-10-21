@@ -28,10 +28,10 @@
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="navbar-brand-wrapper d-flex align-items-center">
-            <a class="navbar-brand brand-logo" href="index.html">
-                <img src="images/logo.svg" alt="logo" class="logo-dark" />
+            <a class="navbar-brand brand-logo" href="/dashboard">
+                <img src="{{ asset('images/logo.svg') }}" alt="logo" class="logo-dark" />
             </a>
-            <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg" alt="logo" /></a>
+            <a class="navbar-brand brand-logo-mini" href="/dashboard"><img src="{{ asset('images/logo-mini.svg') }}" alt="logo" /></a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center flex-grow-1">
 
@@ -39,18 +39,11 @@
 
                 <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
                     <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                        <img class="img-xs rounded-circle ml-2" src="images/faces/face8.jpg" alt="Profile image"> <span class="font-weight-normal"> Henry Klein </span></a>
+                        <img class="img-xs rounded-circle" src="{{ asset('images/user.png') }}" alt="Profile image"> <span class="font-weight-normal"> Henry Klein </span></a>
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
-                        <div class="dropdown-header text-center">
-                            <img class="img-md rounded-circle" src="images/faces/face8.jpg" alt="Profile image">
-                            <p class="mb-1 mt-3">Allen Moreno</p>
-                            <p class="font-weight-light text-muted mb-0">allenmoreno@gmail.com</p>
-                        </div>
-                        <a class="dropdown-item"><i class="dropdown-item-icon icon-user text-primary"></i> My Profile <span class="badge badge-pill badge-danger">1</span></a>
-                        <a class="dropdown-item"><i class="dropdown-item-icon icon-speech text-primary"></i> Messages</a>
-                        <a class="dropdown-item"><i class="dropdown-item-icon icon-energy text-primary"></i> Activity</a>
-                        <a class="dropdown-item"><i class="dropdown-item-icon icon-question text-primary"></i> FAQ</a>
-                        <a class="dropdown-item"><i class="dropdown-item-icon icon-power text-primary"></i>Sign Out</a>
+                        <a class="dropdown-item"><i class="dropdown-item-icon icon-user text-primary"></i> View Profile</a>
+                        <a class="dropdown-item"><i class="dropdown-item-icon icon-speech text-primary"></i> Account Security</a>
+                        <a class="dropdown-item"><i class="dropdown-item-icon icon-power text-primary"></i>Logout</a>
                     </div>
                 </li>
             </ul>
@@ -60,86 +53,68 @@
         </div>
     </nav>
     <!-- partial -->
-    <div class="container-fluid page-body-wrapper">
+    <div class="container-fluid page-body-wrapper ">
         <!-- partial:partials/_sidebar.html -->
-        <nav class="sidebar sidebar-offcanvas" id="sidebar">
-            <ul class="nav">
-                <li class="nav-item nav-profile">
-                    <a href="#" class="nav-link">
-                        <div class="profile-image">
-                            <img class="img-xs rounded-circle" src="images/faces/face8.jpg" alt="profile image">
-                            <div class="dot-indicator bg-success"></div>
-                        </div>
-                        <div class="text-wrapper">
-                            <p class="profile-name">Allen Moreno</p>
-                            <p class="designation">Administrator</p>
-                        </div>
-                        <div class="icon-container">
-                            <i class="icon-bubbles"></i>
-                            <div class="dot-indicator bg-danger"></div>
-                        </div>
-                    </a>
-                </li>
-                <li class="nav-item nav-category">
-                    <span class="nav-link">Dashboard</span>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="index.html">
+        <nav class="sidebar sidebar-offcanvas position-fixed" id="sidebar">
+            <ul class="nav ps-3">
+
+                <li class="nav-item my-2 mt-5">
+                    <a class="nav-link" href="{{ route('dashboard') }}">
                         <span class="menu-title">Dashboard</span>
                         <i class="icon-screen-desktop menu-icon"></i>
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <li class="nav-item my-2">
+                    <a class="nav-link" data-toggle="collapse" href="#deposit" aria-expanded="false" aria-controls="deposit">
                         <span class="menu-title">Deposit</span>
                         <i class="icon-layers menu-icon"></i>
                     </a>
-                    <div class="collapse" id="ui-basic">
+                    <div class="collapse" id="deposit">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Deposit</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Deposit List</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Deposit History</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('deposit') }}">Deposit</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('deposit_list') }}">Deposit List</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('deposit_history') }}">Deposit History</a></li>
                         </ul>
                     </div>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <li class="nav-item my-2">
+                    <a class="nav-link" data-toggle="collapse" href="#withdrawal" aria-expanded="false" aria-controls="withdrawal">
                         <span class="menu-title">Withdrawal</span>
                         <i class="icon-layers menu-icon"></i>
                     </a>
-                    <div class="collapse" id="ui-basic">
+                    <div class="collapse" id="withdrawal">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Withdrawal</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Withdrawal History</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('withdrawal') }}">Withdrawal</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('withdrawal_history') }}">Withdrawal History</a></li>
                         </ul>
                     </div>
                 </li>
 
 
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <li class="nav-item my-2">
+                    <a class="nav-link" data-toggle="collapse" href="#account" aria-expanded="false" aria-controls="account">
                         <span class="menu-title">Account</span>
                         <i class="icon-layers menu-icon"></i>
                     </a>
-                    <div class="collapse" id="ui-basic">
+                    <div class="collapse" id="account">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Account Settings</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Security</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('account') }}">Account Settings</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('account_security') }}">Security</a></li>
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+                <li class="nav-item my-2">
+                    <a class="nav-link" data-toggle="collapse" href="#referral" aria-expanded="false" aria-controls="referral">
                         <span class="menu-title">Referral</span>
                         <i class="icon-layers menu-icon"></i>
                     </a>
-                    <div class="collapse" id="ui-basic">
+                    <div class="collapse" id="referral">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Referral</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Referral Links</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Referral</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('referral') }}">Referral</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('referral_link') }}">Referral Links</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('referral_history') }}">Referral History</a></li>
                         </ul>
                     </div>
                 </li>
@@ -151,9 +126,8 @@
             @yield('content')
             <footer class="footer">
                 <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                    <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © bootstrapdash.com 2020</span>
-                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> Free <a href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap admin templates</a> from Bootstrapdash.com</span>
-                </div>
+                    <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © v9ai.de 2023</span>
+               </div>
             </footer>
             <!-- partial -->
         </div>
