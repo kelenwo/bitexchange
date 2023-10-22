@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# URL of the website you want to fetch CSS and JS files from
+website_url="https://blitzexchange.org"
+
+# Directory to save the fetched files
+output_dir="url"
+
+# Create the output directory if it doesn't exist
+mkdir -p "$output_dir"
+
+# Fetch the HTML source code of the website
+html_content=$(curl -s "$website_url")
+
+# Extract and download CSS files
+css_files=$(echo "$html_content" | grep -Eo 'href="([^"]+\.(css))"' | awk -F '"' '{print $2}')
+for css_url in $css_files; do
+    curl -o "$output_dir/$(basename $css_url)" "$website_url/$css_url"
+done
+
+# Extract and download JS files
+js_files=$(echo "$html_content" | grep -Eo 'src="([^"]+\.(js))"' | awk -F '"' '{print $2}')
+for js_url in $js_files; do
+    curl -o "$output_dir/$(basename $js_url)" "$website_url/$js_url"
+done
+
+echo "CSS and JS files fetched and saved in $output_dir"
