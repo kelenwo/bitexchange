@@ -21,15 +21,15 @@ Route::get('/', function () {
 Route::get('/dashboard', [dashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/dashboard/deposit', [dashboardController::class, 'deposit'])->name('deposit');
-Route::get('/dashboard/deposit-list', [dashboardController::class, 'deposit'])->name('deposit_list');
-Route::get('/dashboard/deposit-history', [dashboardController::class, 'deposit'])->name('deposit_history');
+Route::get('/dashboard/deposit-list', [dashboardController::class, 'deposit_list'])->name('deposit_list');
+Route::get('/dashboard/deposit-history', [dashboardController::class, 'deposit_history'])->name('deposit_history');
 
-Route::get('/dashboard/withdrawal', [dashboardController::class, 'deposit'])->name('withdrawal');
-Route::get('/dashboard/withdrawal-history', [dashboardController::class, 'deposit'])->name('withdrawal_history');
+Route::get('/dashboard/withdrawal', [dashboardController::class, 'withdrawal'])->name('withdrawal');
+Route::get('/dashboard/withdrawal-history', [dashboardController::class, 'withdrawal_history'])->name('withdrawal_history');
 
 Route::get('/dashboard/referral', [dashboardController::class, 'deposit'])->name('referral');
 Route::get('/dashboard/referral-link', [dashboardController::class, 'deposit'])->name('referral_link');
 Route::get('/dashboard/referral-history', [dashboardController::class, 'deposit'])->name('referral_history');
 
-Route::get('/dashboard/account', [dashboardController::class, 'deposit'])->name('account');
-Route::get('/dashboard/account-security', [dashboardController::class, 'deposit'])->name('account_security');
+Route::get('/dashboard/account', [dashboardController::class, 'account'])->name('account');
+Route::get('/dashboard/account-security', [dashboardController::class, 'account_security'])->name('account_security');

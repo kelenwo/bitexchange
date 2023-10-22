@@ -16,4 +16,32 @@ class dashboardController extends Controller
     {
         return view('dashboard.deposit');
     }
+
+    public function deposit_list(): View
+    {
+        return view('dashboard.deposit_list');
+    }
+
+    public function deposit_history(): View
+    {
+        return view('dashboard.deposit_history');
+    }
+
+    public function withdrawal(): View
+    {
+        return view('dashboard.withdrawal');
+    }
+
+    public function withdrawal_history(): View
+    {
+        return view('dashboard.withdrawal_history');
+    }
+    public function account(): View
+    {
+        return view('dashboard.account');
+    }
+    public function account_security(): View
+    {
+        return view('dashboard.account_security');
+    }
 }
