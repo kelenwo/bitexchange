@@ -44,4 +44,14 @@ class dashboardController extends Controller
     {
         return view('dashboard.account_security');
     }
+
+    public function login(): View
+    {
+        return view('dashboard.login');
+    }
+
+    public function register(): View
+    {
+        return view('dashboard.register');
+    }
 }
