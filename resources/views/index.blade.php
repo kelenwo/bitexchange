@@ -111,7 +111,7 @@
                             <nav class="navbar navbar-expand-lg navbar-light no-padding">
                                 <div class="navbar-header navbar-header-custom">
                                     <!-- Start Logo -->
-                                    <a href="/?a=home" class="navbar-brand logo5"><img src="{{ asset('images/index/logo.png') }}" alt="logo" id="logo"></a>
+                                    <a href="" class="navbar-brand logo5"><img src="{{ asset('images/index/logo.png') }}" alt="logo" id="logo"></a>
                                     <!-- End Logo -->
                                 </div>
                                 <div class="navbar-toggler" style="background-color:#999999; color:#FFFFFF">
@@ -119,13 +119,13 @@
                                 </div>
                                 <!-- Menu Area -->
                                 <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
-                                    <li><a href="./"> Home</a>
+                                    <li><a href=""> Home</a>
                                     </li>
-                                    <li> <a  href="/?a=login">New Investment</a>
+                                    <li> <a  href="{{ route('login') }}">New Investment</a>
                                     </li>
-                                    <li><a  href="{{ route('dashboard') }}">Account Login</a></li>
-                                    <li><a  href="{{ route('dashboard') }}">Registration</a></li>
-                                    <li><a href="{{ route('about') }}">About Us</a>
+                                    <li><a  href="{{ route('login') }}">Account Login</a></li>
+                                    <li><a  href="{{ route('register') }}">Registration</a></li>
+                                    <li><a href="{{ route('dashboard') }}">About Us</a>
                                     </li>
                                     <li><a href="{{ route('dashboard') }}">Platforms</a>
                                     </li>
@@ -152,7 +152,7 @@
                             <img src="{{ asset('images/index/medical/slider/slide19.jpg') }}" alt="slide1" class="rev-slidebg">
                             <!-- START LAYER 1 -->
                             <center>
-                                <div class="tp-caption tp-resizeme max-style alt-font" id="slide-1-layer-1" data-x="['left','left','center','center']" data-y="['middle','middle','middle','middle']" data-hoffset="['40','40','0','0']" data-voffset="['-100','-100','-100','-120']" data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;" data-transform_in="x:[-175%];y:0px;z:0;rX:0;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0.01;s:3000;e:Power3.easeOut;" data-transform_out="s:1000;e:Power3.easeInOut;s:1000;e:Power3.easeInOut;" data-mask_in="x:[100%];y:0;s:inherit;e:inherit;" data-start="1000" data-splitin="chars" data-splitout="none" data-responsive_offset="on" data-elementdelay="0.05" style="z-index: 5; white-space: nowrap; color: #fff; font-weight: 700; text-transform: uppercase; padding-top:150px">V9AI<span>Exchange</span>
+                                <div class="tp-caption tp-resizeme max-style alt-font" id="slide-1-layer-1" data-x="['left','left','center','center']" data-y="['middle','middle','middle','middle']" data-hoffset="['40','40','0','0']" data-voffset="['-100','-100','-100','-120']" data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;" data-transform_in="x:[-175%];y:0px;z:0;rX:0;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0.01;s:3000;e:Power3.easeOut;" data-transform_out="s:1000;e:Power3.easeInOut;s:1000;e:Power3.easeInOut;" data-mask_in="x:[100%];y:0;s:inherit;e:inherit;" data-start="1000" data-splitin="chars" data-splitout="none" data-responsive_offset="on" data-elementdelay="0.05" style="z-index: 5; white-space: nowrap; color: #fff; font-weight: 700; text-transform: uppercase; padding-top:150px">BLITZ<span>Exchange</span>
                                 </div>
                             </center>
                             <!-- END LAYER 1 -->
@@ -160,7 +160,7 @@
                             <center>
                                 <div class="tp-caption tp-resizeme slider-text" id="slide-1-layer-2" data-x="['left','left','center','center']" data-y="['middle','middle','middle','middle']" data-hoffset="['45','45','10','10']" data-voffset="['-20','-20','-20','-40']" data-fontsize="['18','20','20','20']" data-lineheight="['30','30','28','28']" data-width="none" data-height="none" data-transform_idle="o:1;" data-transform_in="x:[175%];y:0px;z:0;rX:0;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0.01;s:3000;e:Power3.easeOut;" data-transform_out="s:1000;e:Power3.easeInOut;s:1000;e:Power3.easeInOut;" data-mask_in="x:[-100%];y:0;s:inherit;e:inherit;" data-start="2500" data-splitin="none" data-splitout="none" data-responsive_offset="on" style="z-index: 5; white-space: nowrap; color: #fff; line-height: 22px;">
                                     <p style="display:none" class="white-space xs-padding-15px-lr">
-                                        V9AI Exchange Ranks up with Over 250 perpetual and quarterly Bitcoin markets index as the best bitcoin investment service.
+                                        Blitz Exchange Ranks up with Over 250 perpetual and quarterly Bitcoin markets index as the best bitcoin investment service.
                                     </p>
                                 </div>
                             </center>
@@ -264,10 +264,10 @@
             <div class="col-lg-6 col-md-12" style="background-image:url(images/index/medical/holder.png);  background-position:bottom; margin-top:-40px;">
                 <div class="section-heading half left">
                     <br /><br /><br />
-                    <h4 style="color:#FFF">CFD Trading Platforms <span style="color:#FFFFFF">V9AI Exchange</span></h4>
+                    <h4 style="color:#FFF">CFD Trading Platforms <span style="color:#FFFFFF">Blitz Exchange</span></h4>
                 </div>
                 <div style="color:#FFFFFF">  Our <strong style="color:#FFF; background:#00CC33">&nbsp;Buy&nbsp;</strong> / <strong style="color:#FFF; background:#F63">&nbsp; Sell&nbsp;</strong>&nbsp;
-                    V9AI Exchange is the most popular trading platform in the world. Trade forex, indices, ETFs and much more on a platform designed to give traders all the tools and charting to take advantage of market opportunities. Experience CFD trading across multiple asset classes on the world’s favourite trading platform V9AI Exchange
+                    Blitz Exchange is the most popular trading platform in the world. Trade forex, indices, ETFs and much more on a platform designed to give traders all the tools and charting to take advantage of market opportunities. Experience CFD trading across multiple asset classes on the world’s favourite trading platform Blitz Exchange
                 </div>
                 <ul class="list-style-5 margin-20px-bottom" style="color:#FFFFFF">
                     <center>
@@ -296,8 +296,8 @@
                         <div class="text-white font-size18 xs-font-size16 font-weight-500" style="color:#333333; text-transform:capitalize"><font color="#666666">Platform Analysis Tools </font></div>
                     </h2>
                 </center>
-                <p><small style="text-align:left">Spend less time analyzing and more time trading with automated analysis tool Trading Central with V9AI Exchange.
-                        Save time with actionable trade opportunities, identified patterns, in-depth volatility analysis and intraday technical analysis, all included free in the V9AI Exchange webportal, powerful trading platforms were designed to meet the demanding needs of currency traders looking for maximum performance, flexibility and speed. </small>
+                <p><small style="text-align:left">Spend less time analyzing and more time trading with automated analysis tool Trading Central with Blitz Exchange.
+                        Save time with actionable trade opportunities, identified patterns, in-depth volatility analysis and intraday technical analysis, all included free in the Blitz Exchange webportal, powerful trading platforms were designed to meet the demanding needs of currency traders looking for maximum performance, flexibility and speed. </small>
                 </p>
             </div>
             <div class="col-12" style="line-height:15px; padding-left:20px; text-align:left">
@@ -404,7 +404,7 @@
                             Our Market Strategist
                         </h4>
                         <p style="text-align:left; color:#000">
-                            V9AI Exchange market strategists can work with you on developing a trading plan.
+                            Blitz Exchange market strategists can work with you on developing a trading plan.
                         </p>
                         <p style="text-align:left">&nbsp;</p>
                     </div>
@@ -613,9 +613,9 @@
             <div class="col-lg-5 col-md-12">
                 <div class="padding-30px-left sm-no-padding">
                     <h4 class="sm-margin-lr-auto xs-width-100">Explore the benefits of trading on MT4 with Coinex Digital</h4>
-                    <p>When you trade FX on V9AI Exchange through FinTech Investment, you benefit from the reliability of a trusted broker, ultra-tight spreads, exceptional executions, custom trader tools, and more. Also We  Optimize your strategy with a suite of over 20 expert advisors and custom indicators to give you professional-grade control and flexibility over your trading strategy.</p>
+                    <p>When you trade FX on Blitz Exchange through FinTech Investment, you benefit from the reliability of a trusted broker, ultra-tight spreads, exceptional executions, custom trader tools, and more. Also We  Optimize your strategy with a suite of over 20 expert advisors and custom indicators to give you professional-grade control and flexibility over your trading strategy.</p>
                     <ul class="list-style-5">
-                        <li>V9AI Exchange WebTrader matches the execution capabilities of the V9AI Exchange desktop application</li>
+                        <li>Blitz Exchange WebTrader matches the execution capabilities of the Blitz Exchange desktop application</li>
                         <li>It offers the convenience of a fully functional application which is ideal for when you want to quickly access the financial markets</li>
                         <li>Ease of trading (no download required & starts in seconds)
                             Complete suite of trading tools and operations
@@ -829,18 +829,18 @@
                         <div class="text-white font-size18 xs-font-size16 font-weight-500" style="color:#333333"><font color="#666666">Extensive Support</font></div>
                     </h2>
                 </center>
-                <p><small style="text-align:left"> OUR V9AI exchange is available in 38 languages and offered by more than 750 brokerages. Supported instruments include CFDs, futures and forex. Traders and investors from around the globe are able to utilise its sophisticated functionality through web-based, downloadable or mobile application. </small></p>
+                <p><small style="text-align:left"> OUR blitz exchange is available in 38 languages and offered by more than 750 brokerages. Supported instruments include CFDs, futures and forex. Traders and investors from around the globe are able to utilise its sophisticated functionality through web-based, downloadable or mobile application. </small></p>
             </div>
             <div class="col-12" style="line-height:15px; padding-left:20px; text-align:left">
-                <p><small style="text-align:left; color:#996; text-transform:uppercase">Interactive charts and a wide variety of indicators are accessible. V9AI Exchange contains a technical analysis package comprised of 30 built-in indicators and more than 2,000 free custom indicators, as well as 700 indicators that are for purchase.</small></p>
-                <a class="butn theme margin-20px-top medium" href="/about"><span>Read more</span></a>
+                <p><small style="text-align:left; color:#996; text-transform:uppercase">Interactive charts and a wide variety of indicators are accessible. Blitz Exchange contains a technical analysis package comprised of 30 built-in indicators and more than 2,000 free custom indicators, as well as 700 indicators that are for purchase.</small></p>
+                <a class="butn theme margin-20px-top medium" href="/?a=about"><span>Read more</span></a>
             </div>
         </div>
         <div class="row">
             <div class="col-12" style="line-height:15px; padding-left:20px; text-align:left">
                 <p>&nbsp;</p>
                 <p>&nbsp;</p>
-                <p><small style="text-align:left; color:#666666; text-transform:uppercase">We provide our investors with the very latest technology and versatile software. Following the great success of V9AI exchange, MetaQuotes designed its ultimate successor, MetaTrader5 .We’re redefining what it means to learn about finance—and that means education resources that are built for today.</small></p>
+                <p><small style="text-align:left; color:#666666; text-transform:uppercase">We provide our investors with the very latest technology and versatile software. Following the great success of blitz exchange, MetaQuotes designed its ultimate successor, MetaTrader5 .We’re redefining what it means to learn about finance—and that means education resources that are built for today.</small></p>
             </div>
             <div class="col-lg-1 col-md-6 offset-lg-1">
             </div>
@@ -855,8 +855,7 @@
                         <span class="d-inline-block width-85 vertical-align-top padding-10px-left">
                         <strong>Registered office address:</strong>
                         <br />
-                        65 Shearsmith Tower Cable Street London E1.
-  </span>
+                        60a Station Road, North Harrow, England, HA2 7SL  </span>
                         <small>Google map location</small>
                         <br />
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.7250552087094!2d-3.1907035843698366!3d51.499912779633966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x486e1c9bfa599a21%3A0x6fb9bdf12c51408e!2sCompanies%20House!5e0!3m2!1sen!2sng!4v1648044396234!5m2!1sen!2sng" width="700" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
@@ -907,7 +906,7 @@
                                 <span class="d-inline-block width-85 vertical-align-top padding-10px-left">Investment&nbsp;</span></a>
                         </li>
                         <li>
-                            <a href="/about"> <span class="d-inline-block vertical-align-top font-size18"></span>
+                            <a href="/?a=about"> <span class="d-inline-block vertical-align-top font-size18"></span>
                                 <span class="d-inline-block width-85 vertical-align-top padding-10px-left">About site &nbsp;&nbsp;</span></a>
                         </li>
                         <li>
@@ -946,8 +945,7 @@
                     <ul class="footer-list">
                         <li>
                             <span class="d-inline-block vertical-align-top font-size18"><i class="fas fa-map-marker-alt text-theme-color"></i></span>
-                            <span class="d-inline-block width-85 vertical-align-top padding-10px-left">65 Shearsmith Tower Cable Street London E1.
-</span>
+                            <span class="d-inline-block width-85 vertical-align-top padding-10px-left">60a Station Road, North Harrow, England, HA2 7SL </span>
                         </li>
                         <li>
                             <span class="d-inline-block vertical-align-top font-size18"><i class="far fa-envelope text-theme-color"></i></span>
@@ -1008,22 +1006,15 @@ new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'a
 <script type="text/javascript">
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
     (function(){
-        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        var s1=document.createElement("script"), s0=document.getElementsByTagName("script")[0];
         s1.async=true;
-        s1.src='https://embed.tawk.to/653675e1f2439e1631e78192/1hdebousl';
+        s1.src='https://embed.tawk.to/64a1ef9b94cf5d49dc611bef/1h4c8vu7q';
         s1.charset='UTF-8';
         s1.setAttribute('crossorigin','*');
         s0.parentNode.insertBefore(s1,s0);
     })();
 </script>
 <!--End of Tawk.to Script-->
-<script async src="https://telegram.org/js/telegram-widget.js?5"
-        data-telegram-share-url="https://your-website.com"
-        data-telegram-cta="Start chatting"
-        data-telegram-radius="10"
-        data-telegram-size="large"
-        data-telegram-to="your_telegram_username">
-</script>
 <script type="text/javascript">
     (function () {
         var options = {

@@ -18,11 +18,6 @@ Route::get('/', function () {
     return view('index');
 });
 
-
-
-Route::get('/about', [dashboardController::class, 'about'])->name('about');
-
-
 Route::get('/dashboard', [dashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/dashboard/deposit', [dashboardController::class, 'deposit'])->name('deposit');
@@ -38,3 +33,6 @@ Route::get('/dashboard/referral-history', [dashboardController::class, 'deposit'
 
 Route::get('/dashboard/account', [dashboardController::class, 'account'])->name('account');
 Route::get('/dashboard/account-security', [dashboardController::class, 'account_security'])->name('account_security');
+
+Route::get('/login', [dashboardController::class, 'login'])->name('login');
+Route::get('/register', [dashboardController::class, 'register'])->name('register');

@@ -7,11 +7,6 @@ use Illuminate\View\View;
 
 class dashboardController extends Controller
 {
-
-    public function about(): View
-    {
-        return view('about');
-    }
     public function index(): View
     {
         return view('dashboard.index');
@@ -48,5 +43,15 @@ class dashboardController extends Controller
     public function account_security(): View
     {
         return view('dashboard.account_security');
+    }
+
+    public function login(): View
+    {
+        return view('dashboard.login');
+    }
+
+    public function register(): View
+    {
+        return view('dashboard.register');
     }
 }
