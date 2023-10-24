@@ -18,6 +18,11 @@ Route::get('/', function () {
     return view('index');
 });
 
+
+
+Route::get('/about', [dashboardController::class, 'about'])->name('about');
+
+
 Route::get('/dashboard', [dashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/dashboard/deposit', [dashboardController::class, 'deposit'])->name('deposit');

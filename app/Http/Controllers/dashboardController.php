@@ -7,6 +7,11 @@ use Illuminate\View\View;
 
 class dashboardController extends Controller
 {
+    
+     public function about(): View
+    {
+        return view('about');
+    }
     public function index(): View
     {
         return view('dashboard.index');
