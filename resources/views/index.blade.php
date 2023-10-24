@@ -111,7 +111,7 @@
                             <nav class="navbar navbar-expand-lg navbar-light no-padding">
                                 <div class="navbar-header navbar-header-custom">
                                     <!-- Start Logo -->
-                                    <a href="/?a=home" class="navbar-brand logo5"><img src="{{ asset('images/index/logo.png') }}" alt="logo" id="logo"></a>
+                                    <a href="" class="navbar-brand logo5"><img src="{{ asset('images/index/logo.png') }}" alt="logo" id="logo"></a>
                                     <!-- End Logo -->
                                 </div>
                                 <div class="navbar-toggler" style="background-color:#999999; color:#FFFFFF">
@@ -119,13 +119,19 @@
                                 </div>
                                 <!-- Menu Area -->
                                 <ul class="navbar-nav ml-auto" id="nav" style="display: none;">
-                                    <li><a href="./"> Home</a>
+                                    <li><a href=""> Home</a>
                                     </li>
-                                    <li> <a  href="/?a=login">New Investment</a>
+                                    <li> <a  href="{{ route('login') }}">New Investment</a>
                                     </li>
+<<<<<<< HEAD
                                     <li><a  href="{{ route('dashboard') }}">Account Login</a></li>
                                     <li><a  href="{{ route('dashboard') }}">Registration</a></li>
                                     <li><a href="{{ route('about') }}">About Us</a>
+=======
+                                    <li><a  href="{{ route('login') }}">Account Login</a></li>
+                                    <li><a  href="{{ route('register') }}">Registration</a></li>
+                                    <li><a href="{{ route('dashboard') }}">About Us</a>
+>>>>>>> 632004d906fcdc177485eeaf05144072d196386a
                                     </li>
                                     <li><a href="{{ route('dashboard') }}">Platforms</a>
                                     </li>

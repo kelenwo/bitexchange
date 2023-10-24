@@ -38,3 +38,6 @@ Route::get('/dashboard/referral-history', [dashboardController::class, 'deposit'
 
 Route::get('/dashboard/account', [dashboardController::class, 'account'])->name('account');
 Route::get('/dashboard/account-security', [dashboardController::class, 'account_security'])->name('account_security');
+
+Route::get('/login', [dashboardController::class, 'login'])->name('login');
+Route::get('/register', [dashboardController::class, 'register'])->name('register');
