@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class dashboardController extends Controller
+class DashboardController extends Controller
 {
-    
+
      public function about(): View
     {
         return view('about');
@@ -50,13 +50,4 @@ class dashboardController extends Controller
         return view('dashboard.account_security');
     }
 
-    public function login(): View
-    {
-        return view('dashboard.login');
-    }
-
-    public function register(): View
-    {
-        return view('dashboard.register');
-    }
 }

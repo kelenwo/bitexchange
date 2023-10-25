@@ -13,65 +13,60 @@
         </div>
         <div class="container-fluid mt-4">
             <form action="" method="post" onsubmit="return checkform()" name="editform">
-                <input type="hidden" name="form_id" value="16979592027095">
-                <input type="hidden" name="form_token" value="ae45f00d8a6d482f78253ee4c8f9f836">
-                <input type="hidden" name="a" value="edit_account">
-                <input type="hidden" name="action" value="edit_account">
-                <input type="hidden" name="say" value="">
-
+                @csrf
                 <div class="form-group">
                     <label for="accountName">Account Name:</label>
-                    <p id="accountName">kelenwo</p>
+                    <p id="accountName">{{ Auth::user()->username }}</p>
                 </div>
 
                 <div class="form-group">
                     <label for="registrationDate">Registration date:</label>
-                    <p id="registrationDate">Oct-4-2023 04:18:35 PM</p>
+                    <p id="registrationDate">{{ Auth::user()->timestamp }}</p>
                 </div>
 
                 <div class="form-group">
                     <label for="fullName">Your Full Name:</label>
-                    <input type="text" name="fullname" id="fullName" value="Kelvin" class="form-control" size="30">
+                    <input type="text" name="name" id="name" value="{{ Auth::user()->name }}" class="form-control">
                 </div>
 
                 <div class="form-group">
                     <label for="newPassword">New Password:</label>
-                    <input type="password" name="password" id="newPassword" value="" class="form-control" size="30">
+                    <input type="password" name="password" id="newPassword" value="" class="form-control">
                 </div>
 
                 <div class="form-group">
                     <label for="retypePassword">Retype Password:</label>
-                    <input type="password" name="password2" id="retypePassword" value="" class="form-control" size="30">
+                    <input type="password" name="password2" id="retypePassword" value="" class="form-control">
                 </div>
 
                 <div class="form-group">
                     <label for="usdtAccountID">Your Usdt (trc20) Account ID:</label>
-                    <input type="text" name="pay_account[1000][Account ID]" id="usdtAccountID" class="form-control" size="30" value="">
+                    <input type="text" name="usdt" id="usdtAccountID" class="form-control" value="{{ Auth::user()->usdt }}">
                 </div>
 
                 <div class="form-group">
                     <label for="bitcoinAccountID">Your Bitcoin Account ID:</label>
-                    <input type="text" name="pay_account[1001][Account ID]" id="bitcoinAccountID" class="form-control" size="30" value="">
+                    <input type="text" name="btc" id="bitcoinAccountID" class="form-control" value="{{ Auth::user()->btc }}">
                 </div>
 
                 <div class="form-group">
                     <label for="ethereumAccountID">Your Ethereum Account ID:</label>
-                    <input type="text" name="pay_account[1002][Account ID]" id="ethereumAccountID" class="form-control" size="30" value="">
+                    <input type="text" name="eth" id="ethereumAccountID" class="form-control" value="{{ Auth::user()->eth }}">
                 </div>
 
                 <div class="form-group">
                     <label for="bnbAccountID">Your BNB (bep20) Account ID:</label>
-                    <input type="text" name="pay_account[1003][Account ID]" id="bnbAccountID" class="form-control" size="30" value="">
+                    <input type="text" name="bnb" id="bnbAccountID" class="form-control" value="{{ Auth::user()->bnb }}">
                 </div>
 
                 <div class="form-group">
                     <label for="trxAccountID">Your TRX Account ID:</label>
-                    <input type="text" name="pay_account[1004][Account ID]" id="trxAccountID" class="form-control" size="30" value="">
+                    <input type="text" name="trx" id="trxAccountID" class="form-control" value="{{ Auth::user()->trx }}">
                 </div>
 
                 <div class="form-group">
                     <label for="emailAddress">Your E-mail address:</label>
-                    <input type="text" name="email" id="emailAddress" value="kelenwo68@gmail.com" class="form-control" size="30">
+                    <input type="text" name="email" id="emailAddress" value="{{ Auth::user()->email }}" class="form-control">
                 </div>
 
                 <div class="form-group">

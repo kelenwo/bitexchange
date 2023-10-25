@@ -4,7 +4,9 @@
 
 @section('content')
     <div class="content-wrapper mt-0+">
-        <h5 class="font-weight-medium d-lg-flex">Welcome User!</h5>
+        <div class="mt-3">
+            <h4 class="font-weight-medium d-lg-flex">Welcome {{ Auth::user()->name }}!</h4>
+        </div>
         <div class="row my-3">
             <div class="col-md-6 col-xl-3">
                 <div class="card">
@@ -49,7 +51,6 @@
             </div> <!-- end col-->
 
             <div class="col-md-6 col-xl-3">
-
                 <div class="card">
                     <div class="card-body py-2">
                         <div class="float-end mt-2" style="position: relative;">

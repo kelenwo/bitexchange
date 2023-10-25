@@ -17,22 +17,35 @@
       <div class="container-fluid page-body-wrapper full-page-wrapper">
         <div class="content-wrapper d-flex align-items-center auth">
           <div class="row flex-grow">
-            <div class="col-lg-4 mx-auto">
+            <div class="col-lg-5 mx-auto">
               <div class="auth-form-light text-left p-5">
                 <div class="brand-logo">
-                  <img src="{{ asset('images/logo.svg') }}">
+                    <a href="{{ route('/') }}" class="navbar-brand logo5"><img src="{{ asset('images/index/logo.png') }}" alt="logo" id="logo"></a>
                 </div>
-                <h4>Hello! let's get started</h4>
-                <h6 class="font-weight-light">Sign in to continue.</h6>
-                <form class="pt-3">
+                <h6 class="font-weight-light">LOGIN TO ACCOUNT</h6>
+
+                  @if(Session::has('success'))
+                      <div class="py-2 alert alert-success" role="alert">
+                          {{ Session::get('success') }}
+                      </div>
+                  @endif
+
+                  @if(Session::has('error'))
+                      <div class="py-2 alert alert-danger" role="alert">
+                          {{ Session::get('error') }}
+                      </div>
+                  @endif
+
+                <form class="pt-3" method="POST" action="{{ route('login') }}">
+                    @csrf
                   <div class="form-group">
-                    <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username">
+                    <input type="email" name="email" class="form-control form-control-lg" placeholder="Email Address">
                   </div>
                   <div class="form-group">
-                    <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+                    <input type="password" name="password" class="form-control form-control-lg" placeholder="Password">
                   </div>
                   <div class="mt-3">
-                    <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="../../index.html">SIGN IN</a>
+                    <button type="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">LOGIN</button>
                   </div>
                   <div class="my-2 d-flex justify-content-between align-items-center">
                     <div class="form-check">

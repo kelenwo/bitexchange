@@ -111,7 +111,7 @@
                             <nav class="navbar navbar-expand-lg navbar-light no-padding">
                                 <div class="navbar-header navbar-header-custom">
                                     <!-- Start Logo -->
-                                    <a href="" class="navbar-brand logo5"><img src="{{ asset('images/index/logo.png') }}" alt="logo" id="logo"></a>
+                                    <a href="{{ route('/') }}" class="navbar-brand logo5"><img src="{{ asset('images/index/logo.png') }}" alt="logo" id="logo"></a>
                                     <!-- End Logo -->
                                 </div>
                                 <div class="navbar-toggler" style="background-color:#999999; color:#FFFFFF">
@@ -123,15 +123,10 @@
                                     </li>
                                     <li> <a  href="{{ route('login') }}">New Investment</a>
                                     </li>
-<<<<<<< HEAD
-                                    <li><a  href="{{ route('dashboard') }}">Account Login</a></li>
-                                    <li><a  href="{{ route('dashboard') }}">Registration</a></li>
-                                    <li><a href="{{ route('about') }}">About Us</a>
-=======
                                     <li><a  href="{{ route('login') }}">Account Login</a></li>
                                     <li><a  href="{{ route('register') }}">Registration</a></li>
-                                    <li><a href="{{ route('dashboard') }}">About Us</a>
->>>>>>> 632004d906fcdc177485eeaf05144072d196386a
+                                    <li><a href="{{ route('about') }}">About Us</a>
+
                                     </li>
                                     <li><a href="{{ route('dashboard') }}">Platforms</a>
                                     </li>
@@ -861,7 +856,7 @@
                         <span class="d-inline-block width-85 vertical-align-top padding-10px-left">
                         <strong>Registered office address:</strong>
                         <br />
-                        65 Shearsmith Tower Cable Street London E1. 
+                        65 Shearsmith Tower Cable Street London E1.
   </span>
                         <small>Google map location</small>
                         <br />
@@ -952,7 +947,7 @@
                     <ul class="footer-list">
                         <li>
                             <span class="d-inline-block vertical-align-top font-size18"><i class="fas fa-map-marker-alt text-theme-color"></i></span>
-                            <span class="d-inline-block width-85 vertical-align-top padding-10px-left">65 Shearsmith Tower Cable Street London E1. 
+                            <span class="d-inline-block width-85 vertical-align-top padding-10px-left">65 Shearsmith Tower Cable Street London E1.
 </span>
                         </li>
                         <li>

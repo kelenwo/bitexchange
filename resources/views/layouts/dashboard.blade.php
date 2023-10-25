@@ -5,20 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@yield('title')</title>
-    <!-- plugins:css -->
+
     <link rel="stylesheet" href="{{ asset('css/dashboard/bootstrap.css') }}">
 
     <link rel="stylesheet" href="{{ asset('vendors/simple-line-icons/css/simple-line-icons.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/flag-icon-css/css/flag-icon.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/css/vendor.bundle.base.css') }}">
-    <!-- endinject -->
-    <!-- Plugin css for this page -->
+
     <link rel="stylesheet" href="{{ asset('vendors/daterangepicker/daterangepicker.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/chartist/chartist.min.css') }}">
-    <!-- End plugin css for this page -->
-    <!-- inject:css -->
-    <!-- endinject -->
-    <!-- Layout styles -->
     <link rel="stylesheet" href="{{ asset('css/dashboard/style.css') }}">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="./images/favicon.png" />
@@ -28,10 +23,10 @@
     <!-- partial:partials/_navbar.html -->
     <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="navbar-brand-wrapper d-flex align-items-center">
-            <a class="navbar-brand brand-logo" href="/dashboard">
-                <img src="{{ asset('images/logo.svg') }}" alt="logo" class="logo-dark" />
-            </a>
-            <a class="navbar-brand brand-logo-mini" href="/dashboard"><img src="{{ asset('images/logo-mini.svg') }}" alt="logo" /></a>
+            <a href="{{ route('dashboard') }}" class="navbar-brand brand-logo logo5"><img src="{{ asset('images/index/logo.png') }}" alt="logo" id="logo"></a>
+
+            <a href="{{ route('dashboard') }}" class="navbar-brand brand-logo-mini logo5"><img src="{{ asset('images/index/logo.png') }}" alt="logo" id="logo"></a>
+
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center flex-grow-1">
 
@@ -39,11 +34,11 @@
 
                 <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
                     <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                        <img class="img-xs rounded-circle" src="{{ asset('images/user.png') }}" alt="Profile image"> <span class="font-weight-normal"> Henry Klein </span></a>
+                        <img class="img-xs rounded-circle" src="{{ asset('images/user.png') }}" alt="Profile image"> <span class="font-weight-normal"> {{ Auth::user()->name }} </span></a>
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
-                        <a class="dropdown-item"><i class="dropdown-item-icon icon-user text-primary"></i> View Profile</a>
-                        <a class="dropdown-item"><i class="dropdown-item-icon icon-speech text-primary"></i> Account Security</a>
-                        <a class="dropdown-item"><i class="dropdown-item-icon icon-power text-primary"></i>Logout</a>
+{{--                        <a class="dropdown-item"><i class="dropdown-item-icon icon-user text-primary"></i> View Profile</a>--}}
+                        <a class="dropdown-item" href="{{ route('account') }}"><i class="dropdown-item-icon icon-speech text-primary"></i> Account Security</a>
+                        <a class="dropdown-item" href="{{ route('logout') }}"><i class="dropdown-item-icon icon-power text-primary"></i>Logout</a>
                     </div>
                 </li>
             </ul>
