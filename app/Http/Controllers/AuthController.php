@@ -42,6 +42,7 @@ class AuthController extends Controller
         $user->btc = $request->input('btc');
         $user->bnb = $request->input('bnb');
         $user->trx = $request->input('trx');
+        $user->admin = false;
 
         if ($user->save()) {
             Session::flash('success', 'Account Created successfully, login to continue');

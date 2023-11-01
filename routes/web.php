@@ -24,6 +24,7 @@ Route::group(['middleware' => ['dashboard.auth']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/dashboard/deposit', [DashboardController::class, 'deposit'])->name('deposit');
+    Route::post('/dashboard/deposit', [DashboardController::class, 'saveDeposit']);
     Route::get('/dashboard/deposit-list', [DashboardController::class, 'deposit_list'])->name('deposit_list');
     Route::get('/dashboard/deposit-history', [DashboardController::class, 'deposit_history'])->name('deposit_history');
 
@@ -37,6 +38,10 @@ Route::group(['middleware' => ['dashboard.auth']], function () {
     Route::get('/dashboard/account', [DashboardController::class, 'account'])->name('account');
     Route::get('/dashboard/account-security', [DashboardController::class, 'account_security'])->name('account_security');
 
+});
+
+Route::group(['middleware' => ['admin.auth']], function () {
+    Route::get('/admin', [DashboardController::class, 'index'])->name('admin');
 });
 
 Route::get('/about', [DashboardController::class, 'about'])->name('about');

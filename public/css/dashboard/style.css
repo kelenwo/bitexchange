@@ -6950,7 +6950,7 @@ a.close.disabled {
 @media (min-width: 992px) {
     .modal-lg,
     .modal-xl {
-        max-width: 90%; } }
+        max-width: 70%; } }
 
 @media (min-width: 1200px) {
     .modal-xl {
@@ -11897,7 +11897,7 @@ dl li {
 
 /* Modals */
 .modal .modal-dialog {
-    margin-top: 100px; }
+    margin-top: 2%; }
 .modal .modal-dialog .modal-content .modal-header {
     padding: 25px 26px; }
 .modal .modal-dialog .modal-content .modal-header .close span {
