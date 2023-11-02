@@ -54,61 +54,53 @@
             <ul class="nav ps-3">
 
                 <li class="nav-item my-2 mt-5">
-                    <a class="nav-link" href="{{ route('dashboard') }}">
+                    <a class="nav-link" href="{{ route('admin') }}">
                         <span class="menu-title">Dashboard</span>
                     </a>
                 </li>
 
                 <li class="nav-item my-2">
                     <a class="nav-link" data-toggle="collapse" href="#deposit" aria-expanded="false" aria-controls="deposit">
-                        <span class="menu-title">Deposit</span>
+                        <span class="menu-title">Manage Deposits</span>
                         <i class="icon-arrow-down menu-icon"></i>
                     </a>
                     <div class="collapse" id="deposit">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('deposit') }}">Deposit</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('deposit_list') }}">Deposit List</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('deposit_history') }}">Deposit History</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('admin_deposits') }}">All Deposits</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('admin_pending_deposits') }}">Pending Deposits</a></li>
+
                         </ul>
                     </div>
                 </li>
 
                 <li class="nav-item my-2">
                     <a class="nav-link" data-toggle="collapse" href="#withdrawal" aria-expanded="false" aria-controls="withdrawal">
-                        <span class="menu-title">Withdrawal</span>
+                        <span class="menu-title">Manage Withdrawal</span>
                         <i class="icon-arrow-down menu-icon"></i>
                     </a>
                     <div class="collapse" id="withdrawal">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('withdrawal') }}">Withdrawal</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('withdrawal_history') }}">Withdrawal History</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('admin_withdrawals') }}">All Withdrawal</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('admin_pending_withdrawals') }}">Pending Withdrawal</a></li>
                         </ul>
                     </div>
                 </li>
 
+                <li class="nav-item my-2">
+                    <a class="nav-link" href="{{ route('admin_users') }}">
+                        <span class="menu-title">Manage Users</span>
+                    </a>
+                </li>
 
                 <li class="nav-item my-2">
-                    <a class="nav-link" data-toggle="collapse" href="#account" aria-expanded="false" aria-controls="account">
-                        <span class="menu-title">Account</span>
+                    <a class="nav-link" data-toggle="collapse" href="#site_settings" aria-expanded="false" aria-controls="withdrawal">
+                        <span class="menu-title">Site Settings</span>
                         <i class="icon-arrow-down menu-icon"></i>
                     </a>
-                    <div class="collapse" id="account">
+                    <div class="collapse" id="site_settings">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('account') }}">Account Settings</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('account_security') }}">Security</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li class="nav-item my-2">
-                    <a class="nav-link" data-toggle="collapse" href="#referral" aria-expanded="false" aria-controls="referral">
-                        <span class="menu-title">Referral</span>
-                        <i class="icon-arrow-down menu-icon"></i>
-                    </a>
-                    <div class="collapse" id="referral">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('referral') }}">Referral</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('referral_link') }}">Referral Links</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('referral_history') }}">Referral History</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('admin_gateways') }}">Manage Gateways</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('admin_settings') }}">Site Settings</a></li>
                         </ul>
                     </div>
                 </li>
@@ -144,8 +136,8 @@
 <script src="{{ asset('js/dashboard/misc.js') }}"></script>
 <!-- endinject -->
 <!-- Custom js for this page -->
-<script src="{{ asset('js/fa.js') }}"></script>
 <script src="{{ asset('js/dashboard/dashboard.js') }}"></script>
+<script src="{{ asset('js/fa.js') }}"></script>
 <!-- End custom js for this page -->
 </body>
 </html>

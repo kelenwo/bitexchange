@@ -13,15 +13,17 @@ return new class extends Migration
     public function up(): void
     {
         $user = Users::firstOrNew(['email' => 'user@example.com']);
+        if ($user) {
+            $user->name = 'Admin';
+            $user->username = 'admin';
+            $user->email = 'admin@v9ai.de';
+            $user->country = 'Germany';
+            $user->admin = true;
+            $user->password = bcrypt('Alimayorru1');
 
-        $user->name = 'Admin';
-        $user->username = 'admin';
-        $user->email = 'admin@v9ai.de';
-        $user->country = 'Germany';
-        $user->admin = true;
-        $user->password = bcrypt('Alimayorru1');
+            $user->save();
+        }
 
-        $user->save();
     }
 
     /**

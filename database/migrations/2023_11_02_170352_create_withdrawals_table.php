@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('deposits', function (Blueprint $table) {
+        Schema::create('withdrawals', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('gateway_id');
@@ -19,12 +19,8 @@ return new class extends Migration
             $table->foreign('gateway_id')->references('id')->on('gateways');
             $table->decimal('amount', 10, 2);
             $table->string('hash');
-            $table->string('plan');
-            $table->string('receipt')->nullable();
-            $table->string('transaction_id');
             $table->string('status');
             $table->timestamps();
-
         });
     }
 
@@ -33,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('deposits');
+        Schema::dropIfExists('withdrawals');
     }
 };

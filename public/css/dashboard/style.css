@@ -12823,7 +12823,7 @@ dl li {
 .sidebar .nav .nav-item .nav-link i {
     color: inherit; }
 .sidebar .nav .nav-item .nav-link i.menu-icon {
-    font-size: 1.125rem;
+    font-size: 0.6rem;
     line-height: 1;
     margin-left: auto;
     color: #626262; }
@@ -12968,7 +12968,7 @@ dl li {
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
     color: #7b8190;
-    font-size: .75rem; }
+    font-size: .5rem; }
 .sidebar .nav.sub-menu .nav-item .nav-link.active {
     color: #5b73e8;
     background: transparent; }

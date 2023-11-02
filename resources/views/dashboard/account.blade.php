@@ -12,7 +12,19 @@
             </nav>
         </div>
         <div class="container-fluid mt-4">
-            <form action="" method="post" onsubmit="return checkform()" name="editform">
+
+            @if(Session::has('success'))
+                <div class="py-2 alert alert-success" role="alert">
+                    {{ Session::get('success') }}
+                </div>
+            @endif
+            @if(Session::has('error'))
+                <div class="py-2 alert alert-danger" role="alert">
+                    {{ Session::get('error') }}
+                </div>
+            @endif
+
+            <form action="{{ route('account') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="accountName">Account Name:</label>
@@ -25,19 +37,37 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="emailAddress">Your E-mail address:</label>
+                    <input type="text" name="email" id="emailAddress" value="{{ Auth::user()->email }}" class="form-control bg-white" readonly>
+                </div>
+
+                <div class="form-group">
                     <label for="fullName">Your Full Name:</label>
                     <input type="text" name="name" id="name" value="{{ Auth::user()->name }}" class="form-control">
                 </div>
 
                 <div class="form-group">
-                    <label for="newPassword">New Password:</label>
-                    <input type="password" name="password" id="newPassword" value="" class="form-control">
+                    <label for="fullName">Country</label>
+                    <select name="country" class="form-control form-control-sm">
+                        <option>Country</option>
+                        <option value="United States of America">United States of America</option>
+                        <option value="United Kingdom">United Kingdom</option>
+                        <option value="India">India</option>
+                        <option value="Germany">Germany</option>
+                        <option value="Argentina">Argentina</option>
+                    </select>
+
                 </div>
 
-                <div class="form-group">
-                    <label for="retypePassword">Retype Password:</label>
-                    <input type="password" name="password2" id="retypePassword" value="" class="form-control">
-                </div>
+{{--                <div class="form-group">--}}
+{{--                    <label for="newPassword">New Password:</label>--}}
+{{--                    <input type="password" name="password" id="newPassword" value="" class="form-control">--}}
+{{--                </div>--}}
+
+{{--                <div class="form-group">--}}
+{{--                    <label for="retypePassword">Retype Password:</label>--}}
+{{--                    <input type="password" name="password2" id="retypePassword" value="" class="form-control">--}}
+{{--                </div>--}}
 
                 <div class="form-group">
                     <label for="usdtAccountID">Your Usdt (trc20) Account ID:</label>
@@ -62,11 +92,6 @@
                 <div class="form-group">
                     <label for="trxAccountID">Your TRX Account ID:</label>
                     <input type="text" name="trx" id="trxAccountID" class="form-control" value="{{ Auth::user()->trx }}">
-                </div>
-
-                <div class="form-group">
-                    <label for="emailAddress">Your E-mail address:</label>
-                    <input type="text" name="email" id="emailAddress" value="{{ Auth::user()->email }}" class="form-control">
                 </div>
 
                 <div class="form-group">
