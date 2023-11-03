@@ -37,11 +37,6 @@ class AuthController extends Controller
         $user->email = $request->input('email');
         $user->country = $request->input('country');
         $user->password = bcrypt($request->input('password')); // Make sure to hash the password
-        $user->usdt = $request->input('usdt');
-        $user->eth = $request->input('eth');
-        $user->btc = $request->input('btc');
-        $user->bnb = $request->input('bnb');
-        $user->trx = $request->input('trx');
         $user->admin = false;
 
         if ($user->save()) {

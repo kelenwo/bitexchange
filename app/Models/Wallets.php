@@ -16,12 +16,12 @@ class Wallets extends Model
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(Users::class, 'email', 'email');
+        return $this->belongsTo(Users::class, 'user_id', 'id');
     }
 
     public function gateway(): BelongsTo
     {
-        return $this->belongsTo(Gateways::class, 'method', 'code');
+        return $this->belongsTo(Gateways::class, 'gateway_id', 'id');
     }
 }
 

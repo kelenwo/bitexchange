@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="{{ asset('css/dashboard/style.css') }}">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="./images/favicon.png" />
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
 </head>
 <body>
 <div class="container-scroller">
@@ -132,6 +134,7 @@
 <!-- container-scroller -->
 <!-- plugins:js -->
 <script src="{{ asset('vendors/js/vendor.bundle.base.js') }}"></script>
+
 <!-- endinject -->
 <!-- Plugin js for this page -->
 <script src="{{ asset('vendors/chart.js/Chart.min.js') }}"></script>

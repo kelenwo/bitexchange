@@ -3,9 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\Deposits;
+use App\Models\Fields;
 use App\Models\Gateways;
+use App\Models\Plans;
 use App\Models\Users;
+use App\Models\Wallets;
+use App\Models\Withdrawals;
 use Exception;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -23,32 +29,38 @@ class DashboardController extends Controller
     }
     public function index(): View
     {
-        return view('dashboard.index');
+        $wallet = Wallets::where('user_id', Auth::user()->id)->sum('amount');
+
+        return view('dashboard.index',['wallet' => $wallet]);
     }
 
     public function deposit(): View
     {
-        return view('dashboard.deposit');
+        $gateways = Gateways::all();
+        $plans = Plans::all();
+
+        return view('dashboard.deposit', ['gateways' => $gateways, 'plans' => $plans]);
     }
 
     public function deposit_list(): View
     {
-        $data = Deposits::where('email', Auth::user()->email)->get();
-
-        return view('dashboard.deposit_list', ['deposits' => $data]);
+        $data = Deposits::where('user_id', Auth::user()->id)->where('status', true)->get();
+        $total = Deposits::where('user_id', Auth::user()->id)->where('status', true)->sum('amount');
+        return view('dashboard.deposit_list', ['deposits' => $data, 'total' => $total]);
     }
 
     public function deposit_history(): View
     {
-        return view('dashboard.deposit_history');
+        $data = Deposits::where('user_id', Auth::user()->id)->get();
+        $total = Deposits::where('user_id', Auth::user()->id)->where('status', true)->sum('amount');
+        return view('dashboard.deposit_history', ['deposits' => $data, 'total' => $total]);
     }
 
     /**
      * @throws Exception
      */
-    public function saveDeposit(Request $request)
+    public function saveDeposit(Request $request): RedirectResponse
     {
-
 
         // Validate the form data
         $request->validate([
@@ -60,20 +72,22 @@ class DashboardController extends Controller
         ]);
 
         $user = Users::where('email', Auth::user()->email)->first();
-
         $gateway = Gateways::where('code', $request->input('method'))->first();
+        $plan = Plans::where('name', $request->input('plan'))->first();
 
-        // Handle image upload
+        $imagePath = null;
+
         if ($request->hasFile('receipt')) {
             $imagePath = $request->file('receipt')->store('images');
         }
+
         $randomId = bin2hex(random_bytes(5));
 
         $deposit = new Deposits();
-        $deposit->email()->associate($user);
+        $deposit->user()->associate($user);
         $deposit->gateway()->associate($gateway);
+        $deposit->plan()->associate($plan);
 
-        $deposit->plan = $request->input('plan');
         $deposit->amount = $request->input('amount');
         $deposit->transaction_id = $request->input('transaction_id');
         $deposit->receipt =  $imagePath?:null;
@@ -82,11 +96,9 @@ class DashboardController extends Controller
 
         if ($deposit->save()) {
             Session::flash('success', 'Deposits has been submitted successfully, Pending admin approval');
-
         }
         else {
             Session::flash('error', 'An error occurred, Make sure all required fields are selected');
-
         }
         return redirect()->back();
 
@@ -94,23 +106,62 @@ class DashboardController extends Controller
 
     public function withdrawal(): View
     {
-        return view('dashboard.withdrawal');
+        $gateways = Gateways::all();
+        $plans = Plans::all();
+        $total = Wallets::where('user_id', Auth::user()->id)->sum('amount');
+
+        return view('dashboard.withdrawal', ['gateways' => $gateways, 'plans' => $plans, 'total' => $total]);
+    }
+
+    public function saveWithdrawal(Request $request): RedirectResponse
+    {
+
+        // Validate the form data
+        $request->validate([
+            'amount' => 'required',
+            'method' => 'required',
+            'wallet' => 'required',
+        ]);
+
+        $user = Users::where('email', Auth::user()->email)->first();
+        $gateway = Gateways::where('code', $request->input('method'))->first();
+        $randomId = bin2hex(random_bytes(5));
+
+        $deposit = new Withdrawals();
+        $deposit->user()->associate($user);
+        $deposit->gateway()->associate($gateway);
+
+        $deposit->amount = $request->input('amount');
+        $deposit->status = false;
+        $deposit->hash = $randomId;
+
+        if ($deposit->save()) {
+            Session::flash('success', 'Withdrawal has been submitted successfully, Pending admin approval');
+        }
+        else {
+            Session::flash('error', 'An error occurred, Make sure all required fields are selected');
+        }
+        return redirect()->back();
+
     }
 
     public function withdrawal_history(): View
     {
-        return view('dashboard.withdrawal_history');
+        $withdrawal = Withdrawals::where('user_id', Auth::user()->id)->get();
+        $total = Withdrawals::where('user_id', Auth::user()->id)->where('status', true)->sum('amount');
+        return view('dashboard.withdrawal_history', ['withdrawals' => $withdrawal, 'total' => $total]);
     }
     public function account(): View
     {
-        return view('dashboard.account');
+        $gateways = Gateways::all();
+        return view('dashboard.account', ['gateways' => $gateways]);
     }
     public function account_security(): View
     {
         return view('dashboard.account_security');
     }
 
-    public function updateAccount(Request $request)
+    public function updateAccount(Request $request): RedirectResponse
     {
         $request->validate([
             'name' => 'required',
@@ -125,20 +176,61 @@ class DashboardController extends Controller
 
         $user->name = $request->input('name');
         $user->country = $request->input('country');
-        $user->usdt = $request->input('usdt');
-        $user->eth = $request->input('eth');
-        $user->btc = $request->input('btc');
-        $user->bnb = $request->input('bnb');
-        $user->trx = $request->input('trx');
         $user->admin = false;
+
+        foreach ($request->input('gateway') as $key => $value) {
+
+            $gateway = Gateways::where('code',$key)->first();
+
+            if($gateway) {
+
+                $fields = Fields::where('user_id', Auth::user()->id)->where('gateway_id',$gateway->id)->first();
+                if (!$fields) {
+                    $fields = new Fields();
+                    $fields->value = $value;
+                    $fields->gateway()->associate($gateway);
+                    $fields->user()->associate($user);
+                }
+                else {
+                    $fields->value = $value;
+                }
+
+                $fields->save();
+
+            }
+
+        }
 
         if ($user->save()) {
             Session::flash('success', 'Account updated successfully.');
-            return redirect()->back();
-        } else {
-            Session::flash('error', 'An error occurred. Make sure all required fields are selected.');
-            return redirect()->back();
         }
+        else {
+            Session::flash('error', 'An error occurred. Make sure all required fields are selected.');
+        }
+        return redirect()->back();
+
+    }
+
+    public function getWallet(Request $request): JsonResponse
+    {
+        $gateway = Gateways::where('code',$request->input('gateway'))->first();
+
+        $field = Fields::where('gateway_id',$gateway->id)->first();
+
+        if($field && $field->value) {
+            $responseData = [
+                'status' => 200,
+                'wallet' => $field->value,
+            ];
+        }
+        else {
+            $responseData = [
+                'status' => 404,
+            ];
+        }
+
+
+        return response()->json($responseData);
     }
 
 

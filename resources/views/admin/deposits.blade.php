@@ -35,18 +35,18 @@
                             <tbody>
                             @foreach ($deposits as $deposit)
                                 <tr>
-                                    <td>{{ $deposit->email }}</td>
-                                    <td>{{ $deposit->plan }}</td>
+                                    <td>{{ $deposit->user->email }}</td>
+                                    <td>{{ $deposit->plan->name }}</td>
                                     <td>${{ $deposit->amount }}</td>
-                                    <td>{{ $deposit->method }}</td>
-                                    <td>10</td>
+                                    <td>{{ $deposit->gateway->name }}</td>
+                                    <td>{{ strtoupper($deposit->hash) }}</td>
                                     <td>
                                         <div class="badge {{ $deposit->status ? "badge-success":"badge-warning" }} p-2">{{ $deposit->status ? "Approved":"Pending" }}</div>
                                     </td>
                                     <td>
-                                        <span class="badge badge-info p-2" type="button" data-toggle="modal" data-target="#depositModal"><i class="fa fa-search"></i> View</span>
+                                        <span class="badge badge-info p-2" type="button" data-toggle="modal" data-target="#depositModal-{{ $deposit->id }}"><i class="fa fa-search"></i> View</span>
 
-                                        <div class="modal fade" id="depositModal" tabindex="-1" role="dialog" aria-labelledby="depositModal" aria-hidden="true">
+                                        <div class="modal fade" id="depositModal-{{ $deposit->id }}" tabindex="-1" role="dialog" aria-labelledby="depositModal" aria-hidden="true">
                                             <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header card m-0">
@@ -62,52 +62,52 @@
                                                                         <tbody>
                                                                         <tr>
                                                                             <td>Deposit ID:</td>
-                                                                            <td>26</td>
+                                                                            <td>{{ $deposit->id }}</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Deposit Hash:</td>
-                                                                            <td>4C2504B8DD</td>
+                                                                            <td>{{ strtoupper($deposit->hash) }}</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>User:</td>
-                                                                            <td><a href="./?a=users&amp;b=edit&amp;id=2">arbitrage@bot.com</a></td>
+                                                                            <td><a href="#">{{ $deposit->user->email }}</a></td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Amount:</td>
-                                                                            <td>13.00 USD</td>
+                                                                            <td>{{ $deposit->amount }} USD</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Gateway:</td>
-                                                                            <td></td>
+                                                                            <td>{{ $deposit->gateway->name }}</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Reference Number:</td>
-                                                                            <td>USD2F4662B40E</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>Gateway Transaction ID:</td>
-                                                                            <td>n/a</td>
+                                                                            <td>{{ $deposit->transaction_id }}</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Date:</td>
-                                                                            <td>25/11/2021 09:36:21</td>
+                                                                            <td>{{ Carbon\Carbon::parse($deposit->created_at)->format('jS F, Y') }}</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Processed on:</td>
-                                                                            <td>n/a</td>
+                                                                            <td>{{ Carbon\Carbon::parse($deposit->updated_at)->format('jS F, Y') }}</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Status:</td>
                                                                             <td>
-                                                                                <span class="badge badge-warning">Pending</span>                                            </td>
+                                                                                <span class="badge {{ $deposit->status ? "badge-success":"badge-warning" }} p-2">
+                                                                                    {{ $deposit->status ? "Approved":"Pending" }}
+                                                                                </span>
+                                                                            </td>
                                                                         </tr>
                                                                         </tbody>
                                                                     </table>
 
                                                                     <div class="my-2">
-                                                                        <form action="" method="POST">
-                                                                            <button type="submit" class="btn btn-success btn-sm" name="btn_action" value="process_deposit">Accept Deposit</button>
-                                                                            <button type="submit" class="btn btn-danger btn-sm" name="btn_action" value="cancel_deposit">Cancel Deposit</button>
+                                                                        <form action="{{ route('process_item', ['id' => $deposit->id, 'type' => 'Deposits']) }}" method="POST">
+                                                                            @csrf
+                                                                            <button type="submit" class="btn btn-success btn-sm" name="action" value="accept">Accept Deposit</button>
+                                                                            <button type="submit" class="btn btn-danger btn-sm" name="action" value="cancel">Cancel Deposit</button>
                                                                         </form>
                                                                     </div>
                                                                 </div>

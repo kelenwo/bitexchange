@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        $user = Users::firstOrNew(['email' => 'user@example.com']);
+        $user = Users::firstOrNew(['email' => 'admin@v9ai.de']);
         if ($user) {
             $user->name = 'Admin';
             $user->username = 'admin';

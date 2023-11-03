@@ -32,26 +32,25 @@
                                 @endif
 
                                 <div class="form-group">
-                                    <label for="exampleInputUsername1">Select A Plan</label>
-                                    <select class="form-control form-control-sm" name="plan">
+                                    <label for="plan">Select A Plan</label>
+                                    <select class="form-control form-control-sm" name="plan" id="plan">
                                         <option>Select a plan</option>
-                                        <option>Plan 1</option>
-                                        <option>Plan 2</option>
-                                        <option>Plan 3</option>
+                                        @foreach ($plans as $plan)
+                                            <option value="{{ $plan->name }}">{{ $plan->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputUsername1">Enter Amount to Deposit</label>
-                                    <input type="number" name="amount" class="form-control form-control-sm" value="50.0" placeholder="Deposit Amount" step="1">
+                                    <label for="amount">Enter Amount to Deposit</label>
+                                    <input type="number" name="amount" id="amount" class="form-control form-control-sm" value="50.0" placeholder="Deposit Amount" step="1">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputUsername1">Select Payment Method</label>
-                                    <select class="form-control form-control-sm" name="method">
-                                        <option value="usdt">USDT (trc20)</option>
-                                        <option value="btc">Bitcoin</option>
-                                        <option value="eth">Ethereum</option>
-                                        <option value="bnb">BNB (Bep20)</option>
-                                        <option value="trx">TRX</option>
+                                    <label for="gateway">Select Payment Method</label>
+                                    <select class="form-control form-control-sm" name="method" id="gateway">
+                                        <option>Select Payment Method</option>
+                                        @foreach ($gateways as $gateway)
+                                            <option value="{{ $gateway->code }}">{{ $gateway->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <button type="button" class="btn btn-primary btn-sm mr-2" data-toggle="modal" data-target="#depositModal">Submit</button>

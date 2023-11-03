@@ -30,6 +30,7 @@ Route::group(['middleware' => ['dashboard.auth']], function () {
     Route::get('/dashboard/deposit-history', [DashboardController::class, 'deposit_history'])->name('deposit_history');
 
     Route::get('/dashboard/withdrawal', [DashboardController::class, 'withdrawal'])->name('withdrawal');
+    Route::post('/dashboard/withdrawal', [DashboardController::class, 'saveWithdrawal']);
     Route::get('/dashboard/withdrawal-history', [DashboardController::class, 'withdrawal_history'])->name('withdrawal_history');
 
     Route::get('/dashboard/referral', [DashboardController::class, 'deposit'])->name('referral');
@@ -39,12 +40,16 @@ Route::group(['middleware' => ['dashboard.auth']], function () {
     Route::get('/dashboard/account', [DashboardController::class, 'account'])->name('account');
     Route::post('/dashboard/account', [DashboardController::class, 'updateAccount']);
     Route::get('/dashboard/account-security', [DashboardController::class, 'account_security'])->name('account_security');
+    Route::post('/dashboard/get-wallet', [DashboardController::class, 'getWallet'])->name('get_wallet');
 
 });
 
 Route::group(['middleware' => ['admin.auth']], function () {
     Route::get('/admin', [AdminController::class, 'index'])->name('admin');
     Route::get('/admin/manage-gateway', [AdminController::class, 'gateway'])->name('admin_gateways');
+    Route::post('/admin/manage-gateway', [AdminController::class, 'saveGateway']);
+    Route::get('/admin/manage-plans', [AdminController::class, 'plan'])->name('admin_plans');
+    Route::post('/admin/manage-plans', [AdminController::class, 'savePlan']);
     Route::get('/admin/site-settings', [AdminController::class, 'gateway'])->name('admin_settings');
     Route::get('/admin/deposits', [AdminController::class, 'deposits'])->name('admin_deposits');
     Route::get('/admin/pending-deposits', [AdminController::class, 'gateway'])->name('admin_pending_deposits');
@@ -52,6 +57,9 @@ Route::group(['middleware' => ['admin.auth']], function () {
     Route::get('/admin/pending-withdrawals', [AdminController::class, 'gateway'])->name('admin_pending_withdrawals');
     Route::get('/admin/users', [AdminController::class, 'gateway'])->name('admin_users');
 });
+
+Route::post('/delete-item', [AdminController::class, 'delete'])->name('delete_item');
+Route::post('/process-item', [AdminController::class, 'process'])->name('process_item');
 
 Route::get('/about', [DashboardController::class, 'about'])->name('about');
 

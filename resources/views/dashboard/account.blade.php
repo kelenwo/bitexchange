@@ -33,7 +33,7 @@
 
                 <div class="form-group">
                     <label for="registrationDate">Registration date:</label>
-                    <p id="registrationDate">{{ Auth::user()->timestamp }}</p>
+                    <p id="registrationDate">{{ Carbon\Carbon::parse(Auth::user()->created_at)->format('jS F, Y') }}</p>
                 </div>
 
                 <div class="form-group">
@@ -49,12 +49,12 @@
                 <div class="form-group">
                     <label for="fullName">Country</label>
                     <select name="country" class="form-control form-control-sm">
-                        <option>Country</option>
-                        <option value="United States of America">United States of America</option>
-                        <option value="United Kingdom">United Kingdom</option>
-                        <option value="India">India</option>
-                        <option value="Germany">Germany</option>
-                        <option value="Argentina">Argentina</option>
+                        <option value="">Country</option>
+                        <option {{ Auth::user()->country == "United States of America" ? "selected":null }} value="United States of America">United States of America</option>
+                        <option {{ Auth::user()->country == "United Kingdom" ? "selected":null }} value="United Kingdom">United Kingdom</option>
+                        <option {{ Auth::user()->country == "India" ? "selected":null }} value="India">India</option>
+                        <option {{ Auth::user()->country == "Germany" ? "selected":null }} value="Germany">Germany</option>
+                        <option {{ Auth::user()->country == "Argentina" ? "selected":null }} value="Argentina">Argentina</option>
                     </select>
 
                 </div>
@@ -69,33 +69,18 @@
 {{--                    <input type="password" name="password2" id="retypePassword" value="" class="form-control">--}}
 {{--                </div>--}}
 
-                <div class="form-group">
-                    <label for="usdtAccountID">Your Usdt (trc20) Account ID:</label>
-                    <input type="text" name="usdt" id="usdtAccountID" class="form-control" value="{{ Auth::user()->usdt }}">
-                </div>
+                @foreach ($gateways as $gateway)
+                    @php
+                        $field = \App\Models\Fields::where('user_id', Auth::user()->id)->where('gateway_id',$gateway->id)->first()
+                    @endphp
+                    <div class="form-group">
+                        <label for="{{ $gateway->code }}">{{ $gateway->name }}</label>
+                        <input type="text" name="gateway[{{ $gateway->code }}]" id="{{ $gateway->code }}" class="form-control" placeholder="{{ $gateway->name }}" value="{{ $field->value }}">
+                    </div>
+                @endforeach
 
                 <div class="form-group">
-                    <label for="bitcoinAccountID">Your Bitcoin Account ID:</label>
-                    <input type="text" name="btc" id="bitcoinAccountID" class="form-control" value="{{ Auth::user()->btc }}">
-                </div>
-
-                <div class="form-group">
-                    <label for="ethereumAccountID">Your Ethereum Account ID:</label>
-                    <input type="text" name="eth" id="ethereumAccountID" class="form-control" value="{{ Auth::user()->eth }}">
-                </div>
-
-                <div class="form-group">
-                    <label for="bnbAccountID">Your BNB (bep20) Account ID:</label>
-                    <input type="text" name="bnb" id="bnbAccountID" class="form-control" value="{{ Auth::user()->bnb }}">
-                </div>
-
-                <div class="form-group">
-                    <label for="trxAccountID">Your TRX Account ID:</label>
-                    <input type="text" name="trx" id="trxAccountID" class="form-control" value="{{ Auth::user()->trx }}">
-                </div>
-
-                <div class="form-group">
-                    <input type="submit" value="Change Account data" class="btn btn-primary form-control sbmt">
+                    <input type="submit" value="Change Account data" class="btn btn-primary form-control">
                 </div>
             </form>
         </div>

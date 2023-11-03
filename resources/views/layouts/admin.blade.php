@@ -99,7 +99,8 @@
                     </a>
                     <div class="collapse" id="site_settings">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('admin_gateways') }}">Manage Gateways</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('admin_plans') }}">Plans</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('admin_gateways') }}">Payment Gateways</a></li>
                             <li class="nav-item"> <a class="nav-link" href="{{ route('admin_settings') }}">Site Settings</a></li>
                         </ul>
                     </div>

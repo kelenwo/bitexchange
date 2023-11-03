@@ -9,26 +9,26 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('withdrawals', function (Blueprint $table) {
+        Schema::create('fields', function (Blueprint $table) {
             $table->id();
+            $table->string('value')->nullable();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('gateway_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('gateway_id')->references('id')->on('gateways');
-            $table->decimal('amount', 10, 2);
-            $table->string('hash');
-            $table->string('status');
+            $table->unsignedBigInteger('gateway_id');
+            $table->foreign('gateway_id')->references('id')->on('gateways')->onDelete('cascade');
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('withdrawals');
+        Schema::dropIfExists('fields');
     }
 };
