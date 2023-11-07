@@ -2,26 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Referrals;
 use App\Models\Users;
+use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
 class AuthController extends Controller
 {
-    public function login(): View
-    {
-        return view('dashboard.login');
-    }
-
-    public function register(): View
-    {
-        return view('dashboard.register');
-    }
-
-    public function saveRegister(Request $request)
+    public function register(Request $request)
     {
         $request->validate([
             'name' => 'required',
@@ -36,12 +29,24 @@ class AuthController extends Controller
         $user->username = $request->input('username');
         $user->email = $request->input('email');
         $user->country = $request->input('country');
-        $user->password = bcrypt($request->input('password')); // Make sure to hash the password
+        $user->mobile = $request->input('mobile');
+        $user->password = bcrypt($request->input('password'));
         $user->admin = false;
 
         if ($user->save()) {
-            Session::flash('success', 'Account Created successfully, login to continue');
-            return redirect()->route('login');
+            Auth::login($user);
+            $user->sendEmailVerificationNotification();
+
+            if($request->input('referral_id')) {
+                $refUser = Users::where('id', $request->input('referral_id'))->first();
+                $referral = new Referrals();
+                $referral->referral()->associate($refUser);
+                $referral->user()->associate($user);
+                $referral->amount = 0.0;
+                $referral->save();
+            }
+            Session::flash('success', 'Account Created successfully, A verification email has been sent to your email address.');
+            return redirect()->route('dashboard');
 
         }
         else {
@@ -51,7 +56,7 @@ class AuthController extends Controller
         }
     }
 
-    public function loginUser(Request $request)
+    public function login(Request $request)
     {
         $credentials = $request->validate([
             'email' => 'required|email',
@@ -62,20 +67,18 @@ class AuthController extends Controller
 
             $request->session()->regenerate();
 
+            if (Auth::check() && Auth::user()->admin) {
+                return redirect()->route('admin');
+            }
             return redirect('/dashboard');
         }
         else {
 
-            Session::flash('error', "Sorry, we can't find that user. Check email and password!");
+            Session::flash('error', "Sorry, we can't find that user. check email and password!");
             return redirect()->back();
         }
 
 
     }
 
-    public function logout(): RedirectResponse
-    {
-        Auth::logout(); // Log the user out
-        return redirect()->route('/'); // Redirect to the login page
-    }
 }

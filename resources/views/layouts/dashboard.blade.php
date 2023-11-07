@@ -101,18 +101,11 @@
                         </ul>
                     </div>
                 </li>
+
                 <li class="nav-item my-2">
-                    <a class="nav-link" data-toggle="collapse" href="#referral" aria-expanded="false" aria-controls="referral">
+                    <a class="nav-link" href="{{ route('referral') }}">
                         <span class="menu-title">Referral</span>
-                        <i class="icon-arrow-down menu-icon"></i>
                     </a>
-                    <div class="collapse" id="referral">
-                        <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('referral') }}">Referral</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('referral_link') }}">Referral Links</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('referral_history') }}">Referral History</a></li>
-                        </ul>
-                    </div>
                 </li>
 
             </ul>

@@ -67,7 +67,6 @@ class Kernel extends HttpKernel
     ];
 
     protected $routeMiddleware = [
-        'dashboard.auth' => \App\Http\Middleware\DashboardMiddleware::class,
         'admin.auth' => \App\Http\Middleware\AdminMiddleware::class,
     ];
 }

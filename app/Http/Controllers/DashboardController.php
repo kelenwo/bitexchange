@@ -6,6 +6,7 @@ use App\Models\Deposits;
 use App\Models\Fields;
 use App\Models\Gateways;
 use App\Models\Plans;
+use App\Models\Referrals;
 use App\Models\Users;
 use App\Models\Wallets;
 use App\Models\Withdrawals;
@@ -30,8 +31,10 @@ class DashboardController extends Controller
     public function index(): View
     {
         $wallet = Wallets::where('user_id', Auth::user()->id)->sum('amount');
+        $referrals = Referrals::where('referral_id', Auth::user()->id)->sum('amount');
+        $withdrawals = Withdrawals::where('user_id', Auth::user()->id)->where('status', true)->sum('amount');
 
-        return view('dashboard.index',['wallet' => $wallet]);
+        return view('dashboard.index',['wallet' => $wallet, 'referrals' => $referrals, 'withdrawals' => $withdrawals]);
     }
 
     public function deposit(): View
@@ -54,6 +57,13 @@ class DashboardController extends Controller
         $data = Deposits::where('user_id', Auth::user()->id)->get();
         $total = Deposits::where('user_id', Auth::user()->id)->where('status', true)->sum('amount');
         return view('dashboard.deposit_history', ['deposits' => $data, 'total' => $total]);
+    }
+
+    public function referrals(): View
+    {
+        $data = Referrals::where('referral_id', Auth::user()->id)->get();
+        $total = Referrals::where('referral_id', Auth::user()->id)->sum('amount');
+        return view('dashboard.referrals', ['referrals' => $data, 'total' => $total]);
     }
 
     /**

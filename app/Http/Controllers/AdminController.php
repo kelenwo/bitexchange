@@ -6,6 +6,7 @@ use App\Models\Deposits;
 use App\Models\Fields;
 use App\Models\Gateways;
 use App\Models\Plans;
+use App\Models\Referrals;
 use App\Models\Users;
 use App\Models\Wallets;
 use App\Models\Withdrawals;
@@ -19,7 +20,13 @@ class AdminController extends Controller
 {
     public function index(): View
     {
-        return view('admin.index');
+        $users = Users::count();
+        $deposits = Deposits::where('status', true)->get();
+        $pending_deposits = Deposits::where('status', false)->get();
+        $withdrawals = Withdrawals::where('status', true)->get();
+        $pending_withdrawals = Withdrawals::where('status', false)->get();
+
+        return view('admin.index', ['users' => $users, 'deposits' => $deposits, 'pending_deposits' => $pending_deposits, 'withdrawals' => $withdrawals, 'pending_withdrawals' => $pending_withdrawals]);
     }
 
     public function gateway(): View
@@ -40,12 +47,66 @@ class AdminController extends Controller
 
         return view('admin.deposits', ['deposits' => $data]);
     }
+    public function pending_deposits(): View
+    {
+        $data = Deposits::where('status', false)->get();
+
+        return view('admin.pending_deposits', ['deposits' => $data]);
+    }
     public function withdrawals(): View
     {
         $data = Withdrawals::all();
 
         return view('admin.withdrawals', ['withdrawals' => $data]);
     }
+    public function pending_withdrawals(): View
+    {
+        $data = Withdrawals::where('status', false)->get();
+
+        return view('admin.pending_withdrawals', ['withdrawals' => $data]);
+    }
+    public function users(): View
+    {
+        $data = Users::all();
+
+        return view('admin.users', ['users' => $data]);
+    }
+
+    public function account(Request $request): View
+    {
+        $users = Users::where('id', request()->id)->first();
+
+        return view('admin.user_account', ['user' => $users]);
+    }
+
+    public function updateAccount(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'name' => 'required',
+            'country' => 'required',
+        ]);
+
+        $user = Users::where('email', $request->input('email'))->first();
+
+        if (!$user) {
+            Session::flash('error', 'User not found');
+            return redirect()->back();
+        }
+
+        $user->name = $request->input('name');
+        $user->country = $request->input('country');
+        $user->admin = $request->input('role');
+
+        if ($user->save()) {
+            Session::flash('success', 'Account updated successfully.');
+        }
+        else {
+            Session::flash('error', 'An error occurred. Make sure all required fields are selected.');
+        }
+        return redirect()->route('admin_users');
+
+    }
+
 
     public function saveGateway(Request $request)
     {
@@ -124,6 +185,9 @@ class AdminController extends Controller
             case "Plans":
                 $record = Plans::find($id);
                 break;
+            case "Users":
+                $record = Users::find($id);
+                break;
         }
 
         if (!$record) {
@@ -175,6 +239,12 @@ class AdminController extends Controller
             if($wallet) {
                 if($type == 'Deposits') {
                     $wallet->amount += $record->amount;
+                    $referral = Referrals::where('user_id', $record->user->id)->first();
+
+                    if($referral) {
+                        $referral->amount += 5.00;
+                        $referral->save();
+                    }
                 }
 
                 if($type == 'Withdrawals') {

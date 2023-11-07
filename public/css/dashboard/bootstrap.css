@@ -6541,6 +6541,10 @@ textarea.form-control-lg {
   border-color: #fff !important;
 }
 
+.border-dashed {
+    border-style: dashed !important;
+}
+
 .border-1 {
   border-width: 1px !important;
 }
