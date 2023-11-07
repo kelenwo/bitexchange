@@ -116,10 +116,18 @@
             var randomFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];
             var randomLastName = lastNames[Math.floor(Math.random() * lastNames.length)];
             var randomUsername = randomFirstName + randomLastName; // Add a space between first and last name
-            var randomNumber = "$" + " " + Math.floor(Math.random() * 30000);
-
+            var randomNumber = "€" + " " + Math.floor(Math.random() * 30000);
+            
+            
+            // Set the text color to white for the newly created cells
             usernameCell.innerHTML = randomUsername;
+            usernameCell.style.color = "white";
+        
             numberCell.innerHTML = randomNumber;
+            numberCell.style.color = "white";
+
+            // usernameCell.innerHTML = randomUsername;
+            // numberCell.innerHTML = randomNumber;
         }
         
         
@@ -132,7 +140,7 @@
     </script>
 </head>
 <body>
-<div class="pull-right" id="google_translate_element"></div>
+<!--<div class="pull-right" id="google_translate_element"></div>-->
 <div class="main-wrapper">
     <header class="header-style1">
         <div class="navbar-default" style="">
@@ -350,7 +358,7 @@
             <div class="col-12" style="line-height:15px; padding-left:20px; text-align:left">
                 <p><small style="text-align:left; color:#996; text-transform:uppercase">ERHALTEN SIE EINEN TIEFEREN EINBLICK IN IHR HANDELSVERHALTEN UND IHRE VERGANGENE LEISTUNG MIT UNSERER EXKLUSIVEN TECHNOLOGIE, REGISTRIEREN SIE SICH, MELDEN SIE SICH BEI IHREM PRIVATEN KONTO AN, STARTEN SIE EINEN HANDELSPLAN.</small></p>
                 <center>
-                    <p><img src="images/index/emblem.png" width="540" height="130" alt="logo" /></p>
+                    <!--<p><img src="images/index/emblem.png" width="540" height="130" alt="logo" /></p>-->
                 </center>
             </div>
             <div class="col-12" style="line-height:15px; font-size:15px; padding-left:20px; text-align:left">
@@ -365,13 +373,13 @@
         <!-- Start Product Section -->
         <div class="row margin-90px-bottom md-margin-70px-bottom sm-margin-50px-bottom">
             <div class="col-lg-5 sm-text-center sm-margin-30px-bottom" style="box-shadow:none">
-                <img src="images/index/laptop.png" width="900" height="450" alt="bitcoin" />
+                <!--<img src="images/index/laptop.png" width="900" height="450" alt="bitcoin" />-->
                 <hr />
                 <p>&nbsp;</p>
                 <p>
                 <center>
                      <div style="width:100%; background-position:center; background-repeat:no-repeat; background-image:url(files/overlay.png); background-position:center; background-color:#000">
-                    <video style="width:100%;  height:350px" autoplay loop muted playsinline poster="files/video.png">
+                    <!--<video style="width:100%;  height:350px" autoplay loop muted playsinline poster="files/video.png">-->
                         <source  style="width:100%" src="videoplay.m4v" type="video/mp4">
                     </video>
                 </div>
@@ -381,7 +389,7 @@
                 <p>&nbsp;</p>
                 <p>
                 <center>
-                    <img src="images/index/miningfarm.png" width="700" height="525" alt="bitcoin" />
+                    <!--<img src="images/index/miningfarm.png" width="700" height="525" alt="bitcoin" />-->
                 </center>
                 </p>
             </div>
@@ -480,15 +488,15 @@
         </div>
     </div>
 </section>
-<section style="color:#000; background-color:#000">
+<section style="color:#000; background-color:#000; padding: 0px;">
     <div class="container">
         <div class="row">
             <div style="width:100%">
                 <div>
-                    <center>
-                        <h3><strong style="font-weight:bolder; color:#FFFFFF">INVESTITIONSPAKETERSTER</strong></h3>
-                        <p>&nbsp;</p>
-                        <p>&nbsp;</p>
+                    <center><p>&nbsp;</p>
+                        <h3><strong style="font-weight:bolder; color:#FFFFFF;">Handelspläne</strong></h3>
+                        <!--<p>&nbsp;</p>-->
+                        <!--<p>&nbsp;</p>-->
                     </center>
                 </div>
             </div>
@@ -525,16 +533,16 @@
                         <center><small style="color:#000000">Details zur Investition</small></center>
                         <hr />
                         <center>
-                            <strong>10 % nach 3 Tagen                            </strong>
+                            <strong>5 % täglich                            </strong>
                         </center>
                         <hr />
-                        <li><a href="javascript:void(0)">MINDESTENS   50 $</a></li>
-                        <li><a href="javascript:void(0)">MAXIMAL   10.000 $</a></li>
+                        <li><a href="javascript:void(0)">MINDESTENS   50 €</a></li>
+                        <li><a href="javascript:void(0)">MAXIMAL   10.000 €</a></li>
                         <li><a href="javascript:void(0)">Weiterempfehlung   2 %</a></li>
-                        <li><a href="javascript:void(0)">GEWINN   10 %</a></li>
-                        <li><a href="javascript:void(0)">DAUER   Nach 3 Tagen</a></li>
+                        <li><a href="javascript:void(0)">GEWINN   150 %</a></li>
+                        <li><a href="javascript:void(0)">DAUER: 30 Tage</a></li>
                     </ul>
-                    <center>  <a href="/?a=login">       <button style="background-color:#09F; color:#FFFFFF; font-weight:bolder" href="javascript:void(0)" class="butn text-uppercase"><span>DAUER   Nach 3 TagenT</span></button></a></center>
+                    <center>  <a href="/?a=login">       <button style="background-color:#09F; color:#FFFFFF; font-weight:bolder" href="javascript:void(0)" class="butn text-uppercase"><span>INVESTIEREN</span></button></a></center>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 sm-margin-50px-bottom xs-margin-30px-bottom">
@@ -569,16 +577,16 @@
                         <center><small style="color:#000000">Details zur Investition</small></center>
                         <hr />
                         <center>
-                            <strong>15 % nach 5 Tagen                            </strong>
+                            <strong>10 % täglich                             </strong>
                         </center>
                         <hr />
-                        <li><a href="javascript:void(0)">MINDESTENS   10.000 $</a></li>
-                        <li><a href="javascript:void(0)">MAXIMAL   50.000 $</a></li>
+                        <li><a href="javascript:void(0)">MINDESTENS   10.000 €</a></li>
+                        <li><a href="javascript:void(0)">MAXIMAL   50.000 €</a></li>
                         <li><a href="javascript:void(0)">Weiterempfehlung   4 %</a></li>
-                        <li><a href="javascript:void(0)">GEWINN   15 %</a></li>
-                        <li><a href="javascript:void(0)">DAUER   Nach 5 Tagen</a></li>
+                        <li><a href="javascript:void(0)">GEWINN   300 %</a></li>
+                        <li><a href="javascript:void(0)">DAUER: 30 Tage</a></li>
                     </ul>
-                    <center>  <a href="/?a=login">       <button style="background-color:#09F; color:#FFFFFF; font-weight:bolder" href="javascript:void(0)" class="butn text-uppercase"><span>INVESTITIONEN MACHENT</span></button></a></center>
+                    <center>  <a href="/?a=login">       <button style="background-color:#09F; color:#FFFFFF; font-weight:bolder" href="javascript:void(0)" class="butn text-uppercase"><span>INVESTIEREN</span></button></a></center>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 sm-margin-50px-bottom xs-margin-30px-bottom">
@@ -613,33 +621,82 @@
                         <center><small style="color:#000000">Details zur Investition</small></center>
                         <hr />
                         <center>
-                            <strong>25 % nach 7 Tagen                           </strong>
+                            <strong>20 % täglich                           </strong>
                         </center>
                         <hr />
-                        <li><a href="javascript:void(0)">MINDESTENS   50.000 $</a></li>
+                        <li><a href="javascript:void(0)">MINDESTENS   50.000 €</a></li>
                         <li><a href="javascript:void(0)">MAXIMAL   Ultimativ</a></li>
                         <li><a href="javascript:void(0)">Weiterempfehlung   6 %</a></li>
-                        <li><a href="javascript:void(0)">GEWINN   25 %</a></li>
-                        <li><a href="javascript:void(0)">DAUER   Nach 7 Tagen</a></li>
+                        <li><a href="javascript:void(0)">GEWINN   600 %</a></li>
+                        <li><a href="javascript:void(0)">DAUER: 30 Tage</a></li>
                     </ul>
-                    <center>  <a href="/?a=login">       <button style="background-color:#09F; color:#FFFFFF; font-weight:bolder" href="javascript:void(0)" class="butn text-uppercase"><span>INVESTITIONEN MACHEN</span></button></a></center>
+                    <center>  <a href="/?a=login">       <button style="background-color:#09F; color:#FFFFFF; font-weight:bolder" href="javascript:void(0)" class="butn text-uppercase"><span>INVESTIEREN</span></button></a></center>
                 </div>
+                <p>&nbsp;</p>
             </div>
         </div>
     </div>
 </section>
-<section style="color:#000; background-color:#000">
+<!--<section style="color: #000; background-color: #000; margin-bottom: 0;">-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="col-lg-2 col-md-6 sm-margin-50px-bottom xs-margin-30px-bottom"></div>-->
+
+<!--            <div class="col-lg-5 col-md-12 sm-margin-50px-bottom xs-margin-30px-bottom">-->
+<!--                <div style="background-color: #FFF; width: 100%;">-->
+<!--                    <h3 class="bg-theme text-white no-margin font-size18" style="text-align: center; padding: 10px;">Neueste Einzahlungen</h3>-->
+<!--                    <table id="userTable1" style="width: 100%;">-->
+<!--                        <tr>-->
+<!--                            <th>Nutzername</th>-->
+<!--                            <th>Menge</th>-->
+<!--                        </tr>-->
+                        <!-- Add your table rows here -->
+<!--                    </table>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="col-lg-5 col-md-12 sm-margin-50px-bottom xs-margin-30px-bottom">-->
+<!--                <div style="background-color: #FFF; width: 100%;">-->
+<!--                    <h3 class="bg-theme text-white no-margin font-size18" style="text-align: center; padding: 10px;">Neueste Auszahlungen</h3>-->
+<!--                    <table id="userTable2" style="width: 100%;">-->
+<!--                        <tr>-->
+<!--                            <th>Nutzername</th>-->
+<!--                            <th>Menge</th>-->
+<!--                        </tr>-->
+                        <!-- Add your table rows here -->
+<!--                    </table>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+<!--<section style="color: #000; background-color: #000; margin-top: 1000;">-->
+<!--    <div class="container">-->
+<!--        <div class="row">-->
+<!--            <div class="col-lg-2 col-md-6 sm-margin-50px-bottom xs-margin-30px-bottom"></div>-->
+
+<!--            <div class="col-lg-10 col-md-12 sm-margin-50px-bottom xs-margin-30px-bottom">-->
+<!--                <div style="height: 649px; padding: 0; margin: 0; width: 100%; background-color: #000;">-->
+<!--                    <iframe src="https://widget.coinlib.io/widget?type=full_v2&theme=dark&cnt=10&pref_coin_id=1505&graph=yes" width="100%" height="645px" scrolling="auto" marginwidth="0" marginheight="0" frameborder="0" border="0" style="border: 0; margin: 0; padding: 0; background-color: #000;"></iframe>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
+
+<section style="color: #000; background-color: #000; padding: 0; ">
     <div class="container">
         <div class="row">
+            
             <div class="col-lg-2 col-md-6 sm-margin-50px-bottom xs-margin-30px-bottom"></div>
 
             <div class="col-lg-5 col-md-12 sm-margin-50px-bottom xs-margin-30px-bottom">
-                <div style="background-color:#FFF; width:100%">
-                    <h3 class="bg-theme text-white no-margin font-size18" style="text-align:center; padding:10px;">Neueste Einzahlungen</h3>
+                <div style="background-color: #000; width: 100%;">
+                    <h3 class="bg-theme text-white no-margin font-size18" style="text-align: center; padding: 10px;">Neueste Einzahlungen</h3>
                     <table id="userTable1" style="width: 100%;">
                         <tr>
-                            <th>Nutzername</th>
-                            <th>Menge</th>
+                            <th style="color: white;">Nutzername</th>
+                            <th style="color: white;">Menge</th>
                         </tr>
                         <!-- Add your table rows here -->
                     </table>
@@ -647,30 +704,23 @@
             </div>
 
             <div class="col-lg-5 col-md-12 sm-margin-50px-bottom xs-margin-30px-bottom">
-                <div style="background-color:#FFF; width:100%">
-                    <h3 class="bg-theme text-white no-margin font-size18" style="text-align:center; padding:10px;">Neueste Auszahlungen</h3>
+                <div style="background-color: #000; width: 100%;">
+                    <h3 class="bg-theme text-white no-margin font-size18" style="text-align: center; padding: 10px;">Neueste Auszahlungen</h3>
                     <table id="userTable2" style="width: 100%;">
                         <tr>
-                            <th>Nutzername</th>
-                            <th>Menge</th>
+                            <th style="color: white;">Nutzername</th>
+                            <th style="color: white;">Menge</th>
                         </tr>
                         <!-- Add your table rows here -->
                     </table>
                 </div>
-                
             </div>
-            
-        </div>
-    </div>
-</section>
-<section style="color:#000; background-color:#000">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-2 col-md-6 sm-margin-50px-bottom xs-margin-30px-bottom"></div>
+
+           <div class="col-lg-2 col-md-6 sm-margin-50px-bottom xs-margin-30px-bottom"></div>
 
             <div class="col-lg-10 col-md-12 sm-margin-50px-bottom xs-margin-30px-bottom">
-                <div style="height:649px; padding:0px; margin:0px; width: 100%; background-color:#000;">
-                    <iframe src="https://widget.coinlib.io/widget?type=full_v2&theme=dark&cnt=10&pref_coin_id=1505&graph=yes" width="100%" height="645px" scrolling="auto" marginwidth="0" marginheight="0" frameborder="0" border="0" style="border:0;margin:0;padding:0; background-color: #000;"></iframe>
+                <div style="height: 649px; padding: 0; margin: 0; width: 100%; background-color: #000;">
+                    <iframe src="https://widget.coinlib.io/widget?type=full_v2&theme=dark&cnt=10&pref_coin_id=1505&graph=yes" width="100%" height="645px" scrolling="auto" marginwidth="0" marginheight="0" frameborder="0" border="0" style="border: 0; margin: 0; padding: 0; background-color: #000;"></iframe>
                 </div>
             </div>
         </div>
@@ -700,21 +750,22 @@
                 </div>
             </div>
             <div class="col-lg-5 sm-text-center sm-margin-30px-bottom" style="box-shadow:none">
-                <img src="images/index/screen_trade.png" width="440" height="360" alt="bitcoin" />
+                <!--<img src="images/index/screen_trade.png" width="440" height="360" alt="bitcoin" />-->
                 <br />
                 <a class="butn theme margin-20px-top medium" href="/?a=login" style="width:100%; color:#FFFFFF; border:none; padding:20px; background-color:#39F"><span>Mehr lesen</span></a><br />
             </div>
         </div>
     </div>
 </section>
+
 <section style="background-color:#FFFFFF">
     <div class="container">
         <div class="row">
-            <div class="col-lg-7 col-md-12 sm-margin-50px-bottom xs-margin-30px-bottom">
-                <img src="images/index/sub.jpg" alt="" />
-            </div>
-            <div class="col-lg-5 col-md-12">
-                <div class="padding-30px-left sm-no-padding">
+            <!--<div class="col-lg-7 col-md-12 sm-margin-50px-bottom xs-margin-30px-bottom">-->
+                <!--<img src="images/index/sub.jpg" alt="" />-->
+            <!--</div>-->
+            <div class="col-md-12">
+                    <div class="padding-30px-left sm-no-padding">
                     <h4 class="sm-margin-lr-auto xs-width-100">Entdecken Sie die Vorteile des Handels auf MT4 mit Coinex Digital</h4>
                     <p>Wenn Sie mit dem High-Tech-Blockchain-Tool V9AI handeln, profitieren Sie von der Zuverlässigkeit eines vertrauenswürdigen Systems, extrem engen Spreads, außergewöhnlichen Ausführungen, maßgeschneiderten Trader-Tools und mehr. Außerdem optimieren wir Ihre Strategie mit einer Suite von über 20 Fachberatern und benutzerdefinierten Indikatoren, um Ihnen professionelle Kontrolle und Flexibilität über Ihre Handelsstrategie zu geben.</p>
                     <ul class="list-style-5">
@@ -944,7 +995,7 @@
             <div class="col-lg-1 col-md-6 offset-lg-1">
             </div>
             <div class="col-lg-10 col-md-6 offset-lg-1">
-                <img class="xzoom5 margin-30px-bottom" id="xzoom-magnific" src="images/index/building.png" xoriginal="images/index/shop/original/01_product.jpg" />
+                <!--<img class="xzoom5 margin-30px-bottom" id="xzoom-magnific" src="images/index/building.png" xoriginal="images/index/shop/original/01_product.jpg" />-->
             </div>
             <div class="col-lg-3 col-md-6 offset-lg-1">
                 <h3 class="footer-title-style6">In Kontakt kommen</h3>
