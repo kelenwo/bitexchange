@@ -3,11 +3,11 @@
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title"> Deposits </h3>
+            <h3 class="page-title"> Investments </h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Deposit</li>
+                    <li class="breadcrumb-item active" aria-current="page">Investments</li>
                 </ol>
             </nav>
         </div>
@@ -31,10 +31,10 @@
                             <tr>
                                 <td>
                                     <b>{{ $deposit->plan->name }}</b>
-                                    (%{{ $deposit->plan->roi }} after  {{ $deposit->plan->duration }})
+                                    (%{{ $deposit->plan->roi }} {{ $deposit->plan->frequency }})
                                 </td>
                                 <td>${{ $deposit->amount }}</td>
-                                <td> $0</td>
+                                <td> ${{ number_format(($deposit->amount * $deposit->roi / 100) + $deposit->amount, 2) }} after {{ $deposit->plan->duration }} days</td>
 
                             </tr>
                         @endforeach

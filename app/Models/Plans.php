@@ -14,6 +14,9 @@ class Plans extends Model
         'name',
         'roi',
         'duration',
+        'frequency',
+        'min',
+        'max',
     ];
 
 }

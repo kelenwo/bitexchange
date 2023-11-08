@@ -3,11 +3,11 @@
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title"> Deposit </h3>
+            <h3 class="page-title"> Invest </h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Deposit</li>
+                    <li class="breadcrumb-item active" aria-current="page">Invest</li>
                 </ol>
             </nav>
         </div>
@@ -17,8 +17,8 @@
                         <form method="POST" action="{{ route('deposit') }}" enctype="multipart/form-data">
                             @csrf
                             <div class="card-body">
-                                <h5 class="">Make a deposit</h5>
-                                <p class="card-description small">Make a Deposit Today and Start Earning Instantly</p>
+                                <h5 class="">Make an Investment</h5>
+                                <p class="card-description small">Make an Investment Today and Start Earning Instantly</p>
 
                                 @if(Session::has('success'))
                                     <div class="py-2 alert alert-success" role="alert">
@@ -41,7 +41,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <label for="amount">Enter Amount to Deposit</label>
+                                    <label for="amount">Enter Amount</label>
                                     <input type="number" name="amount" id="amount" class="form-control form-control-sm" value="50.0" placeholder="Deposit Amount" step="1">
                                 </div>
                                 <div class="form-group">

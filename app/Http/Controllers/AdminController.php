@@ -144,6 +144,9 @@ class AdminController extends Controller
             'name' => 'required',
             'roi' => 'required',
             'duration' => 'required',
+            'frequency' => 'required',
+            'min' => 'required',
+            'max' => 'required',
         ]);
 
         $plan = Plans::where('name', $request->input('name'))->first();
@@ -152,7 +155,10 @@ class AdminController extends Controller
             $plan = new Plans();
             $plan->name = $request->input('name');
             $plan->roi = $request->input('roi');
+            $plan->min = $request->input('min');
+            $plan->max = $request->input('max');
             $plan->duration = $request->input('duration');
+            $plan->frequency = $request->input('frequency');
 
 
             if ($plan->save()) {

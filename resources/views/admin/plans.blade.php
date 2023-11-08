@@ -14,7 +14,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6 grid-margin stretch-card">
+            <div class="col-md-8 grid-margin stretch-card">
                 <div class="card">
                         <div class="card-body">
                             <h5 class="">Plans</h5>
@@ -37,6 +37,7 @@
                                             <th class="font-weight-bold">Name</th>
                                             <th class="font-weight-bold">ROI</th>
                                             <th class="font-weight-bold">Duration</th>
+                                            <th class="font-weight-bold">Amount</th>
                                             <th class="font-weight-bold">Action</th>
                                         </tr>
                                     </thead>
@@ -44,8 +45,9 @@
                                     @foreach ($plans as $plan)
                                         <tr>
                                             <td>{{ $plan->name }}</td>
-                                            <td>%{{ $plan->roi }}</td>
-                                            <td>{{ $plan->duration }}</td>
+                                            <td>%{{ $plan->roi }} {{ $plan->frequency }}</td>
+                                            <td>{{ $plan->duration }} days</td>
+                                            <td>${{ $plan->min }} - ${{ $plan->max }}</td>
                                             <td>
                                                 <form action="{{ route('delete_item', ['id' => $plan->id, 'type' => 'Plans']) }}" method="post">
                                                     @csrf
@@ -63,7 +65,7 @@
                 </div>
             </div>
 
-            <div class="col-md-6 grid-margin stretch-card">
+            <div class="col-md-4 grid-margin stretch-card">
                 <div class="card">
                     <form method="POST" action="{{ route('admin_plans') }}">
                         @csrf
@@ -77,10 +79,36 @@
                             <div class="form-group mt-3">
                                 <label for="roi">ROI (%)</label>
                                 <input type="number" name="roi" id="roi" value="10" class="form-control form-control-sm" placeholder="" step="1">
+
                             </div>
                             <div class="form-group mt-3">
+                                <label for="frequency">Frequency</label>
+                                <select class="form-control form-control-sm form-select" name="frequency" id="frequency">
+                                    <option value="Everyday">Everyday</option>
+                                    <option value="Weekly">Weekly</option>
+                                    <option value="Monthly">Monthly</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group mt-3">
                                 <label for="duration">Duration</label>
-                                <input type="text" name="duration" id="duration" class="form-control form-control-sm" placeholder="E.g: 24 hours, 72 hours">
+                                <div class="input-group">
+                                    <input type="number" name="duration" id="duration" value="30" step="1" class="form-control">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">Days</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group mt-3">
+                                <label for="min">Min - Max Amount</label>
+                                <div class="input-group">
+                                    <input type="number" name="min" id="min" value="50000" class="form-control" placeholder="" step="1">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">-</span>
+                                    </div>
+                                    <input type="number" name="max" id="max" value="10000" class="form-control" placeholder="" step="1">
+                                </div>
                             </div>
                             <button type="submit" class="btn btn-primary btn-sm mr-2">Submit</button>
                         </div>

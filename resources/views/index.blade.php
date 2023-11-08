@@ -91,6 +91,12 @@
         th, td {
             padding: 10px; /* Add space around cell content */
         }
+        .card-bg {
+            background-image: url({{ asset('images/bg-gold.jpg')}});
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
     </style>
     <script>
         // Predefined lists of names
@@ -117,20 +123,20 @@
             var randomLastName = lastNames[Math.floor(Math.random() * lastNames.length)];
             var randomUsername = randomFirstName + randomLastName; // Add a space between first and last name
             var randomNumber = "€" + " " + Math.floor(Math.random() * 30000);
-            
-            
+
+
             // Set the text color to white for the newly created cells
             usernameCell.innerHTML = randomUsername;
             usernameCell.style.color = "white";
-        
+
             numberCell.innerHTML = randomNumber;
             numberCell.style.color = "white";
 
             // usernameCell.innerHTML = randomUsername;
             // numberCell.innerHTML = randomNumber;
         }
-        
-        
+
+
 
         // Add a new row to each table every 2 seconds
         setInterval(function () {
@@ -488,7 +494,7 @@
         </div>
     </div>
 </section>
-<section style="color:#000; background-color:#000; padding: 0px;">
+<section class="pb-5" style="color:#000; background-color:#000; padding: 0px;">
     <div class="container">
         <div class="row">
             <div style="width:100%">
@@ -501,139 +507,24 @@
                 </div>
             </div>
             <div class="col-lg-2 col-md-6 sm-margin-50px-bottom xs-margin-30px-bottom"></div>
-            <div class="col-lg-3 col-md-6 sm-margin-50px-bottom xs-margin-30px-bottom">
-                <div style="background-color:#FFF; width:100%">
-                    <h3 class="bg-theme text-white no-margin font-size18" style="text-align:center; padding:10px;">ERSTER PLAN </h3>
-                    <ul class="list-style-5 shop-category no-margin">
-                        <div style="width:100%; height:200px; background-color:#FFFFFF; overflow:hidden">
-                            <!-- TradingView Widget BEGIN -->
-                            <div class="tradingview-widget-container">
-                                <div id="tradingview_bc4ab"></div>
-                                <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-                                <script type="text/javascript">
-                                    new TradingView.widget(
-                                        {
-                                            "width": 500,
-                                            "height": 300,
-                                            "symbol": "NASDAQ:AAPL",
-                                            "interval": "1",
-                                            "timezone": "America/Caracas",
-                                            "theme": "light",
-                                            "style": "1",
-                                            "locale": "en",
-                                            "toolbar_bg": "#f1f3f6",
-                                            "enable_publishing": false,
-                                            "allow_symbol_change": true,
-                                            "container_id": "tradingview_bc4ab"
-                                        }
-                                    );
-                                </script>
-                            </div>
+            @foreach ($plans as $plan)
+                <div class="col-md-6 col-lg-4 mb-3">
+                    <div class="card text-center card-bg bg-transparent border-primary shadow-lg shadow-primary">
+                        <div class="card-body">
+                            <h4 class="card-title text-primary">{{ $plan->name }}</h4>
+                            <ul class="list-group mx-3 text-white">
+                                <li class="list-group-item bg-transparent border-dark border-top-0 border-left-0 border-right-0">Return {{ $plan->roi }}%</li>
+                                <li class="list-group-item bg-transparent border-dark border-top-0 border-left-0 border-right-0">{{ $plan->frequency }}</li>
+                                <li class="list-group-item bg-transparent border-dark border-top-0 border-left-0 border-right-0">For {{ $plan->duration }} days</li>
+                                <li class="list-group-item bg-transparent border-dark border-top-0 border-left-0 border-right-0">Total {{ $plan->roi * $plan->duration }}% + <span class="badge bg-success font-size13 p-1">Capital</span></li>
+                            </ul>
+                            <h6 class="card-text text-primary mt-4">${{ $plan->min }}- ${{ $plan->max }}</h6>
+
+                            <a href="{{ route('deposit') }}" class="btn btn-primary">INVESTIEREN NOW</a>
                         </div>
-                        <center><small style="color:#000000">Details zur Investition</small></center>
-                        <hr />
-                        <center>
-                            <strong>5 % täglich                            </strong>
-                        </center>
-                        <hr />
-                        <li><a href="javascript:void(0)">MINDESTENS   50 €</a></li>
-                        <li><a href="javascript:void(0)">MAXIMAL   10.000 €</a></li>
-                        <li><a href="javascript:void(0)">Weiterempfehlung   2 %</a></li>
-                        <li><a href="javascript:void(0)">GEWINN   150 %</a></li>
-                        <li><a href="javascript:void(0)">DAUER: 30 Tage</a></li>
-                    </ul>
-                    <center>  <a href="/?a=login">       <button style="background-color:#09F; color:#FFFFFF; font-weight:bolder" href="javascript:void(0)" class="butn text-uppercase"><span>INVESTIEREN</span></button></a></center>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6 sm-margin-50px-bottom xs-margin-30px-bottom">
-                <div style="background-color:#FFF; width:100%">
-                    <h3 class="bg-theme text-white no-margin font-size18" style="text-align:center; padding:10px;">ZWEITER PLAN </h3>
-                    <ul class="list-style-5 shop-category no-margin">
-                        <div style="width:100%; height:200px; background-color:#FFFFFF; overflow:hidden">
-                            <!-- TradingView Widget BEGIN -->
-                            <div class="tradingview-widget-container">
-                                <div id="tradingview_bc4ab2"></div>
-                                <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-                                <script type="text/javascript">
-                                    new TradingView.widget(
-                                        {
-                                            "width": 500,
-                                            "height": 300,
-                                            "symbol": "NASDAQ:AAPL",
-                                            "interval": "1",
-                                            "timezone": "America/Caracas",
-                                            "theme": "light",
-                                            "style": "1",
-                                            "locale": "en",
-                                            "toolbar_bg": "#f1f3f6",
-                                            "enable_publishing": false,
-                                            "allow_symbol_change": true,
-                                            "container_id": "tradingview_bc4ab2"
-                                        }
-                                    );
-                                </script>
-                            </div>
-                        </div>
-                        <center><small style="color:#000000">Details zur Investition</small></center>
-                        <hr />
-                        <center>
-                            <strong>10 % täglich                             </strong>
-                        </center>
-                        <hr />
-                        <li><a href="javascript:void(0)">MINDESTENS   10.000 €</a></li>
-                        <li><a href="javascript:void(0)">MAXIMAL   50.000 €</a></li>
-                        <li><a href="javascript:void(0)">Weiterempfehlung   4 %</a></li>
-                        <li><a href="javascript:void(0)">GEWINN   300 %</a></li>
-                        <li><a href="javascript:void(0)">DAUER: 30 Tage</a></li>
-                    </ul>
-                    <center>  <a href="/?a=login">       <button style="background-color:#09F; color:#FFFFFF; font-weight:bolder" href="javascript:void(0)" class="butn text-uppercase"><span>INVESTIEREN</span></button></a></center>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 sm-margin-50px-bottom xs-margin-30px-bottom">
-                <div style="background-color:#FFF; width:100%">
-                    <h3 class="bg-theme text-white no-margin font-size18" style="text-align:center; padding:10px;">DRITTER PLAN </h3>
-                    <ul class="list-style-5 shop-category no-margin">
-                        <div style="width:100%; height:200px; background-color:#FFFFFF; overflow:hidden">
-                            <!-- TradingView Widget BEGIN -->
-                            <div class="tradingview-widget-container">
-                                <div id="tradingview_bc4ab3"></div>
-                                <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-                                <script type="text/javascript">
-                                    new TradingView.widget(
-                                        {
-                                            "width": 500,
-                                            "height": 300,
-                                            "symbol": "NASDAQ:AAPL",
-                                            "interval": "1",
-                                            "timezone": "America/Caracas",
-                                            "theme": "light",
-                                            "style": "1",
-                                            "locale": "en",
-                                            "toolbar_bg": "#f1f3f6",
-                                            "enable_publishing": false,
-                                            "allow_symbol_change": true,
-                                            "container_id": "tradingview_bc4ab3"
-                                        }
-                                    );
-                                </script>
-                            </div>
-                        </div>
-                        <center><small style="color:#000000">Details zur Investition</small></center>
-                        <hr />
-                        <center>
-                            <strong>20 % täglich                           </strong>
-                        </center>
-                        <hr />
-                        <li><a href="javascript:void(0)">MINDESTENS   50.000 €</a></li>
-                        <li><a href="javascript:void(0)">MAXIMAL   Ultimativ</a></li>
-                        <li><a href="javascript:void(0)">Weiterempfehlung   6 %</a></li>
-                        <li><a href="javascript:void(0)">GEWINN   600 %</a></li>
-                        <li><a href="javascript:void(0)">DAUER: 30 Tage</a></li>
-                    </ul>
-                    <center>  <a href="/?a=login">       <button style="background-color:#09F; color:#FFFFFF; font-weight:bolder" href="javascript:void(0)" class="butn text-uppercase"><span>INVESTIEREN</span></button></a></center>
-                </div>
-                <p>&nbsp;</p>
-            </div>
+            @endforeach
         </div>
     </div>
 </section>
@@ -687,7 +578,7 @@
 <section style="color: #000; background-color: #000; padding: 0; ">
     <div class="container">
         <div class="row">
-            
+
             <div class="col-lg-2 col-md-6 sm-margin-50px-bottom xs-margin-30px-bottom"></div>
 
             <div class="col-lg-5 col-md-12 sm-margin-50px-bottom xs-margin-30px-bottom">
@@ -1054,7 +945,7 @@
                     <ul class="footer-list" style="width:100%; padding-left:10px;">
                         <li>
                             <a href="/?a=home"> <span class="d-inline-block vertical-align-top font-size18"></span>
-                                <span class="d-inline-block width-85 vertical-align-top padding-10px-left">Investition 
+                                <span class="d-inline-block width-85 vertical-align-top padding-10px-left">Investition
   &nbsp;</span></a>
                         </li>
                         <li>

@@ -3,17 +3,17 @@
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title"> Deposit History </h3>
+            <h3 class="page-title"> Investment History </h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Deposit</li>
+                    <li class="breadcrumb-item active" aria-current="page">Investment</li>
                 </ol>
             </nav>
         </div>
         <div class="col-12 grid-margin stretch-card">
             <div class="card mx-0 p-4">
-                <h6>Your deposits:</h6><br>
+                <h6>Your Investments:</h6><br>
 
                 <b>Total: <span class="text-primary">${{ $total }}</span></b>
                 <br><br>

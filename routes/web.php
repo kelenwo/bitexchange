@@ -20,18 +20,15 @@ use App\Http\Controllers\DashboardController;
 |
 */
 
-Route::get('/', function () {
-    return view('index');
-})->name('/');
-
+Route::get('/', [IndexController::class, 'index'])->name('/');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/dashboard/deposit', [DashboardController::class, 'deposit'])->name('deposit');
-    Route::post('/dashboard/deposit', [DashboardController::class, 'saveDeposit']);
-    Route::get('/dashboard/deposit-list', [DashboardController::class, 'deposit_list'])->name('deposit_list');
-    Route::get('/dashboard/deposit-history', [DashboardController::class, 'deposit_history'])->name('deposit_history');
+    Route::get('/dashboard/invest', [DashboardController::class, 'deposit'])->name('deposit');
+    Route::post('/dashboard/invest', [DashboardController::class, 'saveDeposit']);
+    Route::get('/dashboard/investments', [DashboardController::class, 'deposit_list'])->name('deposit_list');
+    Route::get('/dashboard/investment-history', [DashboardController::class, 'deposit_history'])->name('deposit_history');
 
     Route::get('/dashboard/withdrawal', [DashboardController::class, 'withdrawal'])->name('withdrawal');
     Route::post('/dashboard/withdrawal', [DashboardController::class, 'saveWithdrawal']);
