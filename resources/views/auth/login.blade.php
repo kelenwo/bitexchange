@@ -11,14 +11,32 @@
     <link rel="stylesheet" href="{{ asset('vendors/css/vendor.bundle.base.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dashboard/style.css') }}">
     <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" />
+      <style>
+          .card-bg::before {
+              content: "";
+              position: absolute;
+              top: 0;
+              right: 0;
+              bottom: 0;
+              left: 0;
+              background-image: url({{ asset('images/auth-bg.jpg')}});
+              background-size: cover;
+              background-position: center;
+              background-repeat: no-repeat;
+              opacity: 0.05;
+              width: 100%;
+              height: 100%;
+              pointer-events: none; /* Make the background image not respond to pointer events */
+          }
+      </style>
   </head>
   <body>
     <div class="container-scroller">
       <div class="container-fluid page-body-wrapper full-page-wrapper">
         <div class="content-wrapper d-flex align-items-center auth bg-primary">
           <div class="row flex-grow">
-            <div class="col-lg-5 mx-auto">
-              <div class="auth-form-light text-left p-5">
+          <div class="col-lg-5 mx-auto bg-dark">
+              <div class="auth-form-dark text-left p-5 card-bg">
                 <div class="brand-logo">
                     <a href="{{ route('/') }}" class="navbar-brand logo5"><img src="{{ asset('images/index/logo.png') }}" alt="logo" id="logo"></a>
                 </div>
