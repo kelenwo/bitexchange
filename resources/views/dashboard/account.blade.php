@@ -75,7 +75,7 @@
                     @endphp
                     <div class="form-group">
                         <label for="{{ $gateway->code }}">{{ $gateway->name }}</label>
-                        <input type="text" name="gateway[{{ $gateway->code }}]" id="{{ $gateway->code }}" class="form-control" placeholder="{{ $gateway->name }}" value="{{ $field->value }}">
+                        <input type="text" name="gateway[{{ $gateway->code }}]" id="{{ $gateway->code }}" class="form-control" placeholder="{{ $gateway->name }}" value="{{ $field?->value }}">
                     </div>
                 @endforeach
 

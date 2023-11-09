@@ -151,23 +151,23 @@
     <header class="header-style1">
         <div class="navbar-default" style="">
             <!-- Start Top Search -->
-            <div class="top-search bg-theme">
-                <div class="container">
-                    <form class="search-form" action="https://wordpressbusiness.top/template73/search.html" method="GET" accept-charset="utf-8">
-                        <div class="input-group" style="border:solid 1px #0099CC">
-                           <span class="input-group-addon cursor-pointer">
-                           <button class="search-form_submit fas fa-search font-size18 text-white" type="submit"></button>
-                           </span>
-                            <input type="text" class="search-form_input form-control" name="s" autocomplete="off" placeholder="Type & hit enter...">
-                            <span class="input-group-addon close-search"><i class="fas fa-times font-size18 line-height-28 margin-5px-top"></i></span>
+            <nav class="nav-mobile bg-light">
+                <div class="">
+                    <div class="row m-0 align-items-center" >
+                        <div class="col-6 col-md-6 p-3 text-center btn-wrapper border-right">
+                            <a href="{{ route('login') }}" type="button" class="btn btn-block px-0"> LOGIN</a>
                         </div>
-                    </form>
+                        <div class="col-6 col-md-6 p-3 text-center btn-wrapper">
+                            <a href="{{ route('register') }}" type="button" class="btn btn-block px-0"> REGISTER</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </nav>
             <!-- End Top Search -->
-            <div class="container">
+            <div class="px-3">
                 <div class="row align-items-center">
                     <div class="col-12 col-lg-12">
+
                         <div class="menu_area alt-font">
                             <nav class="navbar navbar-expand-lg navbar-light no-padding">
                                 <div class="navbar-header navbar-header-custom">
@@ -203,8 +203,8 @@
         </div>
     </header>
     <!-- end header section -->
-    <div style="width:100%; background-color:#000">
-        <div class="container">
+    <div class="mt-5 pt-5 px-3" style="width:100%; background-color:#000">
+        <div class="container mt-5">
             <div class="index_wrapper fullscreen custom-controls custom-paragraph">
                 <div id="index_2" class="index fullscreenbanner" style="display: none;" data-version="5.4.5">
                     <ul>
@@ -267,15 +267,15 @@
             </div>
         </div>
         <div class="container">
-            <div style="row">
+            <div class="row mx-4">
                 <!--<div style="width:100%; background-position:center; background-repeat:no-repeat; background-image:url(files/overlay.png); background-position:center; background-color:#000">-->
                 <!--    <video style="width:100%;  height:350px" autoplay loop muted playsinline poster="files/video.png">-->
                 <!--        <source  style="width:100%" src="videoplay.m4v" type="video/mp4">-->
                 <!--    </video>-->
                 <!--</div>-->
-                <div style="width:99%; margin:auto">
-                    <div  style="padding-top:0px; background-color:#006699;">
-                        <div style=" width:100%; padding:20px; background-color:#000000">
+                <div class="container px-4">
+                    <div  style="background-color:#006699;">
+                        <div style="width:100%; padding:20px; background-color:#000000">
                             <div style="height:120px; overflow:hidden; width:100%">
                                 <div data-background-color="#000000" data-currency="gbp" data-coin-id="bitcoin" data-locale="en" data-height="200" data-width="" class="coingecko-coin-price-chart-widget"></div>
                                 <script src="https://widgets.coingecko.com/div/coingecko-coin-price-chart-widget-div.js"></script>

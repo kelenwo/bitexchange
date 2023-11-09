@@ -42,6 +42,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/dashboard/account', [DashboardController::class, 'updateAccount']);
     Route::get('/dashboard/account-security', [DashboardController::class, 'account_security'])->name('account_security');
     Route::post('/dashboard/get-wallet', [DashboardController::class, 'getWallet'])->name('get_wallet');
+    Route::post('/dashboard/get-deposit-wallet', [DashboardController::class, 'getDepositWallet'])->name('deposit.get_wallet');
 
 });
 
@@ -51,7 +52,8 @@ Route::group(['middleware' => ['auth', 'verified','admin.auth']], function () {
     Route::post('/admin/manage-gateway', [AdminController::class, 'saveGateway']);
     Route::get('/admin/manage-plans', [AdminController::class, 'plan'])->name('admin_plans');
     Route::post('/admin/manage-plans', [AdminController::class, 'savePlan']);
-    Route::get('/admin/site-settings', [AdminController::class, 'gateway'])->name('admin_settings');
+    Route::get('/admin/site-settings', [AdminController::class, 'settings'])->name('admin_settings');
+    Route::post('/admin/site-settings', [AdminController::class, 'updateSettings']);
     Route::get('/admin/deposits', [AdminController::class, 'deposits'])->name('admin_deposits');
     Route::get('/admin/pending-deposits', [AdminController::class, 'pending_deposits'])->name('admin_pending_deposits');
     Route::get('/admin/withdrawals', [AdminController::class, 'withdrawals'])->name('admin_withdrawals');
@@ -61,6 +63,7 @@ Route::group(['middleware' => ['auth', 'verified','admin.auth']], function () {
     Route::post('/admin/user-account', [AdminController::class, 'updateAccount']);
 
 });
+
 
 Route::get('/invite', [IndexController::class, 'invite'])->name('invite');
 
