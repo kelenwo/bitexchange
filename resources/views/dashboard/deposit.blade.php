@@ -73,7 +73,7 @@
                                                                 Please pay the equivalent amount in ethereum, provide the transaction ID and receipt screenshot(optional)
                                                             </p>
                                                             <span>Address: </span>
-                                                            <h6>0x782405D5F3Dc89993f19fC0cbA0d5e20172cf7eb</h6>
+                                                            <h6 id="payment-address"></h6>
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
@@ -104,4 +104,33 @@
                 <!-- Modal -->
             </div>
     </div>
+    <script type="application/javascript">
+        $(document).ready(function() {
+            $('select[name="method"]').on('change', function () {
+                let input = $(this).val()
+
+                $.ajax({
+                    url: "{{ route('deposit.get_wallet') }}?_token={{csrf_token()}}&gateway="+input,
+                    type: 'POST',
+                    dataType: 'json',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    error: function (xhr, status, error) {
+                        console.error(error);
+                    },
+                    success: function(response) {
+                        console.log(response)
+                        if(response.status === 200) {
+                            $('#payment-address').text(response.wallet)
+
+                        }
+                        else{
+                            $('#payment-address').html('<small class="text-danger">No payment address set, contact admin for wallet address!</small>')
+                        }
+                    }
+                });
+            })
+        })
+    </script>
 @endsection

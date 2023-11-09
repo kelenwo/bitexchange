@@ -243,5 +243,25 @@ class DashboardController extends Controller
         return response()->json($responseData);
     }
 
+    public function getDepositWallet(Request $request): JsonResponse
+    {
+        $gateway = Gateways::where('code',$request->input('gateway'))->first();
 
+        $field = Fields::where('settings', true)->where('gateway_id',$gateway->id)->first();
+
+        if($field && $field->value) {
+            $responseData = [
+                'status' => 200,
+                'wallet' => $field->value,
+            ];
+        }
+        else {
+            $responseData = [
+                'status' => 404,
+            ];
+        }
+
+
+        return response()->json($responseData);
+    }
 }

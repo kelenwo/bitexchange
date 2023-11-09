@@ -10,6 +10,7 @@ use App\Models\Referrals;
 use App\Models\Users;
 use App\Models\Wallets;
 use App\Models\Withdrawals;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -70,6 +71,12 @@ class AdminController extends Controller
         $data = Users::all();
 
         return view('admin.users', ['users' => $data]);
+    }
+    public function settings(): View
+    {
+        $gateways = Gateways::all();
+
+        return view('admin.settings', ['gateways' => $gateways]);
     }
 
     public function account(Request $request): View
@@ -285,6 +292,41 @@ class AdminController extends Controller
         }
 
         return redirect()->back();
+    }
+
+    public function updateSettings(Request $request): RedirectResponse
+    {
+
+
+        foreach ($request->input('gateway') as $key => $value) {
+
+            $gateway = Gateways::where('code',$key)->first();
+
+            if($gateway) {
+
+                $fields = Fields::where('settings', true)->where('gateway_id',$gateway->id)->first();
+                if (!$fields) {
+                    $fields = new Fields();
+                    $fields->value = $value;
+                    $fields->settings = true;
+                    $fields->gateway()->associate($gateway);
+                }
+                else {
+                    $fields->value = $value;
+                }
+
+                if ($fields->save()) {
+                    Session::flash('success', 'Settings updated successfully.');
+                }
+                else {
+                    Session::flash('error', 'An error occurred. Make sure all required fields are selected.');
+                }
+            }
+
+        }
+
+        return redirect()->back();
+
     }
 
 }

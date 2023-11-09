@@ -11,7 +11,8 @@ class Fields extends Model
     use HasFactory;
 
     protected $fillable = [
-        'value'
+        'value',
+        'settings'
     ];
 
     public function gateway(): BelongsTo

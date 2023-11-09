@@ -45,7 +45,7 @@
                                     </td>
                                     <td>
                                         <a class="badge badge-info p-2" href="{{ route('user.account', ['id' => $user->id]) }}">Edit</a> |
-                                        <form action="{{ route('delete_item', ['id' => $user->id, 'type' => 'Users']) }}" method="post">
+                                        <form class="d-inline-block" action="{{ route('delete_item', ['id' => $user->id, 'type' => 'Users']) }}" method="post">
                                             @csrf
                                             <label class="badge badge-danger p-2" type="button" for="submit">Delete</label>
                                             <input type="submit" class="d-none" id="submit">
