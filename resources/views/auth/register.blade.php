@@ -35,7 +35,7 @@
     <div class="container-fluid page-body-wrapper full-page-wrapper">
         <div class="content-wrapper d-flex align-items-center auth bg-primary">
             <div class="row flex-grow ">
-                <div class="col-lg-5 mx-auto mb-5 px-0 bg-dark">
+                <div class="col-lg-5 mx-auto mb-4 px-0 bg-dark">
                     <div class="auth-form-dark text-left mx-0 p-5 card-bg">
                         <div class="brand-logo">
                             <a href="{{ route('/') }}" class="navbar-brand logo5"><img src="{{ asset('images/index/logo.png') }}" alt="logo" id="logo"></a>
