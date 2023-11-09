@@ -506,7 +506,7 @@
                     </center>
                 </div>
             </div>
-            <div class="col-lg-2 col-md-6 sm-margin-50px-bottom xs-margin-30px-bottom"></div>
+            <div class="col-lg-2 col-md-6 sm-margin-0px-bottom xs-margin-0px-bottom"></div>
             @foreach ($plans as $plan)
                 <div class="col-md-6 col-lg-4 mb-3">
                     <div class="card text-center card-bg bg-transparent border-primary shadow-lg shadow-primary">
@@ -518,7 +518,7 @@
                                 <li class="list-group-item bg-transparent border-dark border-top-0 border-left-0 border-right-0">For {{ $plan->duration }} days</li>
                                 <li class="list-group-item bg-transparent border-dark border-top-0 border-left-0 border-right-0">Total {{ $plan->roi * $plan->duration }}% + <span class="badge bg-success font-size13 p-1">Capital</span></li>
                             </ul>
-                            <h6 class="card-text text-primary mt-4">${{ $plan->min }}- ${{ $plan->max }}</h6>
+                            <h6 class="card-text text-primary mt-4">€{{ $plan->min }}- €{{ $plan->max }}</h6>
 
                             <a href="{{ route('deposit') }}" class="btn btn-primary">INVESTIEREN NOW</a>
                         </div>
