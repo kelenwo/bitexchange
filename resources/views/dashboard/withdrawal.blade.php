@@ -20,7 +20,7 @@
                         @csrf
                         <div class="card-body">
 
-                            <h6>Wallet Balance: <span class="text-primary">${{ $total }}</span></h6>
+                            <h6>Wallet Balance: <span class="text-primary">€{{ $total }}</span></h6>
 
                             <br>
 

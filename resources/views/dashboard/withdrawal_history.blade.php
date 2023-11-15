@@ -15,7 +15,7 @@
             <div class="card mx-0 p-4">
                 <h6>Your Withdrawals:</h6><br>
 
-                <b>Total: <span class="text-primary">${{ $total }}</span></b>
+                <b>Total: <span class="text-primary">€{{ $total }}</span></b>
                 <br><br>
 
                 <div class="table-responsive border rounded p-1">
@@ -31,7 +31,7 @@
                         <tbody>
                         @foreach ($withdrawals as $withdrawal)
                             <tr>
-                                <td>${{ $withdrawal->amount }}</td>
+                                <td>€{{ $withdrawal->amount }}</td>
                                 <td> {{ $withdrawal->gateway->name }}</td>
                                 <td>{{ Carbon\Carbon::parse($withdrawal->created_at)->format('jS F, Y') }}</td>
                                 <td>

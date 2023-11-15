@@ -14,7 +14,7 @@
         <div class="container-fluid">
             <div class="card mx-0 p-4">
 
-                <b>Total: <span class="text-primary">${{ $total }}</span></b>
+                <b>Total: <span class="text-primary">€{{ $total }}</span></b>
                 <br><br>
 
                 <div class="table-responsive border rounded p-1">
@@ -33,8 +33,8 @@
                                     <b>{{ $deposit->plan->name }}</b>
                                     (%{{ $deposit->plan->roi }} {{ $deposit->plan->frequency }})
                                 </td>
-                                <td>${{ $deposit->amount }}</td>
-                                <td> ${{ number_format(($deposit->amount * $deposit->plan->roi) * $deposit->plan->duration + ($deposit->amount), 2) }} after {{ $deposit->plan->duration }} days</td>
+                                <td>€{{ $deposit->amount }}</td>
+                                <td> €{{ number_format(($deposit->amount * $deposit->plan->roi) * $deposit->plan->duration + ($deposit->amount), 2) }} after {{ $deposit->plan->duration }} days</td>
 
                             </tr>
                         @endforeach
