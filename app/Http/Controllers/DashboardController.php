@@ -10,6 +10,7 @@ use App\Models\Referrals;
 use App\Models\Users;
 use App\Models\Wallets;
 use App\Models\Withdrawals;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -20,21 +21,21 @@ use Illuminate\View\View;
 
 class DashboardController extends Controller
 {
-    private $user;
-    public function __construct() {
-        $this->user = Auth::user();
-    }
      public function about(): View
     {
         return view('about');
     }
     public function index(): View
     {
+        $this->updateWallet();
+
         $wallet = Wallets::where('user_id', Auth::user()->id)->sum('amount');
+        $deposit = Deposits::where('user_id', Auth::user()->id)->get();
+        $wallet += $deposit->sum('amount') + $deposit->sum('profit');
         $referrals = Referrals::where('referral_id', Auth::user()->id)->sum('amount');
         $withdrawals = Withdrawals::where('user_id', Auth::user()->id)->where('status', true)->sum('amount');
 
-        return view('dashboard.index',['wallet' => $wallet, 'referrals' => $referrals, 'withdrawals' => $withdrawals]);
+        return view('dashboard.index',['wallet' => $wallet, 'referrals' => $referrals, 'withdrawals' => $withdrawals, 'profit' => $deposit->sum('profit')]);
     }
 
     public function deposit(): View
@@ -118,6 +119,8 @@ class DashboardController extends Controller
     {
         $gateways = Gateways::all();
         $plans = Plans::all();
+        $deposit = Deposits::where('user_id', Auth::user()->id)->get();
+        $wallet = $deposit->sum('amount') + $deposit->sum('profit');
         $total = Wallets::where('user_id', Auth::user()->id)->sum('amount');
 
         return view('dashboard.withdrawal', ['gateways' => $gateways, 'plans' => $plans, 'total' => $total]);
@@ -264,4 +267,51 @@ class DashboardController extends Controller
 
         return response()->json($responseData);
     }
+
+    public function updateWallet(): void
+    {
+
+        $deposits = Deposits::where('user_id', Auth::user()->id)->get();
+
+        foreach ($deposits as $deposit) {
+
+            $today = Carbon::now();
+            $currentDate = Carbon::parse($today);
+
+            $created_at = Carbon::parse($deposit->created_at);
+            $diff = $created_at->diffInDays($currentDate);
+
+            if ($deposit->profit_updated_at) {
+                $profit_updated_at = Carbon::parse($deposit->profit_updated_at);
+            } else {
+                $profit_updated_at = $created_at;
+            }
+
+            if ($diff <= $deposit->plan->duration) {
+                if ($currentDate->greaterThan($profit_updated_at)) {
+                    $diff_days = $currentDate->diffInDays($profit_updated_at);
+
+                    if ($deposit->profit < ($deposit->amount * $deposit->plan->roi / 100) * $deposit->plan->duration) {
+
+                        $daily_profit = $deposit->amount * $deposit->plan->roi / 100;
+
+                        $amount = number_format($daily_profit * $diff_days, 2);
+                        $deposit->profit += $amount;
+                        $deposit->profit_updated_at = $today;
+
+                        if ($diff == $deposit->plan->duration) {
+
+                            $user = $deposit->user;
+                            $user->wallet->amount += $deposit->profit + $deposit->amount;
+                            $user->wallet->save();
+
+                        }
+                    }
+                    $deposit->save();
+                }
+            }
+
+        }
+    }
+
 }

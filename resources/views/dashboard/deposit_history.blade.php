@@ -38,7 +38,7 @@
                                 </td>
                                 <td>€{{ $deposit->amount }}</td>
                                 <td> {{ $deposit->gateway->name }}</td>
-                                <td> %{{ $deposit->plan->roi }} after  {{ $deposit->plan->duration }}</td>
+                                <td> %{{ $deposit->plan->roi * $deposit->plan->duration }} after  {{ $deposit->plan->duration }}days</td>
                                 <td>{{ Carbon\Carbon::parse($deposit->created_at)->format('jS F, Y') }}</td>
                                 <td>
                                     <div class="badge {{ $deposit->status ? "badge-success":"badge-warning" }} p-2">{{ $deposit->status ? "Approved":"Pending" }}</div>

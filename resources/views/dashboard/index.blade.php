@@ -23,7 +23,7 @@
                         <div class="col-md-6 col-xl report-inner-card px-3">
                             <div class="inner-card-text">
                                 <span class="report-title">Total Earnings</span>
-                                <h3>€{{ number_format($wallet + $referrals, 2) }}</h3>
+                                <h3>€{{ number_format($profit + $referrals, 2) }}</h3>
                             </div>
                             <div class="inner-card-icon bg-danger rounded-3">
                                 <i class="icon-briefcase"></i>

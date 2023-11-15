@@ -16,6 +16,8 @@ class Deposits extends Model
         'receipt',
         'transaction_id',
         'status',
+        'profit',
+        'profit_updated_at',
     ];
 
     public function user(): BelongsTo

@@ -34,7 +34,7 @@
                                     (%{{ $deposit->plan->roi }} {{ $deposit->plan->frequency }})
                                 </td>
                                 <td>€{{ $deposit->amount }}</td>
-                                <td> €{{ number_format(($deposit->amount * $deposit->plan->roi) * $deposit->plan->duration + ($deposit->amount), 2) }} after {{ $deposit->plan->duration }} days</td>
+                                <td> €{{ number_format(($deposit->amount * $deposit->plan->roi / 100) * ($deposit->plan->duration) + ($deposit->amount), 2) }} after {{ $deposit->plan->duration }} days</td>
 
                             </tr>
                         @endforeach

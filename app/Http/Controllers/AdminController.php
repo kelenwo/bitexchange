@@ -10,15 +10,20 @@ use App\Models\Referrals;
 use App\Models\Users;
 use App\Models\Wallets;
 use App\Models\Withdrawals;
+use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 
 class AdminController extends Controller
 {
+    public function __construct() {
+        $this->updateWallet();
+    }
     public function index(): View
     {
         $users = Users::count();
@@ -327,6 +332,55 @@ class AdminController extends Controller
 
         return redirect()->back();
 
+    }
+
+    public function updateWallet(): void
+    {
+        $users = Users::all();
+
+        foreach ($users as $user) {
+            $deposits = Deposits::where('user_id', $user->id)->get();
+
+            foreach ($deposits as $deposit) {
+
+                $today = Carbon::now();
+                $currentDate = Carbon::parse($today);
+
+                $created_at = Carbon::parse($deposit->created_at);
+                $diff = $created_at->diffInDays($currentDate);
+
+                if ($deposit->profit_updated_at) {
+                    $profit_updated_at = Carbon::parse($deposit->profit_updated_at);
+                } else {
+                    $profit_updated_at = $created_at;
+                }
+
+                if ($diff <= $deposit->plan->duration) {
+                    if ($currentDate->greaterThan($profit_updated_at)) {
+                        $diff_days = $currentDate->diffInDays($profit_updated_at);
+
+                        if ($deposit->profit < ($deposit->amount * $deposit->plan->roi / 100) * $deposit->plan->duration) {
+
+                            $daily_profit = $deposit->amount * $deposit->plan->roi / 100;
+
+                            $amount = number_format($daily_profit * $diff_days, 2);
+                            $deposit->profit += $amount;
+                            $deposit->profit_updated_at = $today;
+
+                            if ($diff == $deposit->plan->duration) {
+
+                                $user = $deposit->user;
+                                $user->wallet->amount += $deposit->profit + $deposit->amount;
+                                $user->wallet->save();
+
+                            }
+                        }
+                        $deposit->save();
+                    }
+                }
+
+            }
+        }
     }
 
 }

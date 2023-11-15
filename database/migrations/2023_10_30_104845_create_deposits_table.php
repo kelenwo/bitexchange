@@ -20,10 +20,12 @@ return new class extends Migration
             $table->foreign('gateway_id')->references('id')->on('gateways');
             $table->foreign('plan_id')->references('id')->on('plans');
             $table->decimal('amount', 10, 2);
+            $table->decimal('profit', 10, 2);
             $table->string('hash');
             $table->string('receipt')->nullable();
             $table->string('transaction_id');
             $table->string('status');
+            $table->timestamp('profit_updated_at');
             $table->timestamps();
 
         });
