@@ -90,7 +90,7 @@
             <div class="card mx-0 p-4">
                 <h6>Your Referrals:</h6><br>
 
-                <b>Total Earned: <span class="text-success">${{ $total }}</span></b>
+                <b>Total Earned: <span class="text-success">€{{ $total }}</span></b>
                 <br><br>
 
                 <div class="table-responsive border rounded p-1">
@@ -112,7 +112,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <span class="text-success">${{ $referral->amount }}</span></td>
+                                    <span class="text-success">€{{ $referral->amount }}</span></td>
                                 <td>{{ Carbon\Carbon::parse($referral->created_at)->format('jS F, Y') }}</td>
                             </tr>
                         @endforeach

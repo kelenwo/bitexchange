@@ -15,7 +15,7 @@
             <div class="card mx-0 p-4">
                 <h6>Your Investments:</h6><br>
 
-                <b>Total: <span class="text-primary">${{ $total }}</span></b>
+                <b>Total: <span class="text-primary">€{{ $total }}</span></b>
                 <br><br>
 
                 <div class="table-responsive border rounded p-1">
@@ -36,7 +36,7 @@
                                 <td>
                                     {{ $deposit->plan->name }}
                                 </td>
-                                <td>${{ $deposit->amount }}</td>
+                                <td>€{{ $deposit->amount }}</td>
                                 <td> {{ $deposit->gateway->name }}</td>
                                 <td> %{{ $deposit->plan->roi }} after  {{ $deposit->plan->duration }}</td>
                                 <td>{{ Carbon\Carbon::parse($deposit->created_at)->format('jS F, Y') }}</td>
