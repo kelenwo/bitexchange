@@ -14,8 +14,11 @@ return new class extends Migration
         Schema::create('plans', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('roi');
-            $table->string('duration');
+            $table->integer('duration');
+            $table->string('frequency');
+            $table->integer('min');
+            $table->integer('max');
+            $table->integer('roi');
             $table->timestamps();
         });
     }
