@@ -256,7 +256,10 @@ class AdminController extends Controller
 
             if($wallet) {
                 if($type == 'Deposits') {
-                    $wallet->amount += $record->amount;
+                    $record->profit = 0.00;
+                    $record->profit_updated_at = Carbon::now();
+                    $record->save();
+//                    $wallet->amount += $record->amount;
                     $referral = Referrals::where('user_id', $record->user->id)->first();
 
                     if($referral) {
@@ -275,7 +278,10 @@ class AdminController extends Controller
                 $wallet->gateway()->associate($gateway);
                 $wallet->user()->associate($user);
                 if($type == 'Deposits') {
-                    $wallet->amount = $record->amount;
+                    $wallet->amount = 0.00;
+                    $record->profit = 0.00;
+                    $record->profit_updated_at = Carbon::now();
+                    $record->save();
                 }
 
                 if($type == 'Withdrawals') {
