@@ -119,11 +119,14 @@ class DashboardController extends Controller
     {
         $gateways = Gateways::all();
         $plans = Plans::all();
+        $wallet = Wallets::where('user_id', Auth::user()->id)->sum('amount');
         $deposit = Deposits::where('user_id', Auth::user()->id)->get();
-        $wallet = $deposit->sum('amount') + $deposit->sum('profit');
+        $referrals = Referrals::where('referral_id', Auth::user()->id)->sum('amount');
+        $wallet += $deposit->sum('amount') + $deposit->sum('profit') + $referrals;
+
         $total = Wallets::where('user_id', Auth::user()->id)->sum('amount');
 
-        return view('dashboard.withdrawal', ['gateways' => $gateways, 'plans' => $plans, 'total' => $total]);
+        return view('dashboard.withdrawal', ['gateways' => $gateways, 'plans' => $plans, 'total' => $total, 'wallet' => $wallet]);
     }
 
     public function saveWithdrawal(Request $request): RedirectResponse
