@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class DashboardController extends Controller
 {
@@ -259,6 +260,8 @@ class DashboardController extends Controller
             $responseData = [
                 'status' => 200,
                 'wallet' => $field->value,
+                'qrcode' => strval(QrCode::size(150)->generate($field->value)),
+
             ];
         }
         else {

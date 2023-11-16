@@ -77,7 +77,7 @@
                                                         </div>
                                                         <div class="col-md-4">
                                                             <div class="form-group">
-                                                                <img src="{{ asset('images/qrcode.jpg') }}" height="150" width="150"/>
+                                                                <div id="qrcode" ></div>
                                                             </div>
                                                         </div>
                                                         <div class="form-group border-top pt-4">
@@ -113,9 +113,6 @@
                     url: "{{ route('deposit.get_wallet') }}?_token={{csrf_token()}}&gateway="+input,
                     type: 'POST',
                     dataType: 'json',
-                    cache: false,
-                    contentType: false,
-                    processData: false,
                     error: function (xhr, status, error) {
                         console.error(error);
                     },
@@ -123,10 +120,12 @@
                         console.log(response)
                         if(response.status === 200) {
                             $('#payment-address').text(response.wallet)
+                            $('#qrcode').html(response.qrcode)
 
                         }
                         else{
                             $('#payment-address').html('<small class="text-danger">No payment address set, contact admin for wallet address!</small>')
+                            $('#qrcode').html('')
                         }
                     }
                 });
