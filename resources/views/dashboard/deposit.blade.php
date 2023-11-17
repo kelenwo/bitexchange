@@ -70,7 +70,7 @@
                                                     <div class="row">
                                                         <div class="col-md-8">
                                                             <p class="card-description mb-2">
-                                                                Please pay the equivalent amount in ethereum, provide the transaction ID and receipt screenshot(optional)
+                                                                Please pay the equivalent amount in <span id="wallet-name"></span> provide the transaction ID and receipt screenshot(optional)
                                                             </p>
                                                             <span>Address: </span>
                                                             <h6 id="payment-address"></h6>
@@ -121,11 +121,14 @@
                         if(response.status === 200) {
                             $('#payment-address').text(response.wallet)
                             $('#qrcode').html(response.qrcode)
+                            $('#wallet-name').html(response.name)
 
                         }
                         else{
                             $('#payment-address').html('<small class="text-danger">No payment address set, contact admin for wallet address!</small>')
                             $('#qrcode').html('')
+                            $('#wallet-name').html('')
+
                         }
                     }
                 });

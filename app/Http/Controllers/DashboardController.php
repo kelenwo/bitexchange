@@ -260,6 +260,7 @@ class DashboardController extends Controller
             $responseData = [
                 'status' => 200,
                 'wallet' => $field->value,
+                'name' => $gateway->name,
                 'qrcode' => strval(QrCode::size(150)->generate($field->value)),
 
             ];
