@@ -79,7 +79,7 @@ class DashboardController extends Controller
             'plan' => 'required',
             'amount' => 'required',
             'method' => 'required',
-            'transaction_id' => 'required',
+//            'transaction_id' => 'required',
             'receipt' => 'image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust file validation as needed
         ]);
 
@@ -101,7 +101,7 @@ class DashboardController extends Controller
         $deposit->plan()->associate($plan);
 
         $deposit->amount = $request->input('amount');
-        $deposit->transaction_id = $request->input('transaction_id');
+        $deposit->transaction_id = 'N/A';
         $deposit->receipt =  $imagePath?:null;
         $deposit->status = false;
         $deposit->hash = $randomId;

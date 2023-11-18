@@ -80,10 +80,10 @@
                                                                 <div id="qrcode" ></div>
                                                             </div>
                                                         </div>
-                                                        <div class="form-group border-top pt-4">
-                                                            <label for="transaction_id">Transaction ID <span class="text-danger">*</span> </label>
-                                                            <input type="text" name="transaction_id" id="transaction_id" class="form-control form-control-sm" placeholder="Transaction ID" step="1">
-                                                        </div>
+{{--                                                        <div class="form-group border-top pt-4">--}}
+{{--                                                            <label for="transaction_id">Transaction ID <span class="text-danger">*</span> </label>--}}
+{{--                                                            <input type="text" name="transaction_id" id="transaction_id" class="form-control form-control-sm" placeholder="Transaction ID" step="1">--}}
+{{--                                                        </div>--}}
                                                         <div class="form-group">
                                                             <label for="receipt">Receipt</label>
                                                             <input type="file" accept="image/*" name="receipt" id="receipt" class="form-control ">
