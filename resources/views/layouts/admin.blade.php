@@ -17,6 +17,10 @@
     <link rel="stylesheet" href="{{ asset('css/dashboard/style.css') }}">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="./images/favicon.png" />
+
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap4.min.js"></script>
 </head>
 <body>
 <div class="container-scroller">

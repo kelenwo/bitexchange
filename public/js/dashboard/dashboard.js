@@ -8,6 +8,7 @@
     function cb(start, end) {
         $('#income-expense-summary-chart-daterange input').val(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
     }
+    $(".datatable").DataTable({dom: 'rtp'}) || null
 
     $('#income-expense-summary-chart-daterange').daterangepicker({
       opens: 'left',
@@ -50,7 +51,7 @@
       showArea: true,
       showPoint: false
     }
-    
+
     var responsiveOptions = [
       ['screen and (max-width: 480px)', {
         height: 150,
@@ -116,7 +117,7 @@
                 data: doughnutPieData,
                 options: doughnutPieOptions
             });
-        
+
           //performance indicator bar chart
 
           new Chartist.Bar('#performance-indicator-chart', {

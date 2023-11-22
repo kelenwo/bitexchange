@@ -20,7 +20,7 @@
                         <h4 class="card-title mb-sm-0">Deposits</h4>
                     </div>
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table datatable">
                             <thead>
                             <tr>
                                 <th class="font-weight-bold">User</th>

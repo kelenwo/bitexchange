@@ -60,7 +60,7 @@
                         <a href="#" class="text-dark ml-auto mb-3 mb-sm-0"> View all Deposits</a>
                     </div>
                     <div class="table-responsive border rounded p-1">
-                        <table class="table">
+                        <table class="table datatable">
                             <thead>
                             <tr>
                                 <th class="font-weight-bold">User</th>
@@ -176,7 +176,7 @@
                         <a href="#" class="text-dark ml-auto mb-3 mb-sm-0"> View all Withdrawals</a>
                     </div>
                     <div class="table-responsive border rounded p-1">
-                        <table class="table">
+                        <table class="table datatable">
                             <thead>
                             <tr>
                                 <th class="font-weight-bold">User</th>

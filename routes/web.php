@@ -43,6 +43,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/dashboard/account-security', [DashboardController::class, 'account_security'])->name('account_security');
     Route::post('/dashboard/get-wallet', [DashboardController::class, 'getWallet'])->name('get_wallet');
     Route::post('/dashboard/get-deposit-wallet', [DashboardController::class, 'getDepositWallet'])->name('deposit.get_wallet');
+    Route::get('/dashboard/transactions', [DashboardController::class, 'transactions'])->name('transactions');
 
 });
 

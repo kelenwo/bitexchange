@@ -19,7 +19,7 @@
                 <br><br>
 
                 <div class="table-responsive border rounded p-1">
-                    <table class="table">
+                    <table class="table datatable">
                         <thead>
                         <tr>
                             <th class="font-weight-bold">Amount</th>

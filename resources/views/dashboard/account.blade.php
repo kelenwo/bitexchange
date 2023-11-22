@@ -77,6 +77,13 @@
                         <label for="{{ $gateway->code }}">{{ $gateway->name }}</label>
                         <input type="text" name="gateway[{{ $gateway->code }}]" id="{{ $gateway->code }}" class="form-control" placeholder="{{ $gateway->name }}" value="{{ $field?->value }}">
                     </div>
+
+                    @if ($gateway->code == "bank")
+                        <div class="form-group">
+                            <label for="bank">Bank Name</label>
+                            <input type="text" name="bank" id="bank" class="form-control" placeholder="Bank Name" value="{{ $field?->bank }}">
+                        </div>
+                    @endif
                 @endforeach
 
                 <div class="form-group">

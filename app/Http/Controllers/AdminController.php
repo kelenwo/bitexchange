@@ -7,6 +7,7 @@ use App\Models\Fields;
 use App\Models\Gateways;
 use App\Models\Plans;
 use App\Models\Referrals;
+use App\Models\Transaction;
 use App\Models\Users;
 use App\Models\Wallets;
 use App\Models\Withdrawals;
@@ -353,6 +354,9 @@ class AdminController extends Controller
                 $currentDate = Carbon::parse($today);
 
                 $created_at = Carbon::parse($deposit->created_at);
+                $currentDate->startOfDay();
+                $created_at->startOfDay();
+
                 $diff = $created_at->diffInDays($currentDate);
 
                 if ($deposit->profit_updated_at) {
@@ -369,9 +373,25 @@ class AdminController extends Controller
 
                             $daily_profit = $deposit->amount * $deposit->plan->roi / 100;
 
-                            $amount = number_format($daily_profit * $diff_days, 2);
-                            $deposit->profit += $amount;
-                            $deposit->profit_updated_at = $today;
+                            $amount = $daily_profit * floatval($diff_days);
+
+                            for ($day = 1; $day <= $diff_days; $day++) {
+                                $transactionDate = $created_at->copy()->addDays($day);
+
+                                $deposit->profit += $daily_profit;
+                                $deposit->profit_updated_at = $transactionDate;
+                                $deposit->save();
+
+                                $randomId = bin2hex(random_bytes(5));
+
+                                $trx = new Transaction();
+                                $trx->amount = $amount;
+                                $trx->hash = $randomId;
+                                $trx->type = 'interest';
+                                $trx->user()->associate($user);
+                                $trx->created_at = $transactionDate;
+                                $trx->save();
+                            }
 
                             if ($diff == $deposit->plan->duration) {
 
@@ -380,8 +400,8 @@ class AdminController extends Controller
                                 $user->wallet->save();
 
                             }
+
                         }
-                        $deposit->save();
                     }
                 }
 

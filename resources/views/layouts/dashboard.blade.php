@@ -18,6 +18,9 @@
     <!-- End layout styles -->
     <link rel="shortcut icon" href="./images/favicon.png" />
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <link href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css" rel="stylesheet" />
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap4.min.js"></script>
 
 </head>
 <body>
@@ -88,6 +91,11 @@
                     </div>
                 </li>
 
+                <li class="nav-item my-2">
+                    <a class="nav-link" href="{{ route('transactions') }}">
+                        <span class="menu-title">Transactions</span>
+                    </a>
+                </li>
 
                 <li class="nav-item my-2">
                     <a class="nav-link" data-toggle="collapse" href="#account" aria-expanded="false" aria-controls="account">
@@ -126,6 +134,8 @@
 </div>
 <!-- container-scroller -->
 <!-- plugins:js -->
+<script src="{{ asset('js/dashboard/dashboard.js') }}"></script>
+
 <script src="{{ asset('vendors/js/vendor.bundle.base.js') }}"></script>
 
 <!-- endinject -->
@@ -141,7 +151,6 @@
 <!-- endinject -->
 <!-- Custom js for this page -->
 <script src="{{ asset('js/fa.js') }}"></script>
-<script src="{{ asset('js/dashboard/dashboard.js') }}"></script>
 <!-- End custom js for this page -->
 </body>
 </html>

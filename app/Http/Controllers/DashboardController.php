@@ -7,6 +7,7 @@ use App\Models\Fields;
 use App\Models\Gateways;
 use App\Models\Plans;
 use App\Models\Referrals;
+use App\Models\Transaction;
 use App\Models\Users;
 use App\Models\Wallets;
 use App\Models\Withdrawals;
@@ -59,6 +60,12 @@ class DashboardController extends Controller
         $data = Deposits::where('user_id', Auth::user()->id)->get();
         $total = Deposits::where('user_id', Auth::user()->id)->where('status', true)->sum('amount');
         return view('dashboard.deposit_history', ['deposits' => $data, 'total' => $total]);
+    }
+
+    public function transactions(): View
+    {
+        $data = Transaction::where('user_id', Auth::user()->id)->get();
+        return view('dashboard.transactions', ['transactions' => $data]);
     }
 
     public function referrals(): View
@@ -204,12 +211,14 @@ class DashboardController extends Controller
                 $fields = Fields::where('user_id', Auth::user()->id)->where('gateway_id',$gateway->id)->first();
                 if (!$fields) {
                     $fields = new Fields();
-                    $fields->value = $value;
                     $fields->gateway()->associate($gateway);
                     $fields->user()->associate($user);
                 }
-                else {
+
                     $fields->value = $value;
+
+                if ($gateway->code == 'bank') {
+                    $fields->bank = $request->input('bank');
                 }
 
                 $fields->save();
@@ -246,7 +255,6 @@ class DashboardController extends Controller
             ];
         }
 
-
         return response()->json($responseData);
     }
 
@@ -271,7 +279,6 @@ class DashboardController extends Controller
             ];
         }
 
-
         return response()->json($responseData);
     }
 
@@ -286,6 +293,9 @@ class DashboardController extends Controller
             $currentDate = Carbon::parse($today);
 
             $created_at = Carbon::parse($deposit->created_at);
+            $currentDate->startOfDay();
+            $created_at->startOfDay();
+
             $diff = $created_at->diffInDays($currentDate);
 
             if ($deposit->profit_updated_at) {
@@ -302,9 +312,25 @@ class DashboardController extends Controller
 
                         $daily_profit = $deposit->amount * $deposit->plan->roi / 100;
 
-                        $amount = number_format($daily_profit * $diff_days, 2);
-                        $deposit->profit += $amount;
-                        $deposit->profit_updated_at = $today;
+                        $amount = $daily_profit * floatval($diff_days);
+
+                        for ($day = 1; $day <= $diff_days; $day++) {
+                            $transactionDate = $created_at->copy()->addDays($day);
+
+                            $deposit->profit += $daily_profit;
+                            $deposit->profit_updated_at = $transactionDate;
+                            $deposit->save();
+
+                            $randomId = bin2hex(random_bytes(5));
+
+                            $trx = new Transaction();
+                            $trx->amount = $amount;
+                            $trx->hash = $randomId;
+                            $trx->type = 'interest';
+                            $trx->user()->associate(Auth::user());
+                            $trx->created_at = $transactionDate;
+                            $trx->save();
+                        }
 
                         if ($diff == $deposit->plan->duration) {
 
@@ -313,8 +339,8 @@ class DashboardController extends Controller
                             $user->wallet->save();
 
                         }
+
                     }
-                    $deposit->save();
                 }
             }
 
