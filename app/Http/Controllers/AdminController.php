@@ -385,10 +385,10 @@ class AdminController extends Controller
                                 $randomId = bin2hex(random_bytes(5));
 
                                 $trx = new Transaction();
-                                $trx->amount = $amount;
+                                $trx->amount = $daily_profit;
                                 $trx->hash = $randomId;
                                 $trx->type = 'interest';
-                                $trx->user()->associate($user);
+                                $trx->user()->associate(Auth::user());
                                 $trx->created_at = $transactionDate;
                                 $trx->save();
                             }
