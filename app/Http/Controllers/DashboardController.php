@@ -324,7 +324,7 @@ class DashboardController extends Controller
                             $randomId = bin2hex(random_bytes(5));
 
                             $trx = new Transaction();
-                            $trx->amount = $amount;
+                            $trx->amount = $daily_profit;
                             $trx->hash = $randomId;
                             $trx->type = 'interest';
                             $trx->user()->associate(Auth::user());
