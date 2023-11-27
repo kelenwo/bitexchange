@@ -31,7 +31,7 @@
                         </div>
                         <div class="col-md-6 col-xl report-inner-card px-3">
                             <div class="inner-card-text">
-                                <span class="report-title">Total Withdrawals</span>
+                                <span class="report-title">Total Investments</span>
                                 <h3>€{{ number_format($withdrawals, 2) }}</h3>
                             </div>
                             <div class="inner-card-icon bg-dark rounded-3">

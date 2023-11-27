@@ -36,7 +36,7 @@ class DashboardController extends Controller
         $deposit = Deposits::where('user_id', Auth::user()->id)->get();
         $wallet += $deposit->sum('amount') + $deposit->sum('profit');
         $referrals = Referrals::where('referral_id', Auth::user()->id)->sum('amount');
-        $withdrawals = Withdrawals::where('user_id', Auth::user()->id)->where('status', true)->sum('amount');
+        $withdrawals = Deposits::where('user_id', Auth::user()->id)->where('status', true)->sum('amount');
 
         return view('dashboard.index',['wallet' => $wallet, 'referrals' => $referrals, 'withdrawals' => $withdrawals, 'profit' => $deposit->sum('profit')]);
     }
