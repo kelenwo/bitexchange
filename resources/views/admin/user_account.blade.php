@@ -65,6 +65,45 @@
                         <option {{ $user->admin ? "selected":null }} value="{{ true }}">Admin</option>
                     </select>
                 </div>
+                
+                
+                
+                
+                
+                
+                
+                
+                <div class="form-group">
+                    <label for="fullName">Total Wallet Balance:</label>
+                    <input type="text" name="name" id="name" value="{{ $totalWallets}}" class="form-control">
+                </div>
+                
+                
+                <div class="form-group">
+                    <label for="fullName">Total Earnings:</label>
+                    <input type="text" name="name" id="name" value="{{$totalProfits }}" class="form-control">
+                </div>
+                
+                
+                <div class="form-group">
+                    <label for="fullName">Total Deposits:</label>
+                    <input type="text" name="name" id="name" value="{{ $totalDeposits }}" class="form-control">
+                </div>
+
+                
+                
+                <div class="form-group">
+                    <label for="fullName">Total Withdraw:</label>
+                    <input type="text" name="name" id="name" value="{{ $totalWithdrawals}}" class="form-control">
+                </div>
+                
+                
+                
+                
+                
+                
+
+                
 
                 <div class="form-group">
                     <input type="submit" value="Change Account data" class="btn btn-primary form-control">

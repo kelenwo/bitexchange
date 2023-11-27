@@ -7,6 +7,7 @@ use App\Models\Fields;
 use App\Models\Gateways;
 use App\Models\Plans;
 use App\Models\Referrals;
+
 use App\Models\Transaction;
 use App\Models\Users;
 use App\Models\Wallets;
@@ -19,9 +20,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
+use App\Models\Deposit;
 
 class AdminController extends Controller
 {
+    
+
+    
     public function __construct() {
         $this->updateWallet();
     }
@@ -87,10 +92,28 @@ class AdminController extends Controller
 
     public function account(Request $request): View
     {
-        $users = Users::where('id', request()->id)->first();
+    $userId = $request->id;
+    $user = Users::where('id', $userId)->first();
+    
+    // Assuming wallet is your model for deposits
+    $wallets = Wallets::where('user_id', $userId)->get();
+    $totalWallets = $wallets->sum('amount');
+    
+    // Assuming Deposit is your model for deposits
+    $deposits = Deposits::where('user_id', $userId)->get();
+    $totalProfits = $deposits->sum('profit');
 
-        return view('admin.user_account', ['user' => $users]);
+    // Assuming Deposit is your model for deposits
+    $deposits = Deposits::where('user_id', $userId)->get();
+    $totalDeposits = $deposits->sum('amount');
+    
+    // Assuming withdraw is your model for deposits
+    $Withdrawals = Withdrawals::where('user_id', $userId)->get();
+    $totalWithdrawals = $Withdrawals->sum('amount');
+
+    return view('admin.user_account', ['user' => $user,'totalWallets' => $totalWallets ,  'totalProfits' => $totalProfits ,  'totalDeposits' => $totalDeposits , 'totalWithdrawals' => $totalWithdrawals]);
     }
+
 
     public function updateAccount(Request $request): RedirectResponse
     {
