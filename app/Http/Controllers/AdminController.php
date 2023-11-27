@@ -11,6 +11,7 @@ use App\Models\Transaction;
 use App\Models\Users;
 use App\Models\Wallets;
 use App\Models\Withdrawals;
+use App\Notifications\EmailAlerts;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
@@ -298,6 +299,19 @@ class AdminController extends Controller
 
         if ($record->save()) {
             Session::flash('success', 'Approved successfully.');
+
+            if($type == 'Deposits') {
+                $customTitle = 'Investment Approved';
+                $customMessage = 'Your Investment has been Approved, Continue to your dashboard to confirm.';
+
+            }
+            if($type == 'Withdrawals') {
+                $customTitle = 'Withdrawal Request Processed';
+                $customMessage = 'Your withdrawal request has been processed';
+
+            }
+
+            $user->notify(new EmailAlerts($customMessage,$customTitle));
         }
         else {
             Session::flash('error', 'An error occurred. Make sure all required fields are selected.');
