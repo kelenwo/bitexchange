@@ -11,6 +11,7 @@ use App\Models\Transaction;
 use App\Models\Users;
 use App\Models\Wallets;
 use App\Models\Withdrawals;
+use App\Notifications\EmailAlerts;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -114,7 +115,11 @@ class DashboardController extends Controller
         $deposit->hash = $randomId;
 
         if ($deposit->save()) {
-            Session::flash('success', 'Deposits has been submitted successfully, Pending admin approval');
+            Session::flash('success', 'Investment has been submitted successfully, Pending admin approval');
+            $customTitle = 'Investment Successful';
+            $customMessage = 'Your Investment has been submitted successfully, Pending admin approval.';
+            $user = auth()->user();
+            $user->notify(new EmailAlerts($customMessage,$customTitle));
         }
         else {
             Session::flash('error', 'An error occurred, Make sure all required fields are selected');
@@ -161,6 +166,10 @@ class DashboardController extends Controller
 
         if ($deposit->save()) {
             Session::flash('success', 'Withdrawal has been submitted successfully, Pending admin approval');
+            $customTitle = 'Withdrawal Request';
+            $customMessage = 'Your Withdrawal request has been submitted, Pending admin approval. if you did not initiate this please contact the admin.';
+            $user = auth()->user();
+            $user->notify(new EmailAlerts($customMessage,$customTitle));
         }
         else {
             Session::flash('error', 'An error occurred, Make sure all required fields are selected');
