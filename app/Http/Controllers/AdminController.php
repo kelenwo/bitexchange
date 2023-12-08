@@ -25,9 +25,9 @@ use App\Models\Deposit;
 
 class AdminController extends Controller
 {
-    
 
-    
+
+
     public function __construct() {
         $this->updateWallet();
     }
@@ -93,26 +93,14 @@ class AdminController extends Controller
 
     public function account(Request $request): View
     {
-    $userId = $request->id;
-    $user = Users::where('id', $userId)->first();
-    
-    // Assuming wallet is your model for deposits
-    $wallets = Wallets::where('user_id', $userId)->get();
-    $totalWallets = $wallets->sum('amount');
-    
-    // Assuming Deposit is your model for deposits
-    $deposits = Deposits::where('user_id', $userId)->get();
-    $totalProfits = $deposits->sum('profit');
+        $userId = $request->id;
+        $user = Users::where('id', $userId)->first();
 
-    // Assuming Deposit is your model for deposits
-    $deposits = Deposits::where('user_id', $userId)->get();
-    $totalDeposits = $deposits->sum('amount');
-    
-    // Assuming withdraw is your model for deposits
-    $Withdrawals = Withdrawals::where('user_id', $userId)->get();
-    $totalWithdrawals = $Withdrawals->sum('amount');
+        $totalProfits = Referrals::where('user_id', $user->id)->get()->sum('profit');
+        $totalDeposits = Deposits::where('user_id', $user->id)->get()->sum('amount');
+        $gateways = Gateways::all();
 
-    return view('admin.user_account', ['user' => $user,'totalWallets' => $totalWallets ,  'totalProfits' => $totalProfits ,  'totalDeposits' => $totalDeposits , 'totalWithdrawals' => $totalWithdrawals]);
+        return view('admin.user_account', ['user' => $user, 'gateways' => $gateways ,  'totalProfits' => $totalProfits ,  'totalDeposits' => $totalDeposits]);
     }
 
 
@@ -132,7 +120,27 @@ class AdminController extends Controller
 
         $user->name = $request->input('name');
         $user->country = $request->input('country');
-        $user->admin = $request->input('role');
+        $user->admin = (bool)$request->input('role');
+
+        foreach ($request->input('wallet') as $key => $value) {
+
+            $gateway = Gateways::where('code',$key)->first();
+
+            if($gateway) {
+                $wallet = Wallets::where('user_id', $user->id)->where('gateway_id',$gateway->id)->first();
+
+                if(!$wallet) {
+
+                    $wallet = new Wallets();
+                    $wallet->gateway()->associate($gateway);
+                    $wallet->user()->associate($user);
+
+                }
+                $wallet->amount = floatval($value);
+                $wallet->save();
+            }
+
+        }
 
         if ($user->save()) {
             Session::flash('success', 'Account updated successfully.');
@@ -425,7 +433,7 @@ class AdminController extends Controller
                                 $trx->amount = $daily_profit;
                                 $trx->hash = $randomId;
                                 $trx->type = 'interest';
-                                $trx->user()->associate(Auth::user());
+                                $trx->user()->associate($user);
                                 $trx->created_at = $transactionDate;
                                 $trx->save();
                             }

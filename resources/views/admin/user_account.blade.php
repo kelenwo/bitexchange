@@ -24,7 +24,7 @@
                 </div>
             @endif
 
-            <form action="{{ route('account') }}" method="POST">
+            <form action="{{ route('user.account') }}" method="POST">
                 @csrf
                 <div class="form-group">
                     <label for="accountName">Account Name:</label>
@@ -65,45 +65,29 @@
                         <option {{ $user->admin ? "selected":null }} value="{{ true }}">Admin</option>
                     </select>
                 </div>
-                
-                
-                
-                
-                
-                
-                
-                
+
+
                 <div class="form-group">
-                    <label for="fullName">Total Wallet Balance:</label>
-                    <input type="text" name="name" id="name" value="{{ $totalWallets}}" class="form-control">
+                    <label for="fullName">Total Deposit Balance:</label>
+                    <input type="number" name="deposit_balance" id="deposit_balance" value="{{ $totalDeposits}}" class="form-control bg-white" readonly>
                 </div>
-                
-                
                 <div class="form-group">
-                    <label for="fullName">Total Earnings:</label>
-                    <input type="text" name="name" id="name" value="{{$totalProfits }}" class="form-control">
-                </div>
-                
-                
-                <div class="form-group">
-                    <label for="fullName">Total Deposits:</label>
-                    <input type="text" name="name" id="name" value="{{ $totalDeposits }}" class="form-control">
+                    <label for="fullName">Total Earning Balance:</label>
+                    <input type="number" name="earning_balance" id="earning_balance" value="{{ $totalProfits}}" class="form-control bg-white" readonly>
                 </div>
 
-                
-                
-                <div class="form-group">
-                    <label for="fullName">Total Withdraw:</label>
-                    <input type="text" name="name" id="name" value="{{ $totalWithdrawals}}" class="form-control">
-                </div>
-                
-                
-                
-                
-                
-                
+                @foreach ($gateways as $gateway)
+                    @php
+                        $wallet = \App\Models\Wallets::where('user_id', Request()->id)->where('gateway_id',$gateway->id)->first()
+                    @endphp
+                    @if ($gateway->code !== "bank")
+                        <div class="form-group">
+                            <label for="{{ $gateway->code }}">{{ $gateway->name }} Wallet Balance:</label>
+                            <input type="number" name="wallet[{{ $gateway->code }}]" id="{{ $gateway->code }}" class="form-control" placeholder="{{ $gateway->name }} Wallet Balance" value="{{ $wallet ? $wallet->amount: '0.00' }}">
+                        </div>
+                    @endif
+                @endforeach
 
-                
 
                 <div class="form-group">
                     <input type="submit" value="Change Account data" class="btn btn-primary form-control">
