@@ -153,7 +153,7 @@ class DashboardController extends Controller
 
         $wallet = Wallets::where('user_id',$user->id)->first();
 
-        if(floatval($wallet->amount) < floatval($request->input('amount'))) {
+        if(floatval($wallet?->amount ?:0.00 ) < floatval($request->input('amount'))) {
             Session::flash('error', 'Insufficient funds, Kindly deposit to invest');
         }
         elseif(floatval($plan->min) > floatval($request->input('amount'))) {
@@ -199,7 +199,7 @@ class DashboardController extends Controller
         $plans = Plans::all();
         $wallet = Wallets::where('user_id', Auth::user()->id)->first();
 
-        return view('dashboard.withdrawal', ['gateways' => $gateways, 'plans' => $plans, 'wallet' => $wallet->amount]);
+        return view('dashboard.withdrawal', ['gateways' => $gateways, 'plans' => $plans, 'wallet' => $wallet?->amount]);
     }
 
     public function saveWithdrawal(Request $request): RedirectResponse
