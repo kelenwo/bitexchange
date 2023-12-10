@@ -66,14 +66,27 @@
 
                 <li class="nav-item my-2">
                     <a class="nav-link" data-toggle="collapse" href="#deposit" aria-expanded="false" aria-controls="deposit">
-                        <span class="menu-title">Investment</span>
+                        <span class="menu-title">Deposit</span>
                         <i class="icon-arrow-down menu-icon"></i>
                     </a>
                     <div class="collapse" id="deposit">
                         <ul class="nav flex-column sub-menu">
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('deposit') }}">Invest</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('deposit_list') }}">Investments</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('deposit_history') }}">Investment History</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('deposit') }}">Deposit</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('deposit_history') }}">Deposit History</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item my-2">
+                    <a class="nav-link" data-toggle="collapse" href="#investment" aria-expanded="false" aria-controls="deposit">
+                        <span class="menu-title">Investment</span>
+                        <i class="icon-arrow-down menu-icon"></i>
+                    </a>
+                    <div class="collapse" id="investment">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('investment') }}">Invest</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('investment_list') }}">Investments</a></li>
+                            <li class="nav-item"> <a class="nav-link" href="{{ route('investment_history') }}">Investment History</a></li>
                         </ul>
                     </div>
                 </li>

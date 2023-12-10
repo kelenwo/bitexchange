@@ -21,7 +21,6 @@
                         <div class="card-body">
 
                             <h6>Wallet Balance: <span class="text-primary">€{{ $wallet }}</span></h6>
-                            <h6>Withdrawable Balance: <span class="text-primary">€{{ $total }}</span></h6>
 
                             <br>
 
@@ -38,7 +37,7 @@
 
                             <div class="form-group mt-3">
                                 <label for="amount">Enter Amount to Withdraw</label>
-                                <input type="number" name="amount" id="amount" class="form-control form-control-sm" placeholder="Minimum €500" max="{{ $total }}" step="1">
+                                <input type="number" name="amount" id="amount" class="form-control form-control-sm" placeholder="Minimum €500" max="{{ $wallet }}" step="1">
                             </div>
                             <div class="form-group">
                                 <label for="gateway">Select Payment Method</label>
@@ -88,7 +87,7 @@
                             $("#message").removeClass("d-none")
                             $("#message").addClass("d-none")
 
-                            if($('[name="amount"]').val() <= {{ $total }} && {{ $total }} > 0) {
+                            if($('[name="amount"]').val() <= {{ $wallet }} && {{ $wallet }} > 0) {
                                 $('button[type="submit"]').removeAttr("disabled")
                             }
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Deposits;
 use App\Models\Fields;
 use App\Models\Gateways;
+use App\Models\Investments;
 use App\Models\Plans;
 use App\Models\Referrals;
 use App\Models\Transaction;
@@ -28,32 +29,21 @@ class DashboardController extends Controller
     {
         return view('about');
     }
+
     public function index(): View
     {
         $this->updateWallet();
 
-        $wallet = Wallets::where('user_id', Auth::user()->id)->sum('amount');
-        $deposit = Deposits::where('user_id', Auth::user()->id)->get();
-        $wallet += $deposit->sum('amount') + $deposit->sum('profit');
-        $referrals = Referrals::where('referral_id', Auth::user()->id)->sum('amount');
-        $withdrawals = Deposits::where('user_id', Auth::user()->id)->where('status', true)->sum('amount');
+        $wallet = Wallets::where('user_id', Auth::user()->id)->first();
 
-        return view('dashboard.index',['wallet' => $wallet, 'referrals' => $referrals, 'withdrawals' => $withdrawals, 'profit' => $deposit->sum('profit')]);
+        return view('dashboard.index',['wallet' => $wallet->amount, 'withdrawals' => $wallet->withdrawals, 'investments' => $wallet->investments, 'profit' => $wallet->earnings]);
     }
 
     public function deposit(): View
     {
         $gateways = Gateways::all();
-        $plans = Plans::all();
 
-        return view('dashboard.deposit', ['gateways' => $gateways, 'plans' => $plans]);
-    }
-
-    public function deposit_list(): View
-    {
-        $data = Deposits::where('user_id', Auth::user()->id)->where('status', true)->get();
-        $total = Deposits::where('user_id', Auth::user()->id)->where('status', true)->sum('amount');
-        return view('dashboard.deposit_list', ['deposits' => $data, 'total' => $total]);
+        return view('dashboard.deposit', ['gateways' => $gateways]);
     }
 
     public function deposit_history(): View
@@ -61,6 +51,29 @@ class DashboardController extends Controller
         $data = Deposits::where('user_id', Auth::user()->id)->get();
         $total = Deposits::where('user_id', Auth::user()->id)->where('status', true)->sum('amount');
         return view('dashboard.deposit_history', ['deposits' => $data, 'total' => $total]);
+    }
+
+    public function investment(): View
+    {
+        $wallet = Wallets::where('user_id', Auth::user()->id)->first();
+        $gateways = Gateways::all();
+        $plans = Plans::all();
+
+        return view('dashboard.investment', ['gateways' => $gateways, 'plans' => $plans, 'wallet' => $wallet]);
+    }
+
+    public function investment_list(): View
+    {
+        $data = Investments::where('user_id', Auth::user()->id)->where('status', true)->get();
+        $total = Investments::where('user_id', Auth::user()->id)->where('status', true)->sum('amount');
+        return view('dashboard.investment_list', ['investments' => $data, 'total' => $total]);
+    }
+
+    public function investment_history(): View
+    {
+        $data = Investments::where('user_id', Auth::user()->id)->get();
+        $total = Investments::where('user_id', Auth::user()->id)->where('status', true)->sum('amount');
+        return view('dashboard.investment_history', ['investments' => $data, 'total' => $total]);
     }
 
     public function transactions(): View
@@ -84,7 +97,6 @@ class DashboardController extends Controller
 
         // Validate the form data
         $request->validate([
-            'plan' => 'required',
             'amount' => 'required',
             'method' => 'required',
 //            'transaction_id' => 'required',
@@ -93,7 +105,6 @@ class DashboardController extends Controller
 
         $user = Users::where('email', Auth::user()->email)->first();
         $gateway = Gateways::where('code', $request->input('method'))->first();
-        $plan = Plans::where('name', $request->input('plan'))->first();
 
         $imagePath = null;
 
@@ -106,18 +117,17 @@ class DashboardController extends Controller
         $deposit = new Deposits();
         $deposit->user()->associate($user);
         $deposit->gateway()->associate($gateway);
-        $deposit->plan()->associate($plan);
 
         $deposit->amount = $request->input('amount');
         $deposit->transaction_id = 'N/A';
         $deposit->receipt =  $imagePath?:null;
         $deposit->status = false;
-        $deposit->hash = $randomId;
+        $deposit->hash = strtoupper($randomId);
 
         if ($deposit->save()) {
-            Session::flash('success', 'Investment has been submitted successfully, Pending admin approval');
-            $customTitle = 'Investment Successful';
-            $customMessage = 'Your Investment has been submitted successfully, Pending admin approval.';
+            Session::flash('success', 'Deposit has been submitted successfully, Pending admin approval');
+            $customTitle = 'Deposit Successful';
+            $customMessage = 'Your Deposit has been submitted successfully, Pending admin approval.';
             $user = auth()->user();
             $user->notify(new EmailAlerts($customMessage,$customTitle));
         }
@@ -128,18 +138,68 @@ class DashboardController extends Controller
 
     }
 
+    public function saveInvestment(Request $request): RedirectResponse
+    {
+
+        // Validate the form data
+        $request->validate([
+            'plan' => 'required',
+            'amount' => 'required',
+//            'transaction_id' => 'required',
+        ]);
+
+        $user = Users::where('email', Auth::user()->email)->first();
+        $plan = Plans::where('name', $request->input('plan'))->first();
+
+        $wallet = Wallets::where('user_id',$user->id)->first();
+
+        if(floatval($wallet->amount) < floatval($request->input('amount'))) {
+            Session::flash('error', 'Insufficient funds, Kindly deposit to invest');
+        }
+        elseif(floatval($plan->min) > floatval($request->input('amount'))) {
+            Session::flash('error', 'Investment amount should not be less than €' .$plan->min . ' for '. $plan->name);
+        }
+        elseif(floatval($plan->max) < floatval($request->input('amount'))) {
+            Session::flash('error', 'Investment amount should not higher than €' .$plan->max. ' for '. $plan->name);
+        }
+        else {
+
+            $randomId = bin2hex(random_bytes(5));
+
+            $deposit = new Investments();
+            $deposit->user()->associate($user);
+            $deposit->plan()->associate($plan);
+
+            $deposit->amount = $request->input('amount');
+            $deposit->status = true;
+            $deposit->hash = strtoupper($randomId);
+            $deposit->profit_updated_at = Carbon::now();
+            $deposit->profit = 0.00;
+
+            if ($deposit->save()) {
+                $wallet->investments += $request->input('amount');
+                $wallet->save();
+
+                Session::flash('success', 'Investment has been saved successfully');
+                $customTitle = 'Investment Successful';
+                $customMessage = 'Your Invested in '. $plan->name .' with the amount €' .$request->input('amount');
+                $user = auth()->user();
+                $user->notify(new EmailAlerts($customMessage, $customTitle));
+            } else {
+                Session::flash('error', 'An error occurred, Make sure all required fields are selected');
+            }
+        }
+        return redirect()->back();
+
+    }
+
     public function withdrawal(): View
     {
         $gateways = Gateways::all();
         $plans = Plans::all();
-        $wallet = Wallets::where('user_id', Auth::user()->id)->sum('amount');
-        $deposit = Deposits::where('user_id', Auth::user()->id)->get();
-        $referrals = Referrals::where('referral_id', Auth::user()->id)->sum('amount');
-        $wallet += $deposit->sum('amount') + $deposit->sum('profit') + $referrals;
+        $wallet = Wallets::where('user_id', Auth::user()->id)->first();
 
-        $total = Wallets::where('user_id', Auth::user()->id)->sum('amount');
-
-        return view('dashboard.withdrawal', ['gateways' => $gateways, 'plans' => $plans, 'total' => $total, 'wallet' => $wallet]);
+        return view('dashboard.withdrawal', ['gateways' => $gateways, 'plans' => $plans, 'wallet' => $wallet->amount]);
     }
 
     public function saveWithdrawal(Request $request): RedirectResponse
@@ -162,7 +222,7 @@ class DashboardController extends Controller
 
         $deposit->amount = $request->input('amount');
         $deposit->status = false;
-        $deposit->hash = $randomId;
+        $deposit->hash = strtoupper($randomId);
 
         if ($deposit->save()) {
             Session::flash('success', 'Withdrawal has been submitted successfully, Pending admin approval');
@@ -267,6 +327,26 @@ class DashboardController extends Controller
         return response()->json($responseData);
     }
 
+    public function getPlan(Request $request): JsonResponse
+    {
+        $plan = Plans::where('name',$request->input('plan'))->first();
+
+        if($plan) {
+            $responseData = [
+                'status' => 200,
+                'min' => $plan->min,
+                'max' => $plan->max,
+            ];
+        }
+        else {
+            $responseData = [
+                'status' => 404,
+            ];
+        }
+
+        return response()->json($responseData);
+    }
+
     public function getDepositWallet(Request $request): JsonResponse
     {
         $gateway = Gateways::where('code',$request->input('gateway'))->first();
@@ -294,9 +374,10 @@ class DashboardController extends Controller
     public function updateWallet(): void
     {
 
-        $deposits = Deposits::where('user_id', Auth::user()->id)->get();
+        $deposits = Investments::where('user_id', Auth::user()->id)->get();
 
         foreach ($deposits as $deposit) {
+            $wallet = Wallets::where('user_id',$deposit->user->id)->first();
 
             $today = Carbon::now();
             $currentDate = Carbon::parse($today);
@@ -326,6 +407,7 @@ class DashboardController extends Controller
                         for ($day = 1; $day <= $diff_days; $day++) {
                             $transactionDate = $created_at->copy()->addDays($day);
 
+                            $wallet->earnings += $daily_profit;
                             $deposit->profit += $daily_profit;
                             $deposit->profit_updated_at = $transactionDate;
                             $deposit->save();
@@ -334,7 +416,7 @@ class DashboardController extends Controller
 
                             $trx = new Transaction();
                             $trx->amount = $daily_profit;
-                            $trx->hash = $randomId;
+                            $trx->hash = strtoupper($randomId);
                             $trx->type = 'interest';
                             $trx->user()->associate(Auth::user());
                             $trx->created_at = $transactionDate;
@@ -342,13 +424,9 @@ class DashboardController extends Controller
                         }
 
                         if ($diff == $deposit->plan->duration) {
-
-                            $user = $deposit->user;
-                            $user->wallet->amount += $deposit->profit + $deposit->amount;
-                            $user->wallet->save();
-
+                            $wallet->amount += $deposit->profit + $deposit->amount;
                         }
-
+                        $wallet->save();
                     }
                 }
             }

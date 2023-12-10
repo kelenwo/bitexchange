@@ -66,27 +66,25 @@
                     </select>
                 </div>
 
+                <div class="form-group">
+                    <label for="fullName">Total Wallet Balance:</label>
+                    <input type="number" name="wallet" id="deposit_balance" value="{{ $wallet }}" class="form-control bg-white">
+                </div>
 
                 <div class="form-group">
-                    <label for="fullName">Total Deposit Balance:</label>
-                    <input type="number" name="deposit_balance" id="deposit_balance" value="{{ $totalDeposits}}" class="form-control bg-white" readonly>
+                    <label for="fullName">Total Investment Balance:</label>
+                    <input type="number" name="investments" id="deposit_balance" value="{{ $totalInvestments }}" class="form-control bg-white">
                 </div>
+
                 <div class="form-group">
                     <label for="fullName">Total Earning Balance:</label>
-                    <input type="number" name="earning_balance" id="earning_balance" value="{{ $totalProfits}}" class="form-control bg-white" readonly>
+                    <input type="number" name="earnings" id="earning_balance" value="{{ $totalEarnings }}" class="form-control bg-white">
                 </div>
 
-                @foreach ($gateways as $gateway)
-                    @php
-                        $wallet = \App\Models\Wallets::where('user_id', Request()->id)->where('gateway_id',$gateway->id)->first()
-                    @endphp
-                    @if ($gateway->code !== "bank")
-                        <div class="form-group">
-                            <label for="{{ $gateway->code }}">{{ $gateway->name }} Wallet Balance:</label>
-                            <input type="number" name="wallet[{{ $gateway->code }}]" id="{{ $gateway->code }}" class="form-control" placeholder="{{ $gateway->name }} Wallet Balance" value="{{ $wallet ? $wallet->amount: '0.00' }}">
-                        </div>
-                    @endif
-                @endforeach
+                <div class="form-group">
+                    <label for="fullName">Total Withdrawal Balance:</label>
+                    <input type="number" name="withdrawals" id="earning_balance" value="{{ $totalWithdrawals }}" class="form-control bg-white">
+                </div>
 
 
                 <div class="form-group">

@@ -12,16 +12,15 @@ class Wallets extends Model
 
     protected $fillable = [
         'amount',
+        'deposits',
+        'investments',
+        'earnings',
+        'withdrawals'
     ];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(Users::class, 'user_id', 'id');
-    }
-
-    public function gateway(): BelongsTo
-    {
-        return $this->belongsTo(Gateways::class, 'gateway_id', 'id');
     }
 }
 

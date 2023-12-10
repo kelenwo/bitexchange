@@ -3,17 +3,16 @@
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title"> Deposit History </h3>
+            <h3 class="page-title"> Investments </h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Investment</li>
+                    <li class="breadcrumb-item active" aria-current="page">Investments</li>
                 </ol>
             </nav>
         </div>
-        <div class="col-12 grid-margin stretch-card">
+        <div class="container-fluid">
             <div class="card mx-0 p-4">
-                <h6>Your Deposits:</h6><br>
 
 {{--                <b>Total: <span class="text-primary">€{{ $total }}</span></b>--}}
 {{--                <br><br>--}}
@@ -22,21 +21,21 @@
                     <table class="table datatable">
                         <thead>
                         <tr>
-                            <th class="font-weight-bold">Gateway</th>
+                            <th class="font-weight-bold">Plan</th>
                             <th class="font-weight-bold">Amount</th>
-                            <th class="font-weight-bold">Paid at</th>
-                            <th class="font-weight-bold">Status</th>
+                            <th class="font-weight-bold">Profit (%)</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($deposits as $deposit)
+                        @foreach ($investments as $investment)
                             <tr>
-                                <td> {{ $deposit->gateway->name }}</td>
-                                <td>€{{ $deposit->amount }}</td>
-                                <td>{{ Carbon\Carbon::parse($deposit->created_at)->format('jS F, Y') }}</td>
                                 <td>
-                                    <div class="badge {{ $deposit->status ? "badge-success":"badge-warning" }} p-2">{{ $deposit->status ? "Approved":"Pending" }}</div>
+                                    <b>{{ $investment->plan->name }}</b>
+                                    (%{{ $investment->plan->roi }} {{ $investment->plan->frequency }})
                                 </td>
+                                <td>€{{ $investment->amount }}</td>
+                                <td> €{{ number_format(($investment->amount * $investment->plan->roi / 100) * ($investment->plan->duration) + ($investment->amount), 2) }} after {{ $investment->plan->duration }} days</td>
+
                             </tr>
                         @endforeach
                         </tbody>

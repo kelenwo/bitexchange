@@ -64,7 +64,6 @@
                             <thead>
                             <tr>
                                 <th class="font-weight-bold">User</th>
-                                <th class="font-weight-bold">Plan</th>
                                 <th class="font-weight-bold">Amount</th>
                                 <th class="font-weight-bold">Gateway</th>
                                 <th class="font-weight-bold">Deposit ID</th>
@@ -76,7 +75,6 @@
                             @foreach ($pending_deposits as $deposit)
                                 <tr>
                                     <td>{{ $deposit->user->email }}</td>
-                                    <td>{{ $deposit->plan->name }}</td>
                                     <td>${{ $deposit->amount }}</td>
                                     <td>{{ $deposit->gateway->name }}</td>
                                     <td>{{ strtoupper($deposit->hash) }}</td>

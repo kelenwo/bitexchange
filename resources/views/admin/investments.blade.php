@@ -4,11 +4,11 @@
 
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title"> Pending Deposits </h3>
+            <h3 class="page-title"> All Deposits </h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Deposits</li>
+                    <li class="breadcrumb-item active" aria-current="page">Investments</li>
                 </ol>
             </nav>
         </div>
@@ -24,27 +24,25 @@
                             <thead>
                             <tr>
                                 <th class="font-weight-bold">User</th>
+                                <th class="font-weight-bold">Plan</th>
                                 <th class="font-weight-bold">Amount</th>
-                                <th class="font-weight-bold">Gateway</th>
-                                <th class="font-weight-bold">Deposit ID</th>
                                 <th class="font-weight-bold">Status</th>
                                 <th class="font-weight-bold">Actions</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($deposits as $deposit)
+                            @foreach ($investments as $investment)
                                 <tr>
-                                    <td>{{ $deposit->user->email }}</td>
-                                    <td>${{ $deposit->amount }}</td>
-                                    <td>{{ $deposit->gateway->name }}</td>
-                                    <td>{{ strtoupper($deposit->hash) }}</td>
+                                    <td>{{ $investment->user->email }}</td>
+                                    <td>{{ $investment->plan->name }}</td>
+                                    <td>${{ $investment->amount }}</td>
                                     <td>
-                                        <div class="badge {{ $deposit->status ? "badge-success":"badge-warning" }} p-2">{{ $deposit->status ? "Approved":"Pending" }}</div>
+                                        <div class="badge {{ $investment->status ? "badge-success":"badge-warning" }} p-2">{{ $investment->status ? "Approved":"Pending" }}</div>
                                     </td>
                                     <td>
-                                        <span class="badge badge-info p-2" type="button" data-toggle="modal" data-target="#depositModal-{{ $deposit->id }}"><i class="fa fa-search"></i> View</span>
+                                        <span class="badge badge-info p-2" type="button" data-toggle="modal" data-target="#depositModal-{{ $investment->id }}"><i class="fa fa-search"></i> View</span>
 
-                                        <div class="modal fade" id="depositModal-{{ $deposit->id }}" tabindex="-1" role="dialog" aria-labelledby="depositModal" aria-hidden="true">
+                                        <div class="modal fade" id="depositModal-{{ $investment->id }}" tabindex="-1" role="dialog" aria-labelledby="depositModal" aria-hidden="true">
                                             <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header card m-0">
@@ -59,50 +57,38 @@
                                                                     <table class="table table-striped">
                                                                         <tbody>
                                                                         <tr>
-                                                                            <td>Deposit ID:</td>
-                                                                            <td>{{ $deposit->id }}</td>
+                                                                            <td>Investment ID:</td>
+                                                                            <td>{{ $investment->id }}</td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td>Deposit Hash:</td>
-                                                                            <td>{{ strtoupper($deposit->hash) }}</td>
+                                                                            <td>Hash:</td>
+                                                                            <td>{{ strtoupper($investment->hash) }}</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>User:</td>
-                                                                            <td><a href="#">{{ $deposit->user->email }}</a></td>
+                                                                            <td><a href="#">{{ $investment->user->email }}</a></td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Amount:</td>
-                                                                            <td>{{ $deposit->amount }} USD</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>Gateway:</td>
-                                                                            <td>{{ $deposit->gateway->name }}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>Reference Number:</td>
-                                                                            <td>{{ $deposit->transaction_id }}</td>
+                                                                            <td>{{ $investment->amount }} USD</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Date:</td>
-                                                                            <td>{{ Carbon\Carbon::parse($deposit->created_at)->format('jS F, Y') }}</td>
-                                                                        </tr>
-                                                                        <tr>
-                                                                            <td>Processed on:</td>
-                                                                            <td>{{ Carbon\Carbon::parse($deposit->updated_at)->format('jS F, Y') }}</td>
+                                                                            <td>{{ Carbon\Carbon::parse($investment->created_at)->format('jS F, Y') }}</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td>Status:</td>
                                                                             <td>
-                                                                                <span class="badge {{ $deposit->status ? "badge-success":"badge-warning" }} p-2">
-                                                                                    {{ $deposit->status ? "Approved":"Pending" }}
+                                                                                <span class="badge {{ $investment->status ? "badge-success":"badge-warning" }} p-2">
+                                                                                    {{ $investment->status ? "Approved":"Pending" }}
                                                                                 </span>
                                                                             </td>
                                                                         </tr>
                                                                         </tbody>
                                                                     </table>
 
-                                                                    <div class="my-2">
-                                                                        <form action="{{ route('process_item', ['id' => $deposit->id, 'type' => 'Deposits']) }}" method="POST">
+                                                                    <div class="my-2 d-none">
+                                                                        <form action="{{ route('process_item', ['id' => $investment->id, 'type' => 'Deposits']) }}" method="POST">
                                                                             @csrf
                                                                             <button type="submit" class="btn btn-success btn-sm" name="action" value="accept">Accept Deposit</button>
                                                                             <button type="submit" class="btn btn-danger btn-sm" name="action" value="cancel">Cancel Deposit</button>

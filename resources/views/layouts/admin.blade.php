@@ -78,6 +78,12 @@
                 </li>
 
                 <li class="nav-item my-2">
+                    <a class="nav-link" href="{{ route('admin_investments') }}">
+                        <span class="menu-title">Investments</span>
+                    </a>
+                </li>
+
+                <li class="nav-item my-2">
                     <a class="nav-link" data-toggle="collapse" href="#withdrawal" aria-expanded="false" aria-controls="withdrawal">
                         <span class="menu-title">Manage Withdrawal</span>
                         <i class="icon-arrow-down menu-icon"></i>

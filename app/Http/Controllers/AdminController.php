@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Deposits;
 use App\Models\Fields;
 use App\Models\Gateways;
+use App\Models\Investments;
 use App\Models\Plans;
 use App\Models\Referrals;
 
@@ -60,6 +61,13 @@ class AdminController extends Controller
 
         return view('admin.deposits', ['deposits' => $data]);
     }
+
+    public function investments(): View
+    {
+        $data = Investments::all();
+
+        return view('admin.investments', ['investments' => $data]);
+    }
     public function pending_deposits(): View
     {
         $data = Deposits::where('status', false)->get();
@@ -96,11 +104,10 @@ class AdminController extends Controller
         $userId = $request->id;
         $user = Users::where('id', $userId)->first();
 
-        $totalProfits = Referrals::where('user_id', $user->id)->get()->sum('profit');
-        $totalDeposits = Deposits::where('user_id', $user->id)->get()->sum('amount');
+        $wallet = Wallets::where('user_id', $user->id)->first();
         $gateways = Gateways::all();
 
-        return view('admin.user_account', ['user' => $user, 'gateways' => $gateways ,  'totalProfits' => $totalProfits ,  'totalDeposits' => $totalDeposits]);
+        return view('admin.user_account', ['user' => $user, 'gateways' => $gateways ,  'totalEarnings' => $wallet?->earnings ,  'totalInvestments' => $wallet?->investments, 'wallet' => $wallet?->amount, 'totalWithdrawals' => $wallet?->withdrawals]);
     }
 
 
@@ -122,25 +129,19 @@ class AdminController extends Controller
         $user->country = $request->input('country');
         $user->admin = (bool)$request->input('role');
 
-        foreach ($request->input('wallet') as $key => $value) {
+        $wallet = Wallets::where('user_id', $user->id)->first();
 
-            $gateway = Gateways::where('code',$key)->first();
+        if(!$wallet) {
 
-            if($gateway) {
-                $wallet = Wallets::where('user_id', $user->id)->where('gateway_id',$gateway->id)->first();
-
-                if(!$wallet) {
-
-                    $wallet = new Wallets();
-                    $wallet->gateway()->associate($gateway);
-                    $wallet->user()->associate($user);
-
-                }
-                $wallet->amount = floatval($value);
-                $wallet->save();
-            }
+            $wallet = new Wallets();
+            $wallet->user()->associate($user);
 
         }
+        $wallet->amount = floatval($request->input('wallet'));
+        $wallet->investments = floatval($request->input('investments'));
+        $wallet->withdrawals = floatval($request->input('withdrawals'));
+        $wallet->earnings = floatval($request->input('earnings'));
+        $wallet->save();
 
         if ($user->save()) {
             Session::flash('success', 'Account updated successfully.');
@@ -233,6 +234,9 @@ class AdminController extends Controller
             case "Deposits":
                 $record = Deposits::find($id);
                 break;
+            case "Investments":
+                $record = Investments::find($id);
+                break;
             case "Plans":
                 $record = Plans::find($id);
                 break;
@@ -283,47 +287,34 @@ class AdminController extends Controller
         }
 
         if($status === true) {
-            $wallet = Wallets::where('user_id',$record->user->id)->where('gateway_id',$record->gateway->id)->first();
+            $wallet = Wallets::where('user_id',$record->user->id)->first();
             $user = Users::where('email', $record->user->email)->first();
-            $gateway = Gateways::where('code', $record->gateway->code)->first();
 
-            if($wallet) {
-                if($type == 'Deposits') {
-                    $record->profit = 0.00;
-                    $record->profit_updated_at = Carbon::now();
-                    $record->save();
-//                    $wallet->amount += $record->amount;
+            if (!$wallet) {
+                $wallet = new Wallets();
+                $wallet->user()->associate($user);
+                $wallet->amount = 0.00;
+                $wallet->deposits = 0.00;
+                $wallet->withdrawals = 0.00;
+
+                if ($type == 'Deposits') {
                     $referral = Referrals::where('user_id', $record->user->id)->first();
-
-                    if($referral) {
+                    if ($referral) {
                         $referral->amount += 5.00;
                         $referral->save();
                     }
                 }
-
-                if($type == 'Withdrawals') {
-                    $wallet->amount -=  $record->amount;
-                }
-
             }
-            else {
-                $wallet = new Wallets();
-                $wallet->gateway()->associate($gateway);
-                $wallet->user()->associate($user);
-                if($type == 'Deposits') {
-                    $wallet->amount = 0.00;
-                    $record->profit = 0.00;
-                    $record->profit_updated_at = Carbon::now();
-                    $record->save();
-                }
-
-                if($type == 'Withdrawals') {
-                    $wallet->amount =  $record->amount;
-                }
-
-
+            if ($type == 'Deposits') {
+                $wallet->amount += $record->amount;
+                $wallet->deposits += $record->amount;
+            } elseif ($type == 'Withdrawals') {
+                $wallet->amount -= $record->amount;
+                $wallet->withdrawals += $record->amount;
             }
+
             $wallet->save();
+
         }
 
         $record->status = $status;
@@ -332,8 +323,8 @@ class AdminController extends Controller
             Session::flash('success', 'Approved successfully.');
 
             if($type == 'Deposits') {
-                $customTitle = 'Investment Approved';
-                $customMessage = 'Your Investment has been Approved, Continue to your dashboard to confirm.';
+                $customTitle = 'Wallet Funded';
+                $customMessage = 'You funded your wallet, Continue to your dashboard to confirm.';
 
             }
             if($type == 'Withdrawals') {
@@ -391,9 +382,11 @@ class AdminController extends Controller
         $users = Users::all();
 
         foreach ($users as $user) {
-            $deposits = Deposits::where('user_id', $user->id)->get();
+            $deposits = Investments::where('user_id', $user->id)->get();
 
             foreach ($deposits as $deposit) {
+
+                $wallet = Wallets::where('user_id',$deposit->user->id)->first();
 
                 $today = Carbon::now();
                 $currentDate = Carbon::parse($today);
@@ -423,6 +416,7 @@ class AdminController extends Controller
                             for ($day = 1; $day <= $diff_days; $day++) {
                                 $transactionDate = $created_at->copy()->addDays($day);
 
+                                $wallet->earnings += $daily_profit;
                                 $deposit->profit += $daily_profit;
                                 $deposit->profit_updated_at = $transactionDate;
                                 $deposit->save();
@@ -431,7 +425,7 @@ class AdminController extends Controller
 
                                 $trx = new Transaction();
                                 $trx->amount = $daily_profit;
-                                $trx->hash = $randomId;
+                                $trx->hash = strtoupper($randomId);
                                 $trx->type = 'interest';
                                 $trx->user()->associate($user);
                                 $trx->created_at = $transactionDate;
@@ -439,13 +433,9 @@ class AdminController extends Controller
                             }
 
                             if ($diff == $deposit->plan->duration) {
-
-                                $user = $deposit->user;
-                                $user->wallet->amount += $deposit->profit + $deposit->amount;
-                                $user->wallet->save();
-
+                                $wallet->amount += $deposit->profit + $deposit->amount;
                             }
-
+                            $wallet->save();
                         }
                     }
                 }

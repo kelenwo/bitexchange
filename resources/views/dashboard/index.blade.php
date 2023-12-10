@@ -23,7 +23,7 @@
                         <div class="col-md-6 col-xl report-inner-card px-3">
                             <div class="inner-card-text">
                                 <span class="report-title">Total Earnings</span>
-                                <h3>€{{ number_format($profit + $referrals, 2) }}</h3>
+                                <h3>€{{ number_format($profit, 2) }}</h3>
                             </div>
                             <div class="inner-card-icon bg-danger rounded-3">
                                 <i class="icon-briefcase"></i>
@@ -33,7 +33,7 @@
                         <div class="col-md-6 col-xl report-inner-card px-3">
                             <div class="inner-card-text">
                                 <span class="report-title">Total Investments</span>
-                                <h3>€{{ number_format($withdrawals, 2) }}</h3>
+                                <h3>€{{ number_format($investments, 2) }}</h3>
                             </div>
                             <div class="inner-card-icon bg-dark rounded-3">
                                 <i class="icon-credit-card"></i>
@@ -41,8 +41,8 @@
                         </div>
                         <div class="col-md-6 col-xl report-inner-card px-3">
                             <div class="inner-card-text">
-                                <span class="report-title">Total Referral Earnings</span>
-                                <h3>€{{ number_format($referrals, 2) }}</h3>
+                                <span class="report-title">Total Withdrawals</span>
+                                <h3>€{{ number_format($withdrawals, 2) }}</h3>
                             </div>
                             <div class="inner-card-icon bg-primary rounded-3">
                                 <i class="icon-people"></i>
