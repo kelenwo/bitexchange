@@ -20,7 +20,7 @@
                                 <h5 class="">Make an Investment</h5>
                                 <p class="card-description small">Make an Investment Today and Start Earning Instantly</p>
 
-                                <h6>Wallet Balance: <span class="text-primary">€{{ $wallet->amount }}</span></h6>
+                                <h6>Wallet Balance: <span class="text-primary">€{{ $wallet?->amount }}</span></h6>
 
                                 <br>
                                 @if(Session::has('success'))
