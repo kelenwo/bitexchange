@@ -15,7 +15,8 @@ class Wallets extends Model
         'deposits',
         'investments',
         'earnings',
-        'withdrawals'
+        'withdrawals',
+        'referrals'
     ];
 
     public function user(): BelongsTo

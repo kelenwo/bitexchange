@@ -36,7 +36,7 @@ class DashboardController extends Controller
 
         $wallet = Wallets::where('user_id', Auth::user()->id)->first();
 
-        return view('dashboard.index',['wallet' => $wallet?->amount, 'withdrawals' => $wallet?->withdrawals, 'investments' => $wallet?->investments, 'profit' => $wallet?->earnings]);
+        return view('dashboard.index',['wallet' => $wallet?->amount, 'withdrawals' => $wallet?->withdrawals, 'investments' => $wallet?->investments, 'profit' => $wallet?->earnings, 'deposit' => $wallet?->deposits, 'referral' => $wallet?->referrals]);
     }
 
     public function deposit(): View

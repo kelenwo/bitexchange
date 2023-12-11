@@ -72,18 +72,28 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="fullName">Total Deposit Balance:</label>
+                    <input type="number" name="deposit" id="deposit_balance" value="{{ $deposit }}" class="form-control bg-white">
+                </div>
+
+                <div class="form-group">
                     <label for="fullName">Total Investment Balance:</label>
                     <input type="number" name="investments" id="deposit_balance" value="{{ $totalInvestments }}" class="form-control bg-white">
                 </div>
 
                 <div class="form-group">
-                    <label for="fullName">Total Earning Balance:</label>
+                    <label for="fullName">Total Interest Balance:</label>
                     <input type="number" name="earnings" id="earning_balance" value="{{ $totalEarnings }}" class="form-control bg-white">
                 </div>
 
                 <div class="form-group">
                     <label for="fullName">Total Withdrawal Balance:</label>
-                    <input type="number" name="withdrawals" id="earning_balance" value="{{ $totalWithdrawals }}" class="form-control bg-white">
+                    <input type="number" name="withdrawals" id="withdrawals_balance" value="{{ $totalWithdrawals }}" class="form-control bg-white">
+                </div>
+
+                <div class="form-group">
+                    <label for="fullName">Total Referral Earning:</label>
+                    <input type="number" name="referrals" id="referrals_balance" value="{{ $totalReferrals }}" class="form-control bg-white">
                 </div>
 
 

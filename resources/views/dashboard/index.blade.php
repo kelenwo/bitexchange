@@ -13,8 +13,8 @@
                     <div class="row report-inner-cards-wrapper">
                         <div class="col-md-6 col-xl report-inner-card px-3">
                             <div class="inner-card-text">
-                                <span class="report-title">Total Wallet Balance</span>
-                                <h3>€{{ number_format($wallet, 2) }}</h3>
+                                <span class="report-title">Deposit Wallet Balance</span>
+                                <h3>€{{ number_format($deposit, 2) }}</h3>
                             </div>
                             <div class="inner-card-icon bg-info rounded-3">
                                 <i class="icon-wallet"></i>
@@ -22,7 +22,7 @@
                         </div>
                         <div class="col-md-6 col-xl report-inner-card px-3">
                             <div class="inner-card-text">
-                                <span class="report-title">Total Earnings</span>
+                                <span class="report-title">Interest Wallet Balance</span>
                                 <h3>€{{ number_format($profit, 2) }}</h3>
                             </div>
                             <div class="inner-card-icon bg-danger rounded-3">
@@ -39,10 +39,21 @@
                                 <i class="icon-credit-card"></i>
                             </div>
                         </div>
+
                         <div class="col-md-6 col-xl report-inner-card px-3">
                             <div class="inner-card-text">
                                 <span class="report-title">Total Withdrawals</span>
                                 <h3>€{{ number_format($withdrawals, 2) }}</h3>
+                            </div>
+                            <div class="inner-card-icon bg-primary rounded-3">
+                                <i class="icon-people"></i>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-xl report-inner-card px-3">
+                            <div class="inner-card-text">
+                                <span class="report-title">Referral Earnings</span>
+                                <h3>€{{ number_format($referral, 2) }}</h3>
                             </div>
                             <div class="inner-card-icon bg-primary rounded-3">
                                 <i class="icon-people"></i>
