@@ -107,7 +107,7 @@ class AdminController extends Controller
         $wallet = Wallets::where('user_id', $user->id)->first();
         $gateways = Gateways::all();
 
-        return view('admin.user_account', ['user' => $user, 'gateways' => $gateways ,  'totalEarnings' => $wallet?->earnings ,  'totalInvestments' => $wallet?->investments, 'wallet' => $wallet?->amount, 'totalWithdrawals' => $wallet?->withdrawals]);
+        return view('admin.user_account', ['user' => $user, 'gateways' => $gateways ,  'totalEarnings' => $wallet?->earnings ,  'totalInvestments' => $wallet?->investments, 'wallet' => $wallet?->amount, 'deposit' => $wallet?->deposits, 'totalWithdrawals' => $wallet?->withdrawals, 'totalReferrals' => $wallet?->referrals]);
     }
 
 
@@ -137,10 +137,13 @@ class AdminController extends Controller
             $wallet->user()->associate($user);
 
         }
+
         $wallet->amount = floatval($request->input('wallet'));
+        $wallet->deposits = floatval($request->input('deposit'));
         $wallet->investments = floatval($request->input('investments'));
         $wallet->withdrawals = floatval($request->input('withdrawals'));
         $wallet->earnings = floatval($request->input('earnings'));
+        $wallet->referrals = floatval($request->input('referrals'));
         $wallet->save();
 
         if ($user->save()) {
@@ -300,6 +303,7 @@ class AdminController extends Controller
                 if ($type == 'Deposits') {
                     $referral = Referrals::where('user_id', $record->user->id)->first();
                     if ($referral) {
+                        $wallet->referrals += 5.00;
                         $referral->amount += 5.00;
                         $referral->save();
                     }
