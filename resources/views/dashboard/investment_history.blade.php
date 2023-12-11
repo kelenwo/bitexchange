@@ -3,17 +3,17 @@
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title"> Investment History </h3>
+            <h3 class="page-title"> Investitionsgeschichte </h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Investment</li>
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Armaturenbrett</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Investition</li>
                 </ol>
             </nav>
         </div>
         <div class="col-12 grid-margin stretch-card">
             <div class="card mx-0 p-4">
-                <h6>Your Investments:</h6><br>
+                <h6>Ihre Investitionen:</h6><br>
 
 {{--                <b>Total: <span class="text-primary">€{{ $total }}</span></b>--}}
 {{--                <br><br>--}}
@@ -22,10 +22,10 @@
                     <table class="table datatable">
                         <thead>
                         <tr>
-                            <th class="font-weight-bold">Plan</th>
-                            <th class="font-weight-bold">Amount</th>
-                            <th class="font-weight-bold">Profit (%)</th>
-                            <th class="font-weight-bold">Paid at</th>
+                            <th class="font-weight-bold">Planen</th>
+                            <th class="font-weight-bold">Menge</th>
+                            <th class="font-weight-bold">Profitieren (%)</th>
+                            <th class="font-weight-bold">Bezahlt bei</th>
                             <th class="font-weight-bold">Status</th>
                         </tr>
                         </thead>

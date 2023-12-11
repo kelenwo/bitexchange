@@ -3,11 +3,11 @@
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title"> Investments </h3>
+            <h3 class="page-title"> Investitionen </h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Investments</li>
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Armaturenbrett</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Investitionen</li>
                 </ol>
             </nav>
         </div>
@@ -21,9 +21,9 @@
                     <table class="table datatable">
                         <thead>
                         <tr>
-                            <th class="font-weight-bold">Plan</th>
-                            <th class="font-weight-bold">Amount</th>
-                            <th class="font-weight-bold">Profit (%)</th>
+                            <th class="font-weight-bold">Planen</th>
+                            <th class="font-weight-bold">Menge</th>
+                            <th class="font-weight-bold">Profitieren (%)</th>
                         </tr>
                         </thead>
                         <tbody>

@@ -3,11 +3,11 @@
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title"> Account </h3>
+            <h3 class="page-title"> Konto </h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Account</li>
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Armaturenbrett</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Konto</li>
                 </ol>
             </nav>
         </div>
@@ -27,22 +27,22 @@
             <form action="{{ route('account') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="accountName">Account Name:</label>
+                    <label for="accountName">Kontoname:</label>
                     <p id="accountName">{{ Auth::user()->username }}</p>
                 </div>
 
                 <div class="form-group">
-                    <label for="registrationDate">Registration date:</label>
+                    <label for="registrationDate">Registrierungsdatum:</label>
                     <p id="registrationDate">{{ Carbon\Carbon::parse(Auth::user()->created_at)->format('jS F, Y') }}</p>
                 </div>
 
                 <div class="form-group">
-                    <label for="emailAddress">Your E-mail address:</label>
+                    <label for="emailAddress">Ihre E-Mail-Adresse:</label>
                     <input type="text" name="email" id="emailAddress" value="{{ Auth::user()->email }}" class="form-control bg-white" readonly>
                 </div>
 
                 <div class="form-group">
-                    <label for="fullName">Your Full Name:</label>
+                    <label for="fullName">Ihr vollständiger Name:</label>
                     <input type="text" name="name" id="name" value="{{ Auth::user()->name }}" class="form-control">
                 </div>
 
@@ -60,12 +60,12 @@
                 </div>
 
 {{--                <div class="form-group">--}}
-{{--                    <label for="newPassword">New Password:</label>--}}
+{{--                    <label for="newPassword">Neues Kennwort:</label>--}}
 {{--                    <input type="password" name="password" id="newPassword" value="" class="form-control">--}}
 {{--                </div>--}}
 
 {{--                <div class="form-group">--}}
-{{--                    <label for="retypePassword">Retype Password:</label>--}}
+{{--                    <label for="retypePassword">Passwort wiederholen:</label>--}}
 {{--                    <input type="password" name="password2" id="retypePassword" value="" class="form-control">--}}
 {{--                </div>--}}
 
