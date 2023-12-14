@@ -5,7 +5,7 @@
 @section('content')
     <div class="content-wrapper mt-0+">
         <div class="mt-3">
-            <h4 class="font-weight-medium d-lg-flex">Welcome {{ Auth::user()->name }}!</h4>
+            <h4 class="font-weight-medium d-lg-flex">Willkommen {{ Auth::user()->name }}!</h4>
         </div>
         <div class="col-md-12 grid-margin px-0 mx-0">
             <div class="card">
@@ -101,7 +101,7 @@
                 <!-- TradingView Widget END -->
             </div>
             <div class="col-md-12">
-                <h4 class="mt-4 mb-2"> Forex Market Fundamental Data</h4>
+                <h4 class="mt-4 mb-2"> Grundlegende Daten zum Forex-Markt</h4>
                 <!-- TradingView Widget BEGIN -->
                 <div class="tradingview-widget-container" style="min-height: 28rem; width:100%">
                     <div class="tradingview-widget-container__widget" style="min-height: 28rem; width:100%"></div>

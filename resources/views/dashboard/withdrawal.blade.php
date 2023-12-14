@@ -4,11 +4,11 @@
 
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title"> Withdrawal </h3>
+            <h3 class="page-title"> Rückzug </h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Withdrawal</li>
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Armaturenbrett</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Rückzug</li>
                 </ol>
             </nav>
         </div>
@@ -20,7 +20,7 @@
                         @csrf
                         <div class="card-body">
 
-                            <h6>Wallet Balance: <span class="text-primary">€{{ $wallet }}</span></h6>
+                            <h6>Wallet-Guthaben: <span class="text-primary">€{{ $wallet }}</span></h6>
 
                             <br>
 
@@ -36,26 +36,26 @@
                             @endif
 
                             <div class="form-group mt-3">
-                                <label for="amount">Enter Amount to Withdraw</label>
+                                <label for="amount">Geben Sie den abzuhebenden Betrag ein</label>
                                 <input type="number" name="amount" id="amount" class="form-control form-control-sm" placeholder="Minimum €500" max="{{ $wallet }}" step="1">
                             </div>
                             <div class="form-group">
-                                <label for="gateway">Select Payment Method</label>
+                                <label for="gateway">Wählen Sie die Zahlungsmethode</label>
                                 <select class="form-control form-control-sm" name="method" id="gateway">
-                                    <option value="">Select Payment Method</option>
+                                    <option value="">Wählen Sie die Zahlungsmethode</option>
                                     @foreach ($gateways as $gateway)
                                         <option value="{{ $gateway->code }}">{{ $gateway->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group mt-3">
-                                <label for="wallet">Wallet Address</label>
+                                <label for="wallet">Wallet-Adresse</label>
                                 <input type="text" name="wallet" id="wallet" class="form-control form-control-sm" value="" readonly>
                                 <p class="my-2 d-none" id="message">
-                                    <a href="{{ route('account') }}" >Set your wallet address</a>
+                                    <a href="{{ route('account') }}" >Legen Sie Ihre Wallet-Adresse fest</a>
                                 </p>
                             </div>
-                            <button type="submit" class="btn btn-primary btn-sm mr-2" disabled>Submit</button>
+                            <button type="submit" class="btn btn-primary btn-sm mr-2" disabled>Zurückziehen</button>
                         </div>
 
                     </form>

@@ -3,11 +3,11 @@
 @section('content')
     <div class="content-wrapper">
         <div class="page-header">
-            <h3 class="page-title"> Investment History </h3>
+            <h3 class="page-title"> Investitionsgeschichte </h3>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Transactions</li>
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Armaturenbrett</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Transaktionen</li>
                 </ol>
             </nav>
         </div>
@@ -18,10 +18,10 @@
                     <table class="table align-items-center justify-content-center datatable">
                         <thead>
                         <tr>
-                            <th class="font-weight-bold">Transaction Id</th>
-                            <th class="font-weight-bold">Amount</th>
-                            <th class="font-weight-bold">Type</th>
-                            <th class="font-weight-bold">Created at</th>
+                            <th class="font-weight-bold">Transaktions-ID</th>
+                            <th class="font-weight-bold">Menge</th>
+                            <th class="font-weight-bold">Typ</th>
+                            <th class="font-weight-bold">Hergestellt in</th>
                         </tr>
                         </thead>
                         <tbody>
