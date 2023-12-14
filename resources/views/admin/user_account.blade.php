@@ -72,30 +72,29 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="fullName">Total Deposit Balance:</label>
+                    <label for="fullName">Total Deposits</label>
                     <input type="number" name="deposit" id="deposit_balance" value="{{ $deposit }}" class="form-control bg-white">
                 </div>
 
                 <div class="form-group">
-                    <label for="fullName">Total Investment Balance:</label>
-                    <input type="number" name="investments" id="deposit_balance" value="{{ $totalInvestments }}" class="form-control bg-white">
-                </div>
-
-                <div class="form-group">
-                    <label for="fullName">Total Interest Balance:</label>
+                    <label for="fullName">Interest Wallet Balance</label>
                     <input type="number" name="earnings" id="earning_balance" value="{{ $totalEarnings }}" class="form-control bg-white">
                 </div>
 
                 <div class="form-group">
-                    <label for="fullName">Total Withdrawal Balance:</label>
+                    <label for="fullName">Total Investments</label>
+                    <input type="number" name="investments" id="deposit_balance" value="{{ $totalInvestments }}" class="form-control bg-white">
+                </div>
+
+                <div class="form-group">
+                    <label for="fullName">Total Withdrawals</label>
                     <input type="number" name="withdrawals" id="withdrawals_balance" value="{{ $totalWithdrawals }}" class="form-control bg-white">
                 </div>
 
                 <div class="form-group">
-                    <label for="fullName">Total Referral Earning:</label>
+                    <label for="fullName">Referral Earnings</label>
                     <input type="number" name="referrals" id="referrals_balance" value="{{ $totalReferrals }}" class="form-control bg-white">
                 </div>
-
 
                 <div class="form-group">
                     <input type="submit" value="Change Account data" class="btn btn-primary form-control">

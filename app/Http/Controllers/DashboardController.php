@@ -310,7 +310,7 @@ class DashboardController extends Controller
     {
         $gateway = Gateways::where('code',$request->input('gateway'))->first();
 
-        $field = Fields::where('gateway_id',$gateway->id)->first();
+        $field = Fields::where('gateway_id',$gateway->id)->where('user_id',Auth::user()->id)->first();
 
         if($field && $field->value) {
             $responseData = [

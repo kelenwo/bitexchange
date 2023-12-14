@@ -13,7 +13,16 @@
                     <div class="row report-inner-cards-wrapper">
                         <div class="col-md-6 col-xl report-inner-card px-3">
                             <div class="inner-card-text">
-                                <span class="report-title">Deposit Wallet Balance</span>
+                                <span class="report-title">Total Wallet Balance</span>
+                                <h3>€{{ number_format($wallet, 2) }}</h3>
+                            </div>
+                            <div class="inner-card-icon bg-info rounded-3">
+                                <i class="icon-wallet"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-xl report-inner-card px-3">
+                            <div class="inner-card-text">
+                                <span class="report-title">Total Deposits</span>
                                 <h3>€{{ number_format($deposit, 2) }}</h3>
                             </div>
                             <div class="inner-card-icon bg-info rounded-3">
