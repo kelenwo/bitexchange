@@ -41,7 +41,7 @@ class DashboardController extends Controller
 
     public function deposit(): View
     {
-        $gateways = Gateways::all();
+        $gateways = Gateways::where('status', true)->get();
 
         return view('dashboard.deposit', ['gateways' => $gateways]);
     }
@@ -56,7 +56,7 @@ class DashboardController extends Controller
     public function investment(): View
     {
         $wallet = Wallets::where('user_id', Auth::user()->id)->first();
-        $gateways = Gateways::all();
+        $gateways = Gateways::where('status', true)->get();
         $plans = Plans::all();
 
         return view('dashboard.investment', ['gateways' => $gateways, 'plans' => $plans, 'wallet' => $wallet]);
@@ -104,7 +104,7 @@ class DashboardController extends Controller
         ]);
 
         $user = Users::where('email', Auth::user()->email)->first();
-        $gateway = Gateways::where('code', $request->input('method'))->first();
+        $gateway = Gateways::where('code', $request->input('method'))->where('status', true)->first();
 
         $imagePath = null;
 
@@ -195,7 +195,7 @@ class DashboardController extends Controller
 
     public function withdrawal(): View
     {
-        $gateways = Gateways::all();
+        $gateways = Gateways::where('status', true)->get();
         $plans = Plans::all();
         $wallet = Wallets::where('user_id', Auth::user()->id)->first();
 
@@ -213,7 +213,7 @@ class DashboardController extends Controller
         ]);
 
         $user = Users::where('email', Auth::user()->email)->first();
-        $gateway = Gateways::where('code', $request->input('method'))->first();
+        $gateway = Gateways::where('code', $request->input('method'))->where('status', true)->first();
         $randomId = bin2hex(random_bytes(5));
 
         $deposit = new Withdrawals();
@@ -246,7 +246,7 @@ class DashboardController extends Controller
     }
     public function account(): View
     {
-        $gateways = Gateways::all();
+        $gateways = Gateways::where('status', true)->get();
         return view('dashboard.account', ['gateways' => $gateways]);
     }
     public function account_security(): View
@@ -273,7 +273,7 @@ class DashboardController extends Controller
 
         foreach ($request->input('gateway') as $key => $value) {
 
-            $gateway = Gateways::where('code',$key)->first();
+            $gateway = Gateways::where('code',$key)->where('status', true)->first();
 
             if($gateway) {
 
@@ -308,7 +308,7 @@ class DashboardController extends Controller
 
     public function getWallet(Request $request): JsonResponse
     {
-        $gateway = Gateways::where('code',$request->input('gateway'))->first();
+        $gateway = Gateways::where('code',$request->input('gateway'))->where('status', true)->first();
 
         $field = Fields::where('gateway_id',$gateway->id)->where('user_id',Auth::user()->id)->first();
 
@@ -349,7 +349,7 @@ class DashboardController extends Controller
 
     public function getDepositWallet(Request $request): JsonResponse
     {
-        $gateway = Gateways::where('code',$request->input('gateway'))->first();
+        $gateway = Gateways::where('code',$request->input('gateway'))->where('status', true)->first();
 
         $field = Fields::where('settings', true)->where('gateway_id',$gateway->id)->first();
 

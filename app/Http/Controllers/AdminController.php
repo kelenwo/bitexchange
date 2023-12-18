@@ -45,7 +45,7 @@ class AdminController extends Controller
 
     public function gateway(): View
     {
-        $data = Gateways::all();
+        $data = Gateways::where('status', true)->get();
 
         return view('admin.gateway', ['gateways' => $data]);
     }
@@ -94,7 +94,7 @@ class AdminController extends Controller
     }
     public function settings(): View
     {
-        $gateways = Gateways::all();
+        $gateways = Gateways::where('status', true)->get();
 
         return view('admin.settings', ['gateways' => $gateways]);
     }
@@ -105,7 +105,7 @@ class AdminController extends Controller
         $user = Users::where('id', $userId)->first();
 
         $wallet = Wallets::where('user_id', $user->id)->first();
-        $gateways = Gateways::all();
+        $gateways = Gateways::where('status', true)->get();
 
         return view('admin.user_account', ['user' => $user, 'gateways' => $gateways ,  'totalEarnings' => $wallet?->earnings ,  'totalInvestments' => $wallet?->investments, 'wallet' => $wallet?->amount, 'deposit' => $wallet?->deposits, 'totalWithdrawals' => $wallet?->withdrawals, 'totalReferrals' => $wallet?->referrals]);
     }
@@ -164,7 +164,7 @@ class AdminController extends Controller
             'code' => 'required',
         ]);
 
-        $gateway = Gateways::where('code', $request->input('code'))->first();
+        $gateway = Gateways::where('code', $request->input('code'))->where('status', true)->first();
 
         if (!$gateway) {
             $gateway = new Gateways();
@@ -253,7 +253,15 @@ class AdminController extends Controller
             return redirect()->back();
         }
 
-        $record->delete();
+        if($type == 'Gateways') {
+            $record->status(false);
+            $record->save();
+
+        } else {
+            $record->delete();
+
+        }
+
         Session::flash('success', 'Record deleted successfully.');
         return redirect()->back();
     }
@@ -352,7 +360,7 @@ class AdminController extends Controller
 
         foreach ($request->input('gateway') as $key => $value) {
 
-            $gateway = Gateways::where('code',$key)->first();
+            $gateway = Gateways::where('code',$key)->where('status', true)->first();
 
             if($gateway) {
 
