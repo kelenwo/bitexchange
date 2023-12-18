@@ -254,7 +254,7 @@ class AdminController extends Controller
         }
 
         if($type == 'Gateways') {
-            $record->status(false);
+            $record->status = false;
             $record->save();
 
         } else {
