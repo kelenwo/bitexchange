@@ -13,7 +13,7 @@
                     <div class="row report-inner-cards-wrapper">
                         <div class="col-md-6 col-xl report-inner-card px-3">
                             <div class="inner-card-text">
-                                <span class="report-title">Total Wallet Balance</span>
+                                <span class="report-title">Gesamtguthaben der Brieftasche</span>
                                 <h3>€{{ number_format($wallet, 2) }}</h3>
                             </div>
                             <div class="inner-card-icon bg-info rounded-3">
@@ -22,7 +22,7 @@
                         </div>
                         <div class="col-md-6 col-xl report-inner-card px-3">
                             <div class="inner-card-text">
-                                <span class="report-title">Total Deposits</span>
+                                <span class="report-title">Gesamteinlagen</span>
                                 <h3>€{{ number_format($deposit, 2) }}</h3>
                             </div>
                             <div class="inner-card-icon bg-info rounded-3">
@@ -31,7 +31,7 @@
                         </div>
                         <div class="col-md-6 col-xl report-inner-card px-3">
                             <div class="inner-card-text">
-                                <span class="report-title">Interest Wallet Balance</span>
+                                <span class="report-title">Zins-Wallet-Guthaben</span>
                                 <h3>€{{ number_format($profit, 2) }}</h3>
                             </div>
                             <div class="inner-card-icon bg-danger rounded-3">
@@ -41,7 +41,7 @@
 
                         <div class="col-md-6 col-xl report-inner-card px-3">
                             <div class="inner-card-text">
-                                <span class="report-title">Total Investments</span>
+                                <span class="report-title">Gesamtinvestitionen</span>
                                 <h3>€{{ number_format($investments, 2) }}</h3>
                             </div>
                             <div class="inner-card-icon bg-dark rounded-3">
@@ -51,7 +51,7 @@
 
                         <div class="col-md-6 col-xl report-inner-card px-3">
                             <div class="inner-card-text">
-                                <span class="report-title">Total Withdrawals</span>
+                                <span class="report-title">Gesamtabhebungen</span>
                                 <h3>€{{ number_format($withdrawals, 2) }}</h3>
                             </div>
                             <div class="inner-card-icon bg-primary rounded-3">
@@ -61,7 +61,7 @@
 
                         <div class="col-md-6 col-xl report-inner-card px-3">
                             <div class="inner-card-text">
-                                <span class="report-title">Referral Earnings</span>
+                                <span class="report-title">Empfehlungseinnahmen</span>
                                 <h3>€{{ number_format($referral, 2) }}</h3>
                             </div>
                             <div class="inner-card-icon bg-primary rounded-3">

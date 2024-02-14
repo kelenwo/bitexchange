@@ -283,9 +283,9 @@
                             <script type="text/javascript" src="https://files.coinmarketcap.com/static/widget/coinMarquee.js"></script>
                             <div id="coinmarketcap-widget-marquee" coins="1,1027,825,1839,3408,2010" currency="USD" theme="dark" transparent="true" show-symbol-logo="true" style="margin-left:-180px"></div>
                         </div>
-                        <video autoplay loop muted playsinline poster="files/video.png" width="100%">
-                            <source  src="video.m4v" type="video/mp4">
-                        </video>
+                        <!--<video autoplay loop muted playsinline poster="files/video.png" width="100%">-->
+                        <!--    <source  src="video.m4v" type="video/mp4">-->
+                        <!--</video>-->
                     </div>
                 </div>
             </div>

@@ -273,6 +273,7 @@ class AdminController extends Controller
         $action = $request->input('action');
         $status = null;
         $record = null;
+        
 
         switch ($type) {
             case "Deposits":
@@ -345,7 +346,7 @@ class AdminController extends Controller
 
             }
 
-            $user->notify(new EmailAlerts($customMessage,$customTitle));
+            // $user->notify(new EmailAlerts($customMessage,$customTitle));
         }
         else {
             Session::flash('error', 'An error occurred. Make sure all required fields are selected.');

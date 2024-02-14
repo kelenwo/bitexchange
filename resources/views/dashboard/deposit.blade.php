@@ -60,7 +60,7 @@
                                                     <div class="row">
                                                         <div class="col-md-8">
                                                             <p class="card-description mb-2">
-                                                                Bitte zahlen Sie den entsprechenden Betrag ein<span id="wallet-name"></span> Geben Sie die Transaktions-ID und den Beleg-Screenshot an (optional)
+                                                                Bitte zahlen Sie den entsprechenden Betrag ein  <span id="wallet-name"></span>
                                                             </p>
                                                             <span>Adresse: </span>
                                                             <h6 id="payment-address"></h6>
@@ -74,10 +74,10 @@
 {{--                                                            <label for="transaction_id">Transaction ID <span class="text-danger">*</span> </label>--}}
 {{--                                                            <input type="text" name="transaction_id" id="transaction_id" class="form-control form-control-sm" placeholder="Transaction ID" step="1">--}}
 {{--                                                        </div>--}}
-                                                        <div class="form-group">
-                                                            <label for="receipt">Quittung</label>
-                                                            <input type="file" accept="image/*" name="receipt" id="receipt" class="form-control ">
-                                                        </div>
+                                                        <!--<div class="form-group">-->
+                                                        <!--    <label for="receipt">Quittung</label>-->
+                                                        <!--    <input type="file" accept="image/*" name="receipt" id="receipt" class="form-control ">-->
+                                                        <!--</div>-->
                                                         <div class="form-group">
                                                             <button type="submit" class="btn btn-primary btn-sm mr-2">Kaution</button>
                                                         </div>
